@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZoharBible</name>
+    </assembly>
+    <members>
+        <member name="T:ZoharBible.ChatAnalysis">
+            <summary>
+            The Proverbs class represents a content page within the Zohar Bible application.
+            It provides functionality to retrieve and display a random proverb from the Bible.
+            </summary>
+        </member>
+        <member name="M:ZoharBible.ChatAnalysis.#ctor">
+            <summary>
+            The ChatAnalysis class is a content page within the Zohar Bible application, designed
+            to retrieve and display a text-based analysis of a specific proverb.
+            </summary>
+        </member>
+        <member name="T:ZoharBible.Proverbs">
+            <summary>
+            The Proverbs class represents a content page within the Zohar Bible application.
+            It provides functionality to retrieve and display a random proverb from the Bible.
+            </summary>
+        </member>
+        <member name="M:ZoharBible.Proverbs.OnGetZoharExplanationButtonClicked(System.Object,System.EventArgs)">
+            <summary>
+            Handles the click event of the "Get Zohar Explanation" button.
+            When clicked, it displays a message indicating that a proverb is being retrieved,
+            waits for 2 seconds, and then calls a REST API to get and display a random proverb from the Bible.
+            </summary>
+            <param name="sender">The source of the event, typically the button that was clicked.</param>
+            <param name="e">An EventArgs object that contains the event data.</param>
+        </member>
+        <member name="M:ZoharBible.Proverbs.UpdateLabel(System.String)">
+            <summary>
+            Updates the text of the MessageLabel on the UI thread and ensures the label is visible.
+            </summary>
+            <param name="text">The new text to be updated in the MessageLabel.</param>
+        </member>
+    </members>
+</doc>
