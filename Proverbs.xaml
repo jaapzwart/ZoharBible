@@ -36,7 +36,7 @@
                 <StackLayout>
                     <Editor
                         x:Name="ProverbEditor"
-                        HeightRequest="350"
+                        HeightRequest="300"
                         AutoSize="TextChanges"
                         FontSize="18"
                         BackgroundColor="Green"
@@ -104,6 +104,13 @@
                     <Label Text="Full"
                            TextColor="White"
                            VerticalTextAlignment="Center" />
+                </StackLayout>
+                <!-- New StackLayout for additional checkboxes -->
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="10"
+                             Margin="0,0,0,10">
                     <CheckBox x:Name="ChatGPTCheckBox"
                               Color="White"
                               CheckedChanged="OnChatbotCheckBoxChanged" />
@@ -115,6 +122,18 @@
                               IsChecked="True"
                               CheckedChanged="OnChatbotCheckBoxChanged" />
                     <Label Text="GroK"
+                           TextColor="White"
+                           VerticalTextAlignment="Center" />
+                    <CheckBox x:Name="GeminiCheckBox"
+                              Color="White"
+                              CheckedChanged="OnChatbotCheckBoxChanged" />
+                    <Label Text="Gemini"
+                           TextColor="White"
+                           VerticalTextAlignment="Center" />
+                    <CheckBox x:Name="AllAICheckBox"
+                              Color="White"
+                              CheckedChanged="OnChatbotCheckBoxChanged" />
+                    <Label Text="AllAI"
                            TextColor="White"
                            VerticalTextAlignment="Center" />
                 </StackLayout>

@@ -16,6 +16,14 @@
             to retrieve and display a text-based analysis of a specific proverb.
             </summary>
         </member>
+        <member name="M:ZoharBible.MainPage.OnGetProverbButtonClicked(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Click event of the "Get a random Proverb" button.
+            Navigates the user to the Proverbs page.
+            </summary>
+            <param name="sender">The source of the event. Typically, this is the button that was clicked.</param>
+            <param name="e">An EventArgs that contains the event data.</param>
+        </member>
         <member name="T:ZoharBible.Proverbs">
             <summary>
             The Proverbs class represents a content page within the Zohar Bible application.

@@ -17,73 +17,95 @@ public partial class ChatAnalysis : ContentPage
     {
         InitializeComponent();
         string responseText = "";
-        if (GlobalVars.AiSelected.Contains("ChatGPT"))
+        if (GlobalVars.Amida_.Contains("Amida"))
+        {
+            if (GlobalVars.AiSelected.Contains("ChatGPT"))
+            {
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                    + "First show the text of the Jewish Amida and after that give a deep analysis of the Jewish Amida.");
+                this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + responseText.TrimStart();
+            }
+            else if (GlobalVars.AiSelected.Contains("GroK"))
+            {
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    "https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                    + "First show the text of the Jewish Amida and after that give a deep analysis of the Jewish Amida.");
+                this.ChatAnalysisText.Text = "GroK: " + '\n' + responseText.TrimStart();
+            }
+            else if (GlobalVars.AiSelected.Contains("Gemini"))
+            {
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    "https://bibleapje.azurewebsites.net/api/Google/"
+                    + "First show the text of the Jewish Amida and after that give a deep analysis of the Jewish Amida.");
+                this.ChatAnalysisText.Text = "Gemini: " + '\n' + responseText.TrimStart();
+            }
+            else if (GlobalVars.AiSelected.Contains("AllAI"))
+            {
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                    + "First show the text of the Jewish Amida and after that give a deep analysis of the Jewish Amida.");
+                this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + responseText.TrimStart() + '\n' + '\n';
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    "https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                    + "Give a deep analysis of the Jewish Amida.");
+                this.ChatAnalysisText.Text = "Grok: " + '\n' + responseText.TrimStart() + '\n' + '\n';
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    "https://bibleapje.azurewebsites.net/api/Google/"
+                    + "Give a deep analysis of the Jewish Amida.");
+                this.ChatAnalysisText.Text = "Gemini: " + '\n' + responseText.TrimStart();
+            }
+            
+        }
+        else if (GlobalVars.AiSelected.Contains("ChatGPT"))
         {
             responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/ChatGPT/"
                                                                    + "Give an analysis on " +
                                                                    GlobalVars.ProverbToAnalyse +
                                                                    " from out the perspective of the " +
                                                                    GlobalVars.TypeOfProverbAnalysis + ".");
-            this.ChatAnalysisText.Text = responseText.TrimStart();
+            this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + responseText.TrimStart();
         }
-        else
+        else if(GlobalVars.AiSelected.Contains("GroK"))
         {
-            CallGetGrok();
+            responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                                                                    + "Give an analysis on " +
+                                                                    GlobalVars.ProverbToAnalyse +
+                                                                    " from out the perspective of the " +
+                                                                    GlobalVars.TypeOfProverbAnalysis + ".");
+            this.ChatAnalysisText.Text = "Grok: " + '\n' + responseText.TrimStart();
         }
-    }
-    private async void CallGetGrok()
-    {
-        string question = "Give an analysis on " + GlobalVars.ProverbToAnalyse +
-                          " from out the perspective of the " + GlobalVars.TypeOfProverbAnalysis + ".";
-        string resultGrok = await GetGrok(question);
-        this.ChatAnalysisText.Text = GlobalVars.gRok;
-    }
-    static async Task<string> GetGrok(string question)
-    {
-        string resultGrok = "";
-        // Your API key and base URL
-        string apiKey = "xai-UHkCfAnGrY6wz9IRv5TAZD0olYZhuBdFY2aNimqBR6otc3oVkFgMzXJBjftAuIaLOjt0CD7Kgf4olmXV";
-        string baseURL = "https://api.x.ai/v1/chat/completions";
-
-        // Create the HTTP client
-        using (HttpClient client = new HttpClient())
+        else if(GlobalVars.AiSelected.Contains("Gemini"))
         {
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
-            
-            // Define the request body
-            var requestBody = new
-            {
-                model = "grok-beta",
-                messages = new[]
-                {
-                    new { role = "system", content = "You are Grok, a chatbot inspired by the Holy Spirit." },
-                    new { role = "user", content = question }
-                }
-            };
-
-            // Serialize the request body to JSON
-            string json = JsonConvert.SerializeObject(requestBody);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            // Make the POST request
-            HttpResponseMessage response = await client.PostAsync(baseURL, content);
-
-            // Read and output the response
-            if (response.IsSuccessStatusCode)
-            {
-                string responseBody = await response.Content.ReadAsStringAsync();
-                dynamic result = JsonConvert.DeserializeObject(responseBody);
-                resultGrok = result.choices[0].message.content;
-                GlobalVars.gRok = resultGrok;
-                //Console.WriteLine(result.choices[0].message.content);
-            }
-            else
-            {
-                resultGrok = response.StatusCode.ToString();
-                GlobalVars.gRok = resultGrok;
-                //Console.WriteLine($"Error: {response.StatusCode}");
-            }
+            responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/Google/"
+                                                                   + "Give an analysis on " +
+                                                                   GlobalVars.ProverbToAnalyse +
+                                                                   " from out the perspective of the " +
+                                                                   GlobalVars.TypeOfProverbAnalysis + ".");
+            this.ChatAnalysisText.Text = "Gemini: " + '\n' + responseText.TrimStart();
         }
-        return resultGrok;
+        else if(GlobalVars.AiSelected.Contains("AllAI"))
+        {
+            this.ChatAnalysisText.Text = "All AI ANalysis: " + '\n' + '\n';
+            responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                                                                   + "Give an analysis on " +
+                                                                   GlobalVars.ProverbToAnalyse +
+                                                                   " from out the perspective of the " +
+                                                                   GlobalVars.TypeOfProverbAnalysis + ".");
+            this.ChatAnalysisText.Text += "ChatGPT: " + '\n' + responseText.TrimStart() + '\n' + '\n';
+            responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                                                                   + "Give an analysis on " +
+                                                                   GlobalVars.ProverbToAnalyse +
+                                                                   " from out the perspective of the " +
+                                                                   GlobalVars.TypeOfProverbAnalysis + ".");
+            this.ChatAnalysisText.Text += "Grok: " + '\n' + responseText.TrimStart() + '\n' + '\n';
+            responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/Google/"
+                                                                   + "Give an analysis on " +
+                                                                   GlobalVars.ProverbToAnalyse +
+                                                                   " from out the perspective of the " +
+                                                                   GlobalVars.TypeOfProverbAnalysis + ".");
+            this.ChatAnalysisText.Text += "Gemini: " + '\n' + responseText.TrimStart();
+        }
     }
+    
 }

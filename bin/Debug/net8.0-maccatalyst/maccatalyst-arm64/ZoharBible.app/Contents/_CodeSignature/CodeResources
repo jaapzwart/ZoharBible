@@ -197,6 +197,13 @@
 			6o7NChDmESFJ6j5T4GKc0em/VSDjKb3T7fkohH34N3k=
 			</data>
 		</dict>
+		<key>MonoBundle/Newtonsoft.Json.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			IsZJ91/OW+fHzNqIgEc7Y072ns8z9dGritiSyvR9Wgc=
+			</data>
+		</dict>
 		<key>MonoBundle/System.AppContext.dll</key>
 		<dict>
 			<key>hash2</key>
@@ -1335,21 +1342,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9OX5WKPd2rznsgDevAXx+lno/ATojGs0CXaK7rsMOuc=
+			F2xn+mfEFnaQunWWIfRhdRFK5/AF0uQz+Tp/g2KAmVk=
 			</data>
 		</dict>
 		<key>MonoBundle/ZoharBible.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z63LYTr2uQuGZ1Bvfdd342JHn5NR5+8ytUrk7rK80z8=
+			eTI8UlcLm9R2Ev5+7iMrjA8wfcIbd2qdOGZn6YStAc0=
 			</data>
 		</dict>
 		<key>MonoBundle/aot-instances.aotdata.arm64</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dEBefzZ3Ul1svja59lASAwJ1rn3/Go08qeSazefAEDU=
+			zXT+kXg+kkQjOKv/cuOH4aM0nYDYXslc1UF4wMxKtfI=
 			</data>
 		</dict>
 		<key>MonoBundle/ar/Microsoft.Maui.Controls.resources.dll</key>

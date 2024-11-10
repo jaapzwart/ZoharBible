@@ -13,6 +13,34 @@ public partial class Proverbs : ContentPage
     public Proverbs()
     {
         InitializeComponent();
+        if (GlobalVars.AiSelected.Contains("GroK"))
+        {
+            ChatGPTCheckBox.IsChecked = false;
+            GroKCheckBox.IsChecked = true;
+            GeminiCheckBox.IsChecked = false;
+            AllAICheckBox.IsChecked = false;
+        }
+        if (GlobalVars.AiSelected.Contains("Gemini"))
+        {
+            ChatGPTCheckBox.IsChecked = false;
+            GroKCheckBox.IsChecked = false;
+            GeminiCheckBox.IsChecked = true;
+            AllAICheckBox.IsChecked = false;
+        }
+        if (GlobalVars.AiSelected.Contains("ChatGPT"))
+        {
+            ChatGPTCheckBox.IsChecked = true;
+            GroKCheckBox.IsChecked = false;
+            GeminiCheckBox.IsChecked = false;
+            AllAICheckBox.IsChecked = false;
+        }
+        if (GlobalVars.AiSelected.Contains("AllAI"))
+        {
+            ChatGPTCheckBox.IsChecked = false;
+            GroKCheckBox.IsChecked = false;
+            GeminiCheckBox.IsChecked = false;
+            AllAICheckBox.IsChecked = true;
+        }
         UpdateLabel("...");
         PartCheckBox.IsChecked = true;
         OnOptionButtonClicked(KabbalahButton, EventArgs.Empty);
@@ -166,12 +194,30 @@ public partial class Proverbs : ContentPage
         if (sender == ChatGPTCheckBox && ChatGPTCheckBox.IsChecked)
         {
             GroKCheckBox.IsChecked = false;
+            GeminiCheckBox.IsChecked = false;
+            AllAICheckBox.IsChecked = false;
             GlobalVars.AiSelected = "ChatGPT";
         }
         else if (sender == GroKCheckBox && GroKCheckBox.IsChecked)
         {
             ChatGPTCheckBox.IsChecked = false;
+            GeminiCheckBox.IsChecked = false;
+            AllAICheckBox.IsChecked = false;
             GlobalVars.AiSelected = "GroK";
+        }
+        else if (sender == GeminiCheckBox && GeminiCheckBox.IsChecked)
+        {
+            ChatGPTCheckBox.IsChecked = false;
+            GroKCheckBox.IsChecked = false;
+            AllAICheckBox.IsChecked = false;
+            GlobalVars.AiSelected = "Gemini";
+        }
+        else if (sender == AllAICheckBox && AllAICheckBox.IsChecked)
+        {
+            ChatGPTCheckBox.IsChecked = false;
+            GroKCheckBox.IsChecked = false;
+            GeminiCheckBox.IsChecked = false;
+            GlobalVars.AiSelected = "AllAI";
         }
     }
 }

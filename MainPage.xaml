@@ -2,31 +2,88 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZoharBible.MainPage"
-             BackgroundColor="#1E3A5F"> 
-    <Grid>
-        <!-- Hoofdinhoud -->
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-            <Button Text="Get a random Proverb"
+             BackgroundColor="#1E3A5F">
+    <VerticalStackLayout>
+        <!-- Knoppen en Checkboxes -->
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <Button x:Name="ProverbButton"
+                    Text="Get a random Proverb"
                     BackgroundColor="#61A0D7" 
                     BorderColor="#FFFFFF" 
                     BorderWidth="2"
                     TextColor="#FFFFFF" 
                     Padding="10"
+                    HeightRequest="50"
+                    WidthRequest="200"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Clicked="OnGetProverbButtonClicked"/>
+            <Button x:Name="AmidaButton"
+                    Text="Get the Amida"
+                    BackgroundColor="#61A0D7" 
+                    BorderColor="#FFFFFF" 
+                    BorderWidth="2"
+                    TextColor="#FFFFFF" 
+                    Padding="10"
+                    HeightRequest="50"
+                    WidthRequest="200"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Clicked="OnGetAmidaButtonClicked"/>
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Spacing="10"
+                         Margin="0,0,0,10">
+                <CheckBox x:Name="ChatGPTCheckBox"
+                          Color="White"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="ChatGPT"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+                <CheckBox x:Name="GroKCheckBox"
+                          Color="White"
+                          IsChecked="True"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="GroK"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+                <CheckBox x:Name="GeminiCheckBox"
+                          Color="White"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="Gemini"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+                <CheckBox x:Name="AllAICheckBox"
+                          Color="White"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="AllAI"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+        </StackLayout>
+        <!-- Berichtlabel onderaan -->
+        <StackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
+            <Label
+                x:Name="MessageLabel"
+                BackgroundColor="DarkBlue"
+                Text="..."
+                TextColor="White"
+                Padding="10"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End" />
         </StackLayout>
         <!-- Versie label in de rechterbovenhoek -->
-       <StackLayout VerticalOptions="Start" HorizontalOptions="Fill" Margin="0,10,0,0">
-           <Label Text="Versie 1.0.10 - 11/05/2024 (US)"
-                  BackgroundColor="Transparent"
-                  TextColor="#FFFFFF"
-                  FontAttributes="Bold"
-                  TextDecorations="Underline"
-                  VerticalOptions="Start"
-                  HorizontalOptions="Start"
-                  HorizontalTextAlignment="Start"
-                  FontSize="9"/>
-       </StackLayout>
-    </Grid>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Fill" Margin="0,10,0,0">
+            <Label Text="Versie 1.0.10 - 11/05/2024 (US)"
+                   BackgroundColor="Transparent"
+                   TextColor="#FFFFFF"
+                   FontAttributes="Bold"
+                   TextDecorations="Underline"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Start"
+                   FontSize="9"/>
+        </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>

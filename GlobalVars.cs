@@ -12,6 +12,7 @@ public static class GlobalVars
     public static string longText = longString();
     public static string gRok = "";
     public static string AiSelected = "";
+    public static string Amida_ = "";
 
     private static string longString()
     {
