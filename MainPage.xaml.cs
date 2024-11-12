@@ -8,6 +8,7 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
         GlobalVars.AiSelected = "GroK";
+        OnOptionButtonClicked(KabbalahButton, EventArgs.Empty);
     }
     private void OnLanguagePickerChanged(object sender, EventArgs e)
     {
@@ -108,28 +109,41 @@ public partial class MainPage : ContentPage
     private async void OnParshatButtonClicked(object sender, EventArgs e)
     {
         GlobalVars.Amida_ = "Parshat";
-        string _today = GlobalVars.GetHttpReturnFromAPIRestLink(
-            "https://bibleapje.azurewebsites.net/api/ChatGrok/Give de date of TODAY in this EXACTLY format"
-            + " Monday 10 Cheshvan 5785 November 11 2024, but adjusted and updated for this date" +
-        DateTime.Now.Year.ToString() + " - " + DateTime.Now.Month.ToString() + " - " +  DateTime.Now.Day.ToString());
-        string _parshatname = GlobalVars.GetHttpReturnFromAPIRestLink(
-            "https://bibleapje.azurewebsites.net/api/ChatGrok/Give ONLY the name of the Weekly Parshat for"
-            + " " + _today + "?");
-            //DateTime.Now.Year.ToString() + " - " + DateTime.Now.Month.ToString() + " - " +  DateTime.Now.Day.ToString());
-            _parshatname = _parshatname.Replace("***", "").Replace("###", "")
-                .Replace("**", "").Replace("*", "").Replace("\n\n", " ").Replace("\n", " ");    
-        GlobalVars._pPortion = GlobalVars.GetHttpReturnFromAPIRestLink(
-            "https://bibleapje.azurewebsites.net/api/ChatGrok/"
-            + "Give the specific DAILY portion of the Weekly Parshat " + _parshatname + " for " +
-            _today);
-        GlobalVars._pPortion = GlobalVars._pPortion.Replace("***", "").Replace("###", "")
-            .Replace("**", "").Replace("*", "");
-        
+        GlobalVars._pPortion = this.TopEntryBox.Text;
         this.MessageLabel.IsVisible = true;
-        UpdateLabel("Preparing Parshat Portion");
+        UpdateLabel("Preparing Analysis of the given text");
         await Task.Delay(1000);
         await Navigation.PushAsync(new ChatAnalysis());
-        UpdateLabel("...");
-        
+        UpdateLabel("..."); 
+    }
+    private void TopEntryBox_Focused(object sender, FocusEventArgs e)
+    {
+        TopEntryBox.Text = string.Empty; // Clear text when Entry gets focus
+    }
+    private void OnOptionButtonClicked(object sender, EventArgs e)
+    {
+        var clickedButton = sender as Button;
+        GlobalVars.TypeOfProverbAnalysis = clickedButton.Text; // Save the type of analysis for Proverbs
+        if (GlobalVars.TypeOfProverbAnalysis.Contains(("All")))
+            GlobalVars.TypeOfProverbAnalysis = " Kabbalah and the Zohar and the Mishna";
+        foreach (var child in (clickedButton.Parent as StackLayout).Children)
+        {
+            if (child is Button button && button != clickedButton && button != ResetButton)
+            {
+                button.IsEnabled = false;
+            }
+        }
+    }
+
+    private void OnResetButtonClicked(object sender, EventArgs e)
+    {
+        KabbalahButton.IsEnabled = true;
+        ZoharButton.IsEnabled = true;
+        MishnaButton.IsEnabled = true;
+        AllButton.IsEnabled = true;
+    }
+    private async void OnChabatButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ChabatPage());
     }
 }

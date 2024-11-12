@@ -28,6 +28,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/ChabatPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.ChabatPage.xaml
+build_metadata.AdditionalFiles.TargetPath = ChabatPage.xaml
+build_metadata.AdditionalFiles.RelativePath = ChabatPage.xaml
+
 [/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/ChatAnalysis.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.ChatAnalysis.xaml

@@ -48,7 +48,7 @@ public partial class ChatAnalysis : ContentPage
         }
         else if (GlobalVars.Amida_.Contains("Parshat"))
         {
-            qq = "Give a deep analysis on the Parshat:" + GlobalVars._pPortion.Replace("\n", ",").Replace("-"," ");
+            qq = "Give a deep thorough analysis of:" + GlobalVars._pPortion + " from out the perspective of the: " + GlobalVars.Amida_;
         }
 
         string qp = "Give an analysis on " +

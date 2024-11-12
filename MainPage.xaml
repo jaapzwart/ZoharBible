@@ -4,8 +4,45 @@
              x:Class="ZoharBible.MainPage"
              BackgroundColor="#1E3A5F">
     <Grid>
-        <!-- Nieuwe Horizontale StackLayout met de nieuwe knoppen -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start" Margin="0, 20, 0, 0">
+        <!-- Invoertekstvak bovenaan met gele achtergrondkleur en donkerblauwe tekstkleur -->
+        <Entry x:Name="TopEntryBox"
+               Placeholder="Give text to analyze"
+               BackgroundColor="Yellow"
+               TextColor="DarkBlue"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start"
+               Margin="0, 0, 0, 10"
+               HeightRequest="40"/>
+               
+        <!-- Analyze button direct onder het invoervak, horizontaal uitgelijnd -->
+       <StackLayout Orientation="Horizontal" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Start"
+                    Margin="0, 50, 0, 10">
+           <Button x:Name="ParshatButton"
+                   Text="Analyze given text"
+                   BackgroundColor="#61A0D7"
+                   BorderColor="#FFFFFF"
+                   BorderWidth="2"
+                   TextColor="#FFFFFF"
+                   Padding="10"
+                   HeightRequest="50"
+                   WidthRequest="200"
+                   Clicked="OnParshatButtonClicked"/>
+           <Button x:Name="ChabatButton"
+                   Text="Get Daily Study"
+                   BackgroundColor="#61A0D7"
+                   BorderColor="#FFFFFF"
+                   BorderWidth="2"
+                   TextColor="#FFFFFF"
+                   Padding="10"
+                   HeightRequest="50"
+                   WidthRequest="200"
+                   Clicked="OnChabatButtonClicked"/>
+       </StackLayout>
+                
+        <!-- Nieuwe Horizontale StackLayout met de nieuwe knoppen onder de analyseknop -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start" Margin="0, 120, 0, 0">
             <Button x:Name="ShemaTimeButton"
                     Text="Shema Time"
                     BackgroundColor="#61A0D7"
@@ -33,7 +70,7 @@
                     VerticalOptions="Center"
                     Clicked="OnAmidaTimeButtonClicked"/>
         </StackLayout>
-
+        
         <!-- Hauptinhalt -->
         <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
             <!-- Knoppen en Checkboxes -->
@@ -50,18 +87,6 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnGetProverbButtonClicked"/>
-                <Button x:Name="ParshatButton"
-                        Text="Parshat"
-                        BackgroundColor="#61A0D7"
-                        BorderColor="#FFFFFF"
-                        BorderWidth="2"
-                        TextColor="#FFFFFF"
-                        Padding="10"
-                        HeightRequest="50"
-                        WidthRequest="200"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        Clicked="OnParshatButtonClicked"/>
                 <Button x:Name="AmidaButton"
                         Text="Get the Amida"
                         BackgroundColor="#61A0D7"
@@ -124,6 +149,52 @@
                                TextColor="White"
                                VerticalTextAlignment="Center" />
                     </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="10">
+                    <Button
+                        x:Name="KabbalahButton"
+                        Text="Kabbalah"
+                        BackgroundColor="LightBlue"
+                        TextColor="DarkBlue"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Clicked="OnOptionButtonClicked" />
+                    <Button
+                        x:Name="ZoharButton"
+                        Text="Zohar"
+                        BackgroundColor="LightBlue"
+                        TextColor="DarkBlue"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Clicked="OnOptionButtonClicked" />
+                    <Button
+                        x:Name="MishnaButton"
+                        Text="Mishna"
+                        BackgroundColor="LightBlue"
+                        TextColor="DarkBlue"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Clicked="OnOptionButtonClicked" />
+                    <Button
+                        x:Name="AllButton"
+                        Text="All"
+                        BackgroundColor="LightBlue"
+                        TextColor="DarkBlue"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Clicked="OnOptionButtonClicked" />
+                    <Button
+                        x:Name="ResetButton"
+                        Text=""
+                        BackgroundColor="Green"
+                        TextColor="White"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="50"
+                        Clicked="OnResetButtonClicked" />
                 </StackLayout>
             </StackLayout>
         </VerticalStackLayout>
