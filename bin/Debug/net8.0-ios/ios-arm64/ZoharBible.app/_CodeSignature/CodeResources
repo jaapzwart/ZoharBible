@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Y2xL+QnttNW7BV+9gk0+crETDXI=
+		fuBtln2B5vRGn/M0PxrmoOzu+Vc=
 		</data>
 		<key>MauiInfo.plist</key>
 		<data>
@@ -35,6 +35,10 @@
 		<key>Microsoft.CSharp.dll</key>
 		<data>
 		n4PI8DRpH1ydKZkDrbK2EE9G1Pc=
+		</data>
+		<key>Microsoft.CognitiveServices.Speech.csharp.dll</key>
+		<data>
+		Pe/gIJ7apIwQ8Okm9uAlMMBg83s=
 		</data>
 		<key>Microsoft.Extensions.Configuration.Abstractions.dll</key>
 		<data>
@@ -139,6 +143,10 @@
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>Plugin.Maui.Audio.dll</key>
+		<data>
+		79da78LcYO3JoApnhdigb23DhLU=
 		</data>
 		<key>PrivacyInfo.xcprivacy</key>
 		<data>
@@ -798,15 +806,15 @@
 		</data>
 		<key>ZoharBible.dll</key>
 		<data>
-		NV6cSfQxN8HaiqZuTdxKhRhTmxY=
+		bkfhC2fGfAEibwO/wnrXrX9frRU=
 		</data>
 		<key>ZoharBible.pdb</key>
 		<data>
-		KufifGkVouvOJ8fnHRpsGkpc0UY=
+		5LTzy5/F3lNvWUDUu4z1s2vbDdk=
 		</data>
 		<key>aot-instances.aotdata.arm64</key>
 		<data>
-		ZV+t9PGEp4hZ2i5yEON1TSanlmY=
+		Z7xAGTSCpEnN0egRGVbES3j5x5I=
 		</data>
 		<key>appicon60x60@2x.png</key>
 		<data>
@@ -1200,6 +1208,13 @@
 			rmbjaSy6gnkxRqsJtnwkqsBB2HG069/XaFNJaWVo1do=
 			</data>
 		</dict>
+		<key>Microsoft.CognitiveServices.Speech.csharp.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CGBc2eAAA7vG21BSTLgU/cywZFZ6jYZINBJgAU9F8q4=
+			</data>
+		</dict>
 		<key>Microsoft.Extensions.Configuration.Abstractions.dll</key>
 		<dict>
 			<key>hash2</key>
@@ -1373,6 +1388,13 @@
 			<key>hash2</key>
 			<data>
 			GrGtMZKUaSEPY0OAJYJbhXfwFOP7fsW/ScoHkylI31M=
+			</data>
+		</dict>
+		<key>Plugin.Maui.Audio.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EaM+IWvW1wvGck53CLbW1EHq1YJUQ7VUPP72SgaHdF8=
 			</data>
 		</dict>
 		<key>PrivacyInfo.xcprivacy</key>
@@ -2527,21 +2549,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QQCnzv0QqfqxvBk2JqiLtaeDF0ehYpzFYll5ml6PAHs=
+			gUpKaes9Jq0UYu0ASEtKn3uMHj1v9J3vZMzZV/HXzQU=
 			</data>
 		</dict>
 		<key>ZoharBible.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TaliB3kIDR+7XyWnMvhlGHeOpfzf8QRo91MyMqGWnFA=
+			Ve2t8W9reg2fA4QrTaIAiU17qS0SingYKlG+jjNCWjs=
 			</data>
 		</dict>
 		<key>aot-instances.aotdata.arm64</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			uWEyNISxUKi9bLSqS84QuUNwL1tBH2aEu5E2Xg2Pxqc=
+			eIJEgBNW3lLs+jp0TVK2WBKTwSN7QBAUbC/hbhyA4UI=
 			</data>
 		</dict>
 		<key>appicon60x60@2x.png</key>

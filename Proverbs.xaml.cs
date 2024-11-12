@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using AVFoundation;
 
 namespace ZoharBible;
 
@@ -10,9 +11,11 @@ namespace ZoharBible;
 /// </summary>
 public partial class Proverbs : ContentPage
 {
+    public static string translatedText = "";
     public Proverbs()
     {
         InitializeComponent();
+        ConfigureAudioSession();
         if (GlobalVars.AiSelected.Contains("GroK"))
         {
             ChatGPTCheckBox.IsChecked = false;
@@ -45,6 +48,13 @@ public partial class Proverbs : ContentPage
         PartCheckBox.IsChecked = true;
         OnOptionButtonClicked(KabbalahButton, EventArgs.Empty);
     }
+    private void ConfigureAudioSession()
+    {
+        var audioSession = AVAudioSession.SharedInstance();
+        audioSession.SetCategory(AVAudioSessionCategory.Playback);
+        //audioSession.SetMode(AVAudioSessionMode.SpokenAudio);
+        audioSession.SetActive(true);
+    }
     private void OnProverbEditorTextChanged(object sender, TextChangedEventArgs e)
     {
         var editor = sender as Editor;
@@ -52,6 +62,8 @@ public partial class Proverbs : ContentPage
 
         var lineCount = editor.Text.Length;
         GetAnalysisButton.IsEnabled = lineCount > 100;
+        StartSpeak.IsEnabled = lineCount > 100;
+        StopSpeak.IsEnabled = lineCount > 100;
     }
     /// <summary>
     /// Handles the click event of the "Get Zohar Explanation" button.
@@ -72,10 +84,12 @@ public partial class Proverbs : ContentPage
             if (PartCheckBox.IsChecked)
             {
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbsPart"); 
+                translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             else
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs");    
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs");  
+                translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             
         }
@@ -85,15 +99,17 @@ public partial class Proverbs : ContentPage
             {
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbsPart/EN" +
                                                                        this.ProverbNumberEntry.Text);   
+                translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             else
             {
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs/EN" +
-                                                                       this.ProverbNumberEntry.Text);   
+                                                                       this.ProverbNumberEntry.Text);  
+                translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             
         }
-        this.ProverbEditor.Text = responseText;
+        this.ProverbEditor.Text = translatedText;
         GlobalVars.ProverbToAnalyse = ExtractProverbsAndNumber(responseText); // Save proverb number to analyse
         UpdateLabel("...");
     }
@@ -153,13 +169,45 @@ public partial class Proverbs : ContentPage
     }
     private async void OnGetAnalysisButtonClicked(object sender, EventArgs e)
     {
+        var button = sender as Button;
+        if (button != null)
+        {
+            ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
+            // Voeg hier de overige logica voor de knop toe.
+        }
         this.MessageLabel.IsVisible = true;
         UpdateLabel("Preparing Analysis");
         await Task.Delay(1000);
         await Navigation.PushAsync(new ChatAnalysis());
         UpdateLabel("...");
     }
-
+    private async void OnStartSpeakClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        if (button != null)
+        {
+            ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
+            // Voeg hier de overige logica voor de knop toe.
+        }
+        await GlobalVars.ttsService.ConvertTextToSpeechAsync(translatedText);
+    }
+    
+    private async void OnStopSpeakClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        if (button != null)
+        {
+            ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
+            // Voeg hier de overige logica voor de knop toe.
+        }
+        await GlobalVars.ttsService.StopSpeakingAsync();
+    }
+    private async void ChangeButtonColorTemporarily(Button button, System.Drawing.Color temporaryColor, System.Drawing.Color originalColor)
+    {
+        button.BackgroundColor = Colors.DarkRed;
+        await Task.Delay(1000); // Wacht een seconde.
+        button.BackgroundColor = Colors.LightBlue;
+    }
     private void OnProverbNumberEntryTextChanged(object sender, TextChangedEventArgs e)
     {
         if (int.TryParse(e.NewTextValue, out int number))

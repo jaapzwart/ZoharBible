@@ -10,7 +10,7 @@
             <Setter Property="Margin" Value="3" />
         </Style>
     </ContentPage.Resources>
-    
+
     <Frame
         Grid.Row="1"
         BorderColor="LightBlue"
@@ -28,6 +28,33 @@
                 PlaceholderColor="YellowGreen"
                 VerticalOptions="FillAndExpand"
                 />
+            <!-- Toegevoegde knop -->
+            <Button
+                Text="Speak the Text"
+                BackgroundColor="DarkBlue"
+                TextColor="Yellow"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                Clicked="OnSpeakButtonClicked"
+                />
+            <Button
+                Text="Stop Speaking"
+                BackgroundColor="DarkRed"
+                TextColor="Yellow"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                Clicked="OnStopSpeakButtonClicked"
+            />
+            <!-- Toegevoegd Label -->
+            <Label
+                x:Name="messageLabel"
+                Text="..."
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                Padding="10"
+            />
         </StackLayout>
     </Frame>
 </ContentPage>

@@ -55,6 +55,10 @@
         "net8.0-android34.0": {
           "targetAlias": "net8.0-android",
           "dependencies": {
+            "Microsoft.CognitiveServices.Speech": {
+              "target": "Package",
+              "version": "[1.41.1, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -76,6 +80,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "Plugin.Maui.Audio": {
+              "target": "Package",
+              "version": "[3.0.1, )"
             }
           },
           "imports": [
@@ -102,6 +110,10 @@
         "net8.0-ios18.0": {
           "targetAlias": "net8.0-ios",
           "dependencies": {
+            "Microsoft.CognitiveServices.Speech": {
+              "target": "Package",
+              "version": "[1.41.1, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -123,6 +135,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "Plugin.Maui.Audio": {
+              "target": "Package",
+              "version": "[3.0.1, )"
             }
           },
           "imports": [
@@ -149,6 +165,10 @@
         "net8.0-maccatalyst18.0": {
           "targetAlias": "net8.0-maccatalyst",
           "dependencies": {
+            "Microsoft.CognitiveServices.Speech": {
+              "target": "Package",
+              "version": "[1.41.1, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -170,6 +190,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "Plugin.Maui.Audio": {
+              "target": "Package",
+              "version": "[3.0.1, )"
             }
           },
           "imports": [
@@ -196,7 +220,7 @@
         }
       },
       "runtimes": {
-        "ios-arm64": {
+        "iossimulator-arm64": {
           "#import": []
         }
       }

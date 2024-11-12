@@ -45,19 +45,101 @@
                         PlaceholderColor="YellowGreen"
                         VerticalOptions="FillAndExpand"
                         TextChanged="OnProverbEditorTextChanged" />
-                    <Button
-                        x:Name="GetAnalysisButton"
-                        Text="Get Analysis"
-                        HorizontalOptions="End"
-                        VerticalOptions="Start"
-                        BackgroundColor="LightBlue"
-                        TextColor="DarkBlue"
-                        Margin="0,10,0,0"
-                        IsEnabled="False"
-                        Clicked="OnGetAnalysisButtonClicked" />
+                    <StackLayout Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
+                      <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                          <Button
+                              x:Name="StartSpeak"
+                              Text="Start Speak"
+                              BackgroundColor="LightBlue"
+                              TextColor="DarkBlue"
+                              IsEnabled="False"
+                              Clicked="OnStartSpeakClicked"
+                              HeightRequest="40">
+                              <Button.Triggers>
+                                  <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                      <Setter Property="BorderColor" Value="DarkGray" />
+                                      <Setter Property="BackgroundColor" Value="LightGray" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                  </Trigger>
+                                  <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                                      <Setter Property="BorderColor" Value="Gray" />
+                                      <Setter Property="BackgroundColor" Value="LightGray" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                  </Trigger>
+                              </Button.Triggers>
+                              <Button.Style>
+                                  <Style TargetType="Button">
+                                      <Setter Property="BorderColor" Value="Black" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                      <Setter Property="FontSize" Value="Small" />
+                                      <Setter Property="HeightRequest" Value="40" />
+                                  </Style>
+                              </Button.Style>
+                          </Button>
+                      
+                          <Button
+                              x:Name="StopSpeak"
+                              Text="Stop Speak"
+                              BackgroundColor="LightBlue"
+                              TextColor="DarkBlue"
+                              IsEnabled="False"
+                              Clicked="OnStopSpeakClicked"
+                              HeightRequest="40">
+                              <Button.Triggers>
+                                  <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                      <Setter Property="BorderColor" Value="DarkGray" />
+                                      <Setter Property="BackgroundColor" Value="LightGray" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                  </Trigger>
+                                  <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                                      <Setter Property="BorderColor" Value="Gray" />
+                                      <Setter Property="BackgroundColor" Value="LightGray" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                  </Trigger>
+                              </Button.Triggers>
+                              <Button.Style>
+                                  <Style TargetType="Button">
+                                      <Setter Property="BorderColor" Value="Black" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                      <Setter Property="FontSize" Value="Small" />
+                                      <Setter Property="HeightRequest" Value="40" />
+                                  </Style>
+                              </Button.Style>
+                          </Button>
+                      
+                          <Button
+                              x:Name="GetAnalysisButton"
+                              Text="Get Analysis"
+                              BackgroundColor="LightBlue"
+                              TextColor="DarkBlue"
+                              IsEnabled="False"
+                              Clicked="OnGetAnalysisButtonClicked"
+                              HeightRequest="40">
+                              <Button.Triggers>
+                                  <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                      <Setter Property="BorderColor" Value="DarkGray" />
+                                      <Setter Property="BackgroundColor" Value="LightGray" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                  </Trigger>
+                                  <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                                      <Setter Property="BorderColor" Value="Gray" />
+                                      <Setter Property="BackgroundColor" Value="LightGray" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                  </Trigger>
+                              </Button.Triggers>
+                              <Button.Style>
+                                  <Style TargetType="Button">
+                                      <Setter Property="BorderColor" Value="Black" />
+                                      <Setter Property="BorderWidth" Value="1" />
+                                      <Setter Property="FontSize" Value="Small" />
+                                      <Setter Property="HeightRequest" Value="40" />
+                                  </Style>
+                              </Button.Style>
+                          </Button>
+                      </HorizontalStackLayout>
+                    </StackLayout>
                 </StackLayout>
             </Frame>
-            <!-- StackLayout voor tekstvak en optieknoppen -->
             <StackLayout
                 Grid.Row="2"
                 Orientation="Vertical"
@@ -85,11 +167,10 @@
                         HorizontalTextAlignment="Center" 
                         TextChanged="OnProverbNumberEntryTextChanged" />
                 </StackLayout>
-                <!-- Checkboxes StackLayout -->
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center"
                              VerticalOptions="Center"
-                             Spacing="10"
+                             Spacing="3"
                              Margin="0,0,0,10">
                     <CheckBox x:Name="PartCheckBox"
                               Color="White"
@@ -105,11 +186,10 @@
                            TextColor="White"
                            VerticalTextAlignment="Center" />
                 </StackLayout>
-                <!-- New StackLayout for additional checkboxes -->
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center"
                              VerticalOptions="Center"
-                             Spacing="10"
+                             Spacing="3"
                              Margin="0,0,0,10">
                     <CheckBox x:Name="ChatGPTCheckBox"
                               Color="White"
