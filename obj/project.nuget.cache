@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AAzxr4Z3pso=",
+  "dgSpecHash": "W4BW7ay0Mag=",
   "success": true,
-  "projectFilePath": "/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/ZoharBible.csproj",
+  "projectFilePath": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/ZoharBible.csproj",
   "expectedPackageFiles": [
     "/Users/jaapzwart/.nuget/packages/googlegson/2.10.1.4/googlegson.2.10.1.4.nupkg.sha512",
     "/Users/jaapzwart/.nuget/packages/microsoft.cognitiveservices.speech/1.41.1/microsoft.cognitiveservices.speech.1.41.1.nupkg.sha512",

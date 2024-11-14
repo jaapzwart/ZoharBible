@@ -17,6 +17,8 @@ public static class GlobalVars
     public static string Amida_ = "";
     public static string _pPortion = "";
     public static string lLanguage_ = "English";
+    public static string SpeechSpeed = "90";
+    public static string _ProverbOrPsalm = "Proverbs";
     
     private const string azureApiKey = "f11e7b39c8f043a99760b0a671d87998";
     private const string azureRegion = "westeurope";
@@ -105,10 +107,11 @@ public class TextToSpeechService
     public TextToSpeechService(string azureApiKey, string azureRegion)
     {
         var config = SpeechConfig.FromSubscription(azureApiKey, azureRegion);
+        config.SetProperty("speech-synthesis-speed", "2.0");
         _synthesizer = new SpeechSynthesizer(config);
     }
 
-    public async Task ConvertTextToSpeechAsync(string text)
+    public async Task ConvertTextToSpeechAsyncOld(string text)
     {
         var result = await _synthesizer.SpeakTextAsync(text);
         if (result.Reason == ResultReason.SynthesizingAudioCompleted)
@@ -125,6 +128,73 @@ public class TextToSpeechService
     public async Task StopSpeakingAsync()
     {
         await _synthesizer.StopSpeakingAsync();
+    }
+    public async Task ConvertTextToSpeechAsync(string text)
+    {
+        int transformedSpeed = 100 - Convert.ToInt16(GlobalVars.SpeechSpeed);
+        
+        String language = GlobalVars.lLanguage_;
+        string voiceName = language switch
+        {
+            "af" => "af-ZA-AdriNeural",          // Afrikaans
+            "ar" => "ar-SA-ZariyahNeural",       // Arabic
+            "bn" => "bn-IN-BashkarNeural",       // Bengali
+            "bg" => "bg-BG-IvanNeural",          // Bulgarian
+            "zh-Hans" => "zh-CN-XiaoxiaoNeural", // Chinese Simplified
+            "zh-Hant" => "zh-TW-HsiaoChenNeural",// Chinese Traditional
+            "hr" => "hr-HR-SreckoNeural",        // Croatian
+            "cs" => "cs-CZ-VlastaNeural",        // Czech
+            "da" => "da-DK-ChristelNeural",      // Danish
+            "nl" => "nl-NL-ColetteNeural",       // Dutch
+            "en" => "en-US-JennyNeural",         // English
+            "fi" => "fi-FI-HarriNeural",         // Finnish
+            "fr" => "fr-FR-DeniseNeural",        // French
+            "de" => "de-DE-KatjaNeural",         // German
+            "el" => "el-GR-NestorasNeural",      // Greek
+            "he" => "he-IL-AvriNeural",          // Hebrew
+            "hi" => "hi-IN-MadhurNeural",        // Hindi
+            "hu" => "hu-HU-NoemiNeural",         // Hungarian
+            "id" => "id-ID-ArdiNeural",          // Indonesian
+            "it" => "it-IT-ElsaNeural",          // Italian
+            "ja" => "ja-JP-KeitaNeural",         // Japanese
+            "ko" => "ko-KR-SunHiNeural",         // Korean
+            "ms" => "ms-MY-OsmanNeural",         // Malay
+            "fa" => "fa-IR-DilaraNeural",        // Persian
+            "pl" => "pl-PL-ZofiaNeural",         // Polish
+            "pt" => "pt-BR-FranciscaNeural",     // Portuguese
+            "pa" => "pa-IN-GurdeepNeural",       // Punjabi
+            "ro" => "ro-RO-EmilNeural",          // Romanian
+            "ru" => "ru-RU-DmitryNeural",        // Russian
+            "sr" => "sr-RS-NicholasNeural",      // Serbian
+            "sk" => "sk-SK-LukasNeural",         // Slovak
+            "es" => "es-ES-ElviraNeural",        // Spanish
+            "sv" => "sv-SE-MattiasNeural",       // Swedish
+            "ta" => "ta-IN-PallaviNeural",       // Tamil
+            "th" => "th-TH-AcharaNeural",        // Thai
+            "tr" => "tr-TR-SedaNeural",          // Turkish
+            "uk" => "uk-UA-PolinaNeural",        // Ukrainian
+            "ur" => "ur-PK-AsadNeural",          // Urdu
+            "vi" => "vi-VN-LienNeural",          // Vietnamese
+            _ => "en-US-JennyNeural"             // Standaard stem
+        };
+        string ssml = $@"
+            <speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'>
+                <voice name='{voiceName}'>
+                    <prosody rate='-{transformedSpeed}%'>{text}</prosody>
+                </voice>
+            </speak>";
+        var result = await _synthesizer.SpeakSsmlAsync(ssml);
+
+        if (result.Reason == ResultReason.SynthesizingAudioCompleted)
+        {
+            // Synthesis successful
+        }
+        else if (result.Reason == ResultReason.Canceled)
+        {
+            var cancellation = SpeechSynthesisCancellationDetails.FromResult(result);
+            Console.WriteLine($"Speech synthesis canceled: {cancellation.Reason}");
+            Console.WriteLine($"Error details: {cancellation.ErrorDetails}");
+        }
     }
 }
 

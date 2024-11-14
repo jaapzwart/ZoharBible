@@ -10,10 +10,9 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 Clicked="OnNavigateToMainPageClicked" />
-                
         <!-- Toevoegen van lege ruimte -->
         <BoxView HeightRequest="80" Color="#1E3A5F" />
-
+        
         <!-- Picker voor taalkeuze -->
         <Picker x:Name="LanguagePicker"
                 Title="Select Language"
@@ -22,7 +21,6 @@
                 BackgroundColor="LightBlue"
                 TextColor="DarkBlue"
                 WidthRequest="150"
-                SelectedIndex="10" 
                 SelectedIndexChanged="OnLanguagePickerChanged">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
@@ -68,6 +66,28 @@
                 </x:Array>
             </Picker.ItemsSource>
         </Picker>
+        <!-- Toevoegen van lege ruimte -->
+        <BoxView HeightRequest="20" Color="#1E3A5F" />
+        <!-- Slider voor spraaksnelheid -->
+        <Label Text="Speech Speed" 
+               TextColor="Gold" 
+               HorizontalOptions="Center" 
+               VerticalOptions="End" />
+        <Slider x:Name="SpeechSpeedSlider"
+                Minimum="10"
+                Maximum="100"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                ValueChanged="OnSpeechSpeedSliderValueChanged"/>
+        
+        <!-- Label om de huidige waarde van de slider weer te geven -->
+        <Label x:Name="SpeechSpeedValueLabel"
+               TextColor="Gold"
+               BackgroundColor="Transparent"
+               FontSize="Large"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="End" />
     </VerticalStackLayout>
         <Label x:Name="MessageLabel"
                BackgroundColor="DarkBlue"

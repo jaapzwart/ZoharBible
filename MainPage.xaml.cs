@@ -30,6 +30,13 @@ public partial class MainPage : ContentPage
     private async void OnGetProverbButtonClicked(object sender, EventArgs e)
     {
         GlobalVars.Amida_ = "";
+        GlobalVars._ProverbOrPsalm = "Proverbs";
+        await Navigation.PushAsync(new Proverbs());
+    }
+    private async void OnGetPsalmsButtonClicked(object sender, EventArgs e)
+    {
+        GlobalVars.Amida_ = "";
+        GlobalVars._ProverbOrPsalm = "Psalms";
         await Navigation.PushAsync(new Proverbs());
     }
     private async void OnGetAmidaButtonClicked(object sender, EventArgs e)

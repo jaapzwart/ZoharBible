@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/ZoharBible.csproj": {}
+    "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/ZoharBible.csproj": {}
   },
   "projects": {
-    "/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/ZoharBible.csproj": {
+    "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/ZoharBible.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/ZoharBible.csproj",
+        "projectUniqueName": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/ZoharBible.csproj",
         "projectName": "ZoharBible",
-        "projectPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/ZoharBible.csproj",
+        "projectPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/ZoharBible.csproj",
         "packagesPath": "/Users/jaapzwart/.nuget/packages/",
-        "outputPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBible/ZoharBible/obj/",
+        "outputPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/obj/",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [

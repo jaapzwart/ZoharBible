@@ -41,7 +41,7 @@
                         FontSize="18"
                         BackgroundColor="Green"
                         TextColor="YellowGreen"
-                        Placeholder="A random Proverb appears here..."
+                        Placeholder="A random verse appears here..."
                         PlaceholderColor="YellowGreen"
                         VerticalOptions="FillAndExpand"
                         TextChanged="OnProverbEditorTextChanged" />
@@ -153,7 +153,7 @@
                              Spacing="10"
                              Margin="0,0,0,10">
                     <Label
-                        Text="Give Proverb Number or 0 for random"
+                        Text="Give Verse Number or 0 for random"
                         TextColor="White"
                         VerticalTextAlignment="Center" />
                     <Entry
@@ -271,7 +271,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="End">
                 <Button
-                    Text="Get a Proverb from the Bible"
+                    Text="Get the Verse from the Bible"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Clicked="OnGetZoharExplanationButtonClicked"

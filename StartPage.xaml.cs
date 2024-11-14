@@ -5,13 +5,22 @@ public partial class StartPage : ContentPage
     public StartPage()
     {
         InitializeComponent();
-        GlobalVars.AiSelected = "GroK";
+        GlobalVars.AiSelected = "ChatGPT";
+        SpeechSpeedSlider.Value = 90;
+            
+        // Stel de initiële waarde van de Label in
+        SpeechSpeedValueLabel.Text = GlobalVars.SpeechSpeed.ToString();
     }
     protected override void OnAppearing()
     {
         base.OnAppearing();
         LanguagePicker.SelectedItem = "en";
         this.MessageLabel.Text = "...";
+    }
+    private void OnSpeechSpeedSliderValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        GlobalVars.SpeechSpeed = $"{e.NewValue}";
+        SpeechSpeedValueLabel.Text = e.NewValue.ToString("F0") + "%";
     }
     private async void OnNavigateToMainPageClicked(object sender, EventArgs e)
     {

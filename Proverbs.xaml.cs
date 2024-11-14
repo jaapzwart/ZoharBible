@@ -75,7 +75,7 @@ public partial class Proverbs : ContentPage
     private async void OnGetZoharExplanationButtonClicked(object? sender, EventArgs e)
     {
         this.MessageLabel.IsVisible = true;
-        UpdateLabel("Getting Proverb");
+        UpdateLabel("Getting Verse");
         await Task.Delay(1000);
         string responseText = "";
         this.ProverbEditor.Text = "";
@@ -83,12 +83,20 @@ public partial class Proverbs : ContentPage
         {
             if (PartCheckBox.IsChecked)
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbsPart"); 
+                if(GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbsPart");
+                else
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalmsPart");
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             else
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs");  
+                if(GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs");
+                else
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalms");
+                    
+                
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             
@@ -97,14 +105,24 @@ public partial class Proverbs : ContentPage
         {
             if (PartCheckBox.IsChecked)
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbsPart/EN" +
-                                                                       this.ProverbNumberEntry.Text);   
+                if(GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbsPart/EN" +
+                                                                       this.ProverbNumberEntry.Text);
+                else
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalmsPart/EN" +
+                                                                           this.ProverbNumberEntry.Text);
+                    
+                
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             else
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs/EN" +
-                                                                       this.ProverbNumberEntry.Text);  
+                if(GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs/EN" +
+                                                                       this.ProverbNumberEntry.Text); 
+                else
+                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalms/EN" +
+                                                                           this.ProverbNumberEntry.Text);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             
@@ -115,19 +133,15 @@ public partial class Proverbs : ContentPage
     }
     static string ExtractProverbsAndNumber(string input)
     {
+        string ww = "";
+        ww = GlobalVars._ProverbOrPsalm.Contains("Proverbs") ? "Proverbs" : "Psalms";
         // Regular expression to match "Proverbs" followed by a space and a number
-        Regex regex = new Regex(@"(Proverbs)\s(\d+)");
-        Match match = regex.Match(input);
+        Regex regex = new Regex(@"(" + ww + @")\s(\d+)");
+        var match = regex.Match(input);
 
-        if (match.Success)
-        {
+        return match.Success ?
             // Return the matched string
-            return match.Value;
-        }
-        else
-        {
-            return "No match found";
-        }
+            match.Value : "No match found";
     }
 
     /// <summary>
