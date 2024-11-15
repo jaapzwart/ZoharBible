@@ -16,6 +16,10 @@ public partial class ChabatPage : ContentPage
     {
         // Get the URL from the entry
         string url = UrlEntry.Text;
+        if(UrlEntry.Text.Contains("throwcards"))
+            url = "https://throwcards.azurewebsites.net";
+        if(UrlEntry.Text.Contains("kabbalah"))
+            url = "https://www.chabad.org/kabbalah/article_cdo/aid/1270227/jewish/Daily-Zohar-Hok-LYisrael.htm";
 
         // Validate the URL
         if (!string.IsNullOrWhiteSpace(url) && Uri.IsWellFormedUriString(url, UriKind.Absolute))

@@ -9,7 +9,7 @@ public partial class StartPage : ContentPage
         SpeechSpeedSlider.Value = 90;
             
         // Stel de initiële waarde van de Label in
-        SpeechSpeedValueLabel.Text = GlobalVars.SpeechSpeed.ToString();
+        SpeechSpeedValueLabel.Text = GlobalVars.SpeechSpeed.ToString() + "%";
     }
     protected override void OnAppearing()
     {

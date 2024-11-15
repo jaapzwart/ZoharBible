@@ -26886,11 +26886,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/ZoharBible.csproj",
+      "projectUniqueName": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleFull/ZoharBible.csproj",
       "projectName": "ZoharBible",
-      "projectPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/ZoharBible.csproj",
+      "projectPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleFull/ZoharBible.csproj",
       "packagesPath": "/Users/jaapzwart/.nuget/packages/",
-      "outputPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleBasic/obj/",
+      "outputPath": "/Volumes/TT7/Projects/RiderProjects/ZoharBibleFull/obj/",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "configFilePaths": [

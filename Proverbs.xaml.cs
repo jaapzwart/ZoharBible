@@ -87,6 +87,7 @@ public partial class Proverbs : ContentPage
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbsPart");
                 else
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalmsPart");
+                responseText = AddCommaToPsalmOrProverbName(responseText);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             else
@@ -95,8 +96,7 @@ public partial class Proverbs : ContentPage
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BibleProverbs");
                 else
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalms");
-                    
-                
+                responseText = AddCommaToPsalmOrProverbName(responseText);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             
@@ -111,8 +111,7 @@ public partial class Proverbs : ContentPage
                 else
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalmsPart/EN" +
                                                                            this.ProverbNumberEntry.Text);
-                    
-                
+                responseText = AddCommaToPsalmOrProverbName(responseText);   
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             else
@@ -123,6 +122,7 @@ public partial class Proverbs : ContentPage
                 else
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/BiblePsalms/EN" +
                                                                            this.ProverbNumberEntry.Text);
+                responseText = AddCommaToPsalmOrProverbName(responseText);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
             }
             
@@ -131,6 +131,25 @@ public partial class Proverbs : ContentPage
         GlobalVars.ProverbToAnalyse = ExtractProverbsAndNumber(responseText); // Save proverb number to analyse
         UpdateLabel("...");
     }
+
+    private static string AddCommaToPsalmOrProverbName(string toAnalyze)
+    {
+        if (toAnalyze.Contains("Proverbs"))
+        {
+            string pattern = @"(Proverbs\s*\d+)";
+        
+            string result = Regex.Replace(toAnalyze, pattern, m => $"{m.Value},");
+            return result;
+        }
+        else
+        {
+            string pattern = @"(Psalms\s*\d+)";
+        
+            string result = Regex.Replace(toAnalyze, pattern, m => $"{m.Value},");
+            return result;
+        }
+    }
+
     static string ExtractProverbsAndNumber(string input)
     {
         string ww = "";

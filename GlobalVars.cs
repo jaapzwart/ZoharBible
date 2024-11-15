@@ -131,7 +131,7 @@ public class TextToSpeechService
     }
     public async Task ConvertTextToSpeechAsync(string text)
     {
-        int transformedSpeed = 100 - Convert.ToInt16(GlobalVars.SpeechSpeed);
+        int transformedSpeed = 100 - Convert.ToInt32(GlobalVars.SpeechSpeed.Substring(0, 2));
         
         String language = GlobalVars.lLanguage_;
         string voiceName = language switch

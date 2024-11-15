@@ -12,7 +12,8 @@
                HorizontalOptions="FillAndExpand"
                VerticalOptions="Start"
                Margin="0, 0, 0, 10"
-               HeightRequest="40"/>
+               HeightRequest="40"
+               Focused="TopEntryBox_Focused" />
                
         <!-- Analyze button direct onder het invoervak, horizontaal uitgelijnd -->
        <StackLayout Orientation="Horizontal" 

@@ -33,6 +33,7 @@ public partial class MainPage : ContentPage
         GlobalVars._ProverbOrPsalm = "Proverbs";
         await Navigation.PushAsync(new Proverbs());
     }
+    
     private async void OnGetPsalmsButtonClicked(object sender, EventArgs e)
     {
         GlobalVars.Amida_ = "";
