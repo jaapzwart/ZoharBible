@@ -20,7 +20,7 @@
                     HorizontalOptions="Center" 
                     VerticalOptions="Start"
                     Margin="0, 50, 0, 10">
-           <Button x:Name="ParshatButton"
+           <Button x:Name="GetAnalysisButton"
                    Text="Analyze given text"
                    BackgroundColor="#61A0D7"
                    BorderColor="#FFFFFF"
@@ -29,7 +29,7 @@
                    Padding="10"
                    HeightRequest="50"
                    WidthRequest="200"
-                   Clicked="OnParshatButtonClicked"/>
+                   Clicked="OnGetAnalysisButtonClicked"/>
            <Button x:Name="ChabatButton"
                    Text="Get Daily Study"
                    BackgroundColor="#61A0D7"

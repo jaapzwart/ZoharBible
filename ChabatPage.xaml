@@ -9,7 +9,8 @@
             <Entry x:Name="UrlEntry" 
                    Placeholder="Enter URL"
                    Text="https://www.chabad.org/dailystudy/default_cdo/jewish/Daily-Study.htm"
-                   HorizontalOptions="FillAndExpand"/>
+                   HorizontalOptions="FillAndExpand"
+                   Focused="UrlEntry_Focused" />
                
             <!-- Button to Load the Web Page -->
             <Button Text="Load URL" 
