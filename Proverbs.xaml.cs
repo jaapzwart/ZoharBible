@@ -501,6 +501,7 @@ public partial class Proverbs : ContentPage
             await DisplayAlertAsync("Error", $"An error occurred while updating the label: {ex.Message}");
         }
     }
+
     /// <summary>
     /// Configures the audio session for playback using AVAudioSession.
     /// Sets the category to AVAudioSessionCategory.Playback and activates the session.
