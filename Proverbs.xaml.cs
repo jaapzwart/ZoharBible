@@ -136,11 +136,11 @@ public partial class Proverbs : ContentPage
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
                         responseText =
                             GlobalVars.GetHttpReturnFromAPIRestLink(
-                                "https://bibleapje.azurewebsites.net/api/BibleProverbsPart");
+                                Secrets.RESTAPI + @"BibleProverbsPart");
                     else
                         responseText =
                             GlobalVars.GetHttpReturnFromAPIRestLink(
-                                "https://bibleapje.azurewebsites.net/api/BiblePsalmsPart");
+                                Secrets.RESTAPI + @"BiblePsalmsPart");
                     responseText = AddCommaToPsalmOrProverbName(responseText);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                 }
@@ -149,11 +149,11 @@ public partial class Proverbs : ContentPage
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
                         responseText =
                             GlobalVars.GetHttpReturnFromAPIRestLink(
-                                "https://bibleapje.azurewebsites.net/api/BibleProverbs");
+                                Secrets.RESTAPI + @"BibleProverbs");
                     else
                         responseText =
                             GlobalVars.GetHttpReturnFromAPIRestLink(
-                                "https://bibleapje.azurewebsites.net/api/BiblePsalms");
+                                Secrets.RESTAPI + @"BiblePsalms");
                     responseText = AddCommaToPsalmOrProverbName(responseText);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                 }
@@ -164,11 +164,11 @@ public partial class Proverbs : ContentPage
                 {
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
                         responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                            "https://bibleapje.azurewebsites.net/api/BibleProverbsPart/EN" +
+                            Secrets.RESTAPI + @"BibleProverbsPart/EN" +
                             this.ProverbNumberEntry.Text);
                     else
                         responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                            "https://bibleapje.azurewebsites.net/api/BiblePsalmsPart/EN" +
+                            Secrets.RESTAPI + @"BiblePsalmsPart/EN" +
                             this.ProverbNumberEntry.Text);
                     responseText = AddCommaToPsalmOrProverbName(responseText);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
@@ -177,11 +177,11 @@ public partial class Proverbs : ContentPage
                 {
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
                         responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                            "https://bibleapje.azurewebsites.net/api/BibleProverbs/EN" +
+                            Secrets.RESTAPI + @"BibleProverbs/EN" +
                             this.ProverbNumberEntry.Text);
                     else
                         responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                            "https://bibleapje.azurewebsites.net/api/BiblePsalms/EN" +
+                            Secrets.RESTAPI + @"BiblePsalms/EN" +
                             this.ProverbNumberEntry.Text);
                     responseText = AddCommaToPsalmOrProverbName(responseText);
                     translatedText = await Translator.TranslateTextToGiven(responseText);

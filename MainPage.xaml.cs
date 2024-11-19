@@ -206,7 +206,7 @@ public partial class MainPage : ContentPage
         try
         {
             string _shema = "SHEMA TIME: " + GlobalVars.GetHttpReturnFromAPIRestLink(
-                "https://bibleapje.azurewebsites.net/api/Google/"
+                Secrets.RESTAPI + @"Google/"
                 + "Give ONLY the time the Shema should be prayed during the day");
             await DisplayAlert("Shema Time", _shema, "OK");
         }
@@ -227,7 +227,7 @@ public partial class MainPage : ContentPage
         try
         {
             string _amida = "AMIDA TIME: " + GlobalVars.GetHttpReturnFromAPIRestLink(
-                "https://bibleapje.azurewebsites.net/api/Google/"
+                Secrets.RESTAPI + @"Google/"
                 + "Give ONLY the time the Amida should be prayed during the day") + '\n';
             await DisplayAlert("Amida Time", _amida, "OK");
         }
@@ -248,6 +248,7 @@ public partial class MainPage : ContentPage
         try
         {
             GlobalVars._pPortion = this.TopEntryBox.Text;
+            GlobalVars.ProverbToAnalyse = this.TopEntryBox.Text;
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Preparing Analysis of the given text");
             await Task.Delay(1000);

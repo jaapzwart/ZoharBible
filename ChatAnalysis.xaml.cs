@@ -106,7 +106,7 @@ public partial class ChatAnalysis : ContentPage
                 if (GlobalVars.AiSelected.Contains("ChatGPT"))
                 {
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                        Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + translatedText;
@@ -114,7 +114,7 @@ public partial class ChatAnalysis : ContentPage
                 else if (GlobalVars.AiSelected.Contains("GroK"))
                 {
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        "https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                        Secrets.RESTAPI + @"ChatGrok/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     this.ChatAnalysisText.Text = "GroK: " + '\n' + translatedText.TrimStart().Replace("***", "")
@@ -124,7 +124,7 @@ public partial class ChatAnalysis : ContentPage
                 else if (GlobalVars.AiSelected.Contains("Gemini"))
                 {
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                        Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     this.ChatAnalysisText.Text = "Gemini: " + '\n' + translatedText.TrimStart();
@@ -132,17 +132,17 @@ public partial class ChatAnalysis : ContentPage
                 else if (GlobalVars.AiSelected.Contains("AllAI"))
                 {
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                        Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        "https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                        Secrets.RESTAPI + @"ChatGrok/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     this.ChatAnalysisText.Text += "Grok: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
                     responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                        Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     this.ChatAnalysisText.Text += "Gemini: " + '\n' + translatedText.TrimStart();
@@ -154,7 +154,7 @@ public partial class ChatAnalysis : ContentPage
             else if (GlobalVars.AiSelected.Contains("ChatGPT"))
             {
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                    "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                    Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + translatedText.TrimStart();
@@ -162,7 +162,7 @@ public partial class ChatAnalysis : ContentPage
             else if (GlobalVars.AiSelected.Contains("GroK"))
             {
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                    "https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                    Secrets.RESTAPI + @"ChatGrok/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "Grok: " + '\n' + translatedText.TrimStart().Replace("***", "")
@@ -171,7 +171,7 @@ public partial class ChatAnalysis : ContentPage
             }
             else if (GlobalVars.AiSelected.Contains("Gemini"))
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/Google/"
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
                                                                        + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "Gemini: " + '\n' + translatedText.TrimStart();
@@ -180,16 +180,16 @@ public partial class ChatAnalysis : ContentPage
             {
                 this.ChatAnalysisText.Text = "All AI ANalysis: " + '\n' + '\n';
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                    "https://bibleapje.azurewebsites.net/api/ChatGPT/"
+                    Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text += "ChatGPT: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                    "https://bibleapje.azurewebsites.net/api/ChatGrok/"
+                    Secrets.RESTAPI + @"ChatGrok/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text += "Grok: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink("https://bibleapje.azurewebsites.net/api/Google/"
+                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
                                                                        + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text += "Gemini: " + '\n' + translatedText.TrimStart();

@@ -5,25 +5,97 @@ using Newtonsoft.Json;
 
 namespace ZoharBible;
 
+/// <summary>
+/// The <c>GlobalVars</c> class contains global variables that hold the application state and configurations.
+/// </summary>
 public static class GlobalVars
 {
-    
-    public static string ChatAnalysis = "";
-    public static string TypeOfProverbAnalysis = "";
-    public static string ProverbToAnalyse = "";
-    public static string longText = longString();
-    public static string gRok = "";
-    public static string AiSelected = "";
-    public static string Amida_ = "";
-    public static string _pPortion = "";
-    public static string lLanguage_ = "English";
-    public static string SpeechSpeed = "90";
-    public static string _ProverbOrPsalm = "Proverbs";
-    
-    private const string azureApiKey = "f11e7b39c8f043a99760b0a671d87998";
-    private const string azureRegion = "westeurope";
-    public static TextToSpeechService ttsService = new TextToSpeechService(azureApiKey, azureRegion);
+    /// <summary>
+    /// Gets or sets the chat analysis data.
+    /// </summary>
+    public static string ChatAnalysis { get; set; } = "";
 
+    /// <summary>
+    /// Specifies the type of analysis to be applied to a proverb.
+    /// This could include perspectives such as Kabbalah, Zohar, Mishna, etc.
+    /// Used across various components to tailor the analysis approach for a specific proverb.
+    /// </summary>
+    public static string TypeOfProverbAnalysis { get; set; } = "";
+
+    /// <summary>
+    /// Gets or sets the proverb text that is to be analyzed. This property is used
+    /// to hold the specific proverb content that will undergo analysis within the application.
+    /// </summary>
+    public static string ProverbToAnalyse { get; set; } = "";
+
+    /// <summary>
+    /// Gets or sets a long string made up of 3000 repeated '#' characters.
+    /// </summary>
+    public static string longText { get; set; } = longString();
+
+    /// <summary>
+    /// A global variable used within the ZoharBible namespace to store a certain piece of data.
+    /// </summary>
+    public static string gRok { get; set; } = "";
+
+    /// <summary>
+    /// Gets or sets the AI service to be used for analysis.
+    /// This property holds the name of the AI selected, such as "ChatGPT", "GroK", "Gemini", etc.
+    /// It is utilized in various parts of the application to determine which AI service will process the requests.
+    /// Default value is an empty string.
+    /// </summary>
+    public static string AiSelected { get; set; } = "";
+
+    /// <summary>
+    /// Represents a special identifier used for determining the type of content being analyzed or presented.
+    /// This property can take values such as "Amida" or "Shema" to indicate specific types of analysis or presentation.
+    /// </summary>
+    public static string Amida_ { get; set; } = "";
+
+    /// <summary>
+    /// Represents the current portion or section being analyzed or processed by the application.
+    /// This property is utilized in various contexts within the application to keep track of the portion
+    /// of text that is currently being worked on, such as in text analysis or speech synthesis operations.
+    /// </summary>
+    public static string _pPortion { get; set; } = "";
+
+    /// <summary>
+    /// Gets or sets the language code used for translations and text-to-speech services.
+    /// This property determines the target language for translation of text in the application,
+    /// as well as the language and voice used in text-to-speech conversion.
+    /// Default value is "English".
+    /// </summary>
+    public static string lLanguage_ { get; set; } = "English";
+
+    /// <summary>
+    /// Gets or sets the speech speed for text-to-speech conversion.
+    /// </summary>
+    /// <remarks>
+    /// The value is represented as a string and should be between "0" and "100", where "100" denotes the slowest speech speed
+    /// and "0" denotes the fastest. By default, the speed is set to "90".
+    /// </remarks>
+    public static string SpeechSpeed { get; set; } = "90";
+
+    /// <summary>
+    /// Gets or sets the string that determines whether the current text to navigate
+    /// or analyze is from Proverbs or Psalms. This property influences the corresponding
+    /// API endpoints and logic for text handling within the ZoharBible application.
+    /// </summary>
+    public static string _ProverbOrPsalm { get; set; } = "Proverbs";
+
+    /// <summary>
+    /// Provides access to the TextToSpeechService instance used for
+    /// converting text into spoken audio using the Azure Text-to-Speech service.
+    /// </summary>
+    public static TextToSpeechService ttsService { get; set; } = new TextToSpeechService(
+        Secrets.azureApiKey, Secrets.azureRegion);
+
+    /// <summary>
+    /// Generates a string consisting of a specified character repeated a specified number of times.
+    /// </summary>
+    /// <returns>
+    /// A string with a specified character repeated 3000 times.
+    /// </returns>
     private static string longString()
     {
         char character = '#'; // The character you want to repeat
@@ -32,6 +104,12 @@ public static class GlobalVars
         string repeatedString = new string(character, repeatCount);
         return repeatedString;
     }
+
+    /// <summary>
+    /// Fetches the response string from a specified REST API URL.
+    /// </summary>
+    /// <param name="theLinkAPI">The URL of the REST API to fetch the response from.</param>
+    /// <returns>The response string from the REST API, or an error message if an exception occurs.</returns>
     public static string GetHttpReturnFromAPIRestLink(string theLinkAPI)
     {
         // This method has some troubles getting the string from the REST API in good format.
@@ -60,12 +138,36 @@ public static class GlobalVars
         }
     }
 }
+
+/// <summary>
+/// Provides methods to translate text to a specified language.
+/// </summary>
 public static class Translator
 {
-    private static readonly string subscriptionKey = "61fb96fbc3c64ead90661b6faf2f09d5";
-    private static readonly string endpoint = "https://api.cognitive.microsofttranslator.com/";
-    private static readonly string location = "westeurope";
+    /// <summary>
+    /// The subscription key required to authenticate API requests.
+    /// This key is used for interacting with various services and APIs that require a subscription for access.
+    /// Typically, the subscription key is a unique string provided by the service provider.
+    /// </summary>
+    private static readonly string subscriptionKey = Secrets.subscriptionKey;
 
+    /// <summary>
+    /// The endpoint for accessing the translation API service.
+    /// </summary>
+    private static readonly string endpoint = Secrets.enddpoint;
+
+    /// <summary>
+    /// Represents the region information required for making API calls to the translation service.
+    /// This value is used as the subscription region in the HTTP request headers when
+    /// interacting with the translation API.
+    /// </summary>
+    private static readonly string location = Secrets.llocation;
+
+    /// <summary>
+    /// Translates the provided text to the language specified in the global settings.
+    /// </summary>
+    /// <param name="inputText">The text to be translated.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the translated text.</returns>
     public static async Task<string> TranslateTextToGiven(string inputText)
     {
         string route = "/translate?api-version=3.0&from=en&to=" + GlobalVars.lLanguage_;
@@ -89,21 +191,45 @@ public static class Translator
         }
     }
 
+    /// <summary>
+    /// Represents the result of a translation operation.
+    /// </summary>
     private class TranslationResult
     {
+        /// <summary>
+        /// Gets or sets the translation results from the API response.
+        /// </summary>
         public Translation[] Translations { get; set; }
     }
 
+    /// <summary>
+    /// Represents a translation result with the translated text.
+    /// </summary>
     private class Translation
     {
+        /// <summary>
+        /// Gets or sets the text content used in translation results.
+        /// </summary>
+        /// <value>
+        /// A string representing the translated text.
+        /// </value>
         public string Text { get; set; }
     }
 }
 
+/// <summary>
+/// The TextToSpeechService class provides functionality to convert text to speech using Azure's Text-to-Speech API.
+/// </summary>
 public class TextToSpeechService
 {
+    /// <summary>
+    /// Handles text-to-speech synthesis operations utilizing the Microsoft Cognitive Services Speech SDK.
+    /// </summary>
     private readonly SpeechSynthesizer _synthesizer;
 
+    /// <summary>
+    /// Provides text-to-speech capabilities using Microsoft Cognitive Services.
+    /// </summary>
     public TextToSpeechService(string azureApiKey, string azureRegion)
     {
         var config = SpeechConfig.FromSubscription(azureApiKey, azureRegion);
@@ -111,6 +237,11 @@ public class TextToSpeechService
         _synthesizer = new SpeechSynthesizer(config);
     }
 
+    /// <summary>
+    /// Converts the given text to speech asynchronously using Microsoft's Cognitive Services.
+    /// </summary>
+    /// <param name="text">The text string that needs to be converted to speech.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task ConvertTextToSpeechAsyncOld(string text)
     {
         var result = await _synthesizer.SpeakTextAsync(text);
@@ -125,10 +256,19 @@ public class TextToSpeechService
             Console.WriteLine($"Error details: {cancellation.ErrorDetails}");
         }
     }
+
+    /// Asynchronously stops the speech synthesis process.
+    /// <returns>A task that represents the asynchronous stop operation.</returns>
     public async Task StopSpeakingAsync()
     {
         await _synthesizer.StopSpeakingAsync();
     }
+
+    /// <summary>
+    /// Converts the provided text to speech asynchronously using specific voice parameters based on global settings.
+    /// </summary>
+    /// <param name="text">The text to be converted to speech.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task ConvertTextToSpeechAsync(string text)
     {
         int transformedSpeed = 100 - Convert.ToInt32(GlobalVars.SpeechSpeed.Substring(0, 2));
