@@ -36,37 +36,7 @@ public partial class Proverbs : ContentPage
 
         try
         {
-            if (GlobalVars.AiSelected.Contains("GroK"))
-            {
-                ChatGPTCheckBox.IsChecked = false;
-                GroKCheckBox.IsChecked = true;
-                GeminiCheckBox.IsChecked = false;
-                AllAICheckBox.IsChecked = false;
-            }
-
-            if (GlobalVars.AiSelected.Contains("Gemini"))
-            {
-                ChatGPTCheckBox.IsChecked = false;
-                GroKCheckBox.IsChecked = false;
-                GeminiCheckBox.IsChecked = true;
-                AllAICheckBox.IsChecked = false;
-            }
-
-            if (GlobalVars.AiSelected.Contains("ChatGPT"))
-            {
-                ChatGPTCheckBox.IsChecked = true;
-                GroKCheckBox.IsChecked = false;
-                GeminiCheckBox.IsChecked = false;
-                AllAICheckBox.IsChecked = false;
-            }
-
-            if (GlobalVars.AiSelected.Contains("AllAI"))
-            {
-                ChatGPTCheckBox.IsChecked = false;
-                GroKCheckBox.IsChecked = false;
-                GeminiCheckBox.IsChecked = false;
-                AllAICheckBox.IsChecked = true;
-            }
+            UpdateCheckBoxes(GlobalVars.AiSelected);
 
             UpdateLabel("...");
             PartCheckBox.IsChecked = true;
@@ -77,19 +47,7 @@ public partial class Proverbs : ContentPage
             DisplayAlert("Error", $"There was an error during initialization: {ex.Message}", "OK");
         }
     }
-
-    /// <summary>
-    /// Configures the audio session for playback using AVAudioSession.
-    /// Sets the category to AVAudioSessionCategory.Playback and activates the session.
-    /// </summary>
-    private void ConfigureAudioSession()
-    {
-        var audioSession = AVAudioSession.SharedInstance();
-        audioSession.SetCategory(AVAudioSessionCategory.Playback);
-        //audioSession.SetMode(AVAudioSessionMode.SpokenAudio);
-        audioSession.SetActive(true);
-    }
-
+    #region Button Event Handlers
     /// <summary>
     /// Handles the text changed event for ProverbEditor.
     /// This method enables or disables buttons based on the length of the text in the editor.
@@ -196,84 +154,6 @@ public partial class Proverbs : ContentPage
         {
             await DisplayAlert("Error", $"There was an error getting Zohar explanation: {ex.Message}", "OK");
             UpdateLabel("Error retrieving verse");
-        }
-    }
-
-    private async Task DisplayAlertAsync(string title, string message)
-    {
-        await DisplayAlert(title, message, "OK");
-    }
-
-    /// <summary>
-    /// Adds a comma after the name of a Psalm or Proverb followed by a number in a given string.
-    /// </summary>
-    /// <param name="toAnalyze">The string to analyze and modify.</param>
-    /// <returns>A new string where commas are added after "Proverbs" or "Psalms" names followed by numbers.</returns>
-    private static string AddCommaToPsalmOrProverbName(string toAnalyze)
-    {
-        try
-        {
-            if (toAnalyze.Contains("Proverbs"))
-            {
-                string pattern = @"(Proverbs\s*\d+)";
-                string result = Regex.Replace(toAnalyze, pattern, m => $"{m.Value},");
-                return result;
-            }
-            else
-            {
-                string pattern = @"(Psalms\s*\d+)";
-                string result = Regex.Replace(toAnalyze, pattern, m => $"{m.Value},");
-                return result;
-            }
-        }
-        catch (Exception ex)
-        {
-            toAnalyze = "Error: " + ex.Message;
-            return toAnalyze;
-        }
-    }
-
-    /// <summary>
-    /// Extracts the book name (either "Proverbs" or "Psalms") and the number from the given input string.
-    /// If the input contains the specified book name followed by a space and a number, it returns the matched string.
-    /// Otherwise, it returns "No match found".
-    /// </summary>
-    /// <param name="input">The input string to search for the book name and number.</param>
-    /// <return>A string containing the matched book name and number or "No match found".</return>
-    static string ExtractProverbsAndNumber(string input)
-    {
-        try
-        {
-            string ww = GlobalVars._ProverbOrPsalm.Contains("Proverbs") ? "Proverbs" : "Psalms";
-            // Regular expression to match "Proverbs" followed by a space and a number
-            Regex regex = new Regex(@"(" + ww + @")\s(\d+)");
-            var match = regex.Match(input);
-            return match.Success ? match.Value : "No match found";
-        }
-        catch (Exception ex)
-        {
-            return "No match found:" + ex.Message;
-        }
-    }
-
-    /// <summary>
-    /// Updates the text of the MessageLabel on the UI thread and ensures the label is visible.
-    /// </summary>
-    /// <param name="text">The new text to be updated in the MessageLabel.</param>
-    private async void UpdateLabel(string text)
-    {
-        try
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                this.MessageLabel.IsVisible = true;
-                this.MessageLabel.Text = text;
-            });
-            await Task.Yield();
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlertAsync("Error", $"An error occurred while updating the label: {ex.Message}");
         }
     }
 
@@ -529,4 +409,108 @@ public partial class Proverbs : ContentPage
             await DisplayAlertAsync("Error", $"An error occurred: {ex.Message}");
         }
     }
+    #endregion
+    
+    #region Helper Methods
+    private void UpdateCheckBoxes(string aiSelected)
+    {
+        ChatGPTCheckBox.IsChecked = aiSelected.Contains("ChatGPT");
+        GroKCheckBox.IsChecked = aiSelected.Contains("GroK");
+        GeminiCheckBox.IsChecked = aiSelected.Contains("Gemini");
+        AllAICheckBox.IsChecked = aiSelected.Contains("AllAI");
+
+        if (!aiSelected.Contains("AllAI"))
+        {
+            AllAICheckBox.IsChecked = false;
+        }
+    }
+     private async Task DisplayAlertAsync(string title, string message)
+    {
+        await DisplayAlert(title, message, "OK");
+    }
+
+    /// <summary>
+    /// Adds a comma after the name of a Psalm or Proverb followed by a number in a given string.
+    /// </summary>
+    /// <param name="toAnalyze">The string to analyze and modify.</param>
+    /// <returns>A new string where commas are added after "Proverbs" or "Psalms" names followed by numbers.</returns>
+    private static string AddCommaToPsalmOrProverbName(string toAnalyze)
+    {
+        try
+        {
+            if (toAnalyze.Contains("Proverbs"))
+            {
+                string pattern = @"(Proverbs\s*\d+)";
+                string result = Regex.Replace(toAnalyze, pattern, m => $"{m.Value},");
+                return result;
+            }
+            else
+            {
+                string pattern = @"(Psalms\s*\d+)";
+                string result = Regex.Replace(toAnalyze, pattern, m => $"{m.Value},");
+                return result;
+            }
+        }
+        catch (Exception ex)
+        {
+            toAnalyze = "Error: " + ex.Message;
+            return toAnalyze;
+        }
+    }
+
+    /// <summary>
+    /// Extracts the book name (either "Proverbs" or "Psalms") and the number from the given input string.
+    /// If the input contains the specified book name followed by a space and a number, it returns the matched string.
+    /// Otherwise, it returns "No match found".
+    /// </summary>
+    /// <param name="input">The input string to search for the book name and number.</param>
+    /// <return>A string containing the matched book name and number or "No match found".</return>
+    static string ExtractProverbsAndNumber(string input)
+    {
+        try
+        {
+            string ww = GlobalVars._ProverbOrPsalm.Contains("Proverbs") ? "Proverbs" : "Psalms";
+            // Regular expression to match "Proverbs" followed by a space and a number
+            Regex regex = new Regex(@"(" + ww + @")\s(\d+)");
+            var match = regex.Match(input);
+            return match.Success ? match.Value : "No match found";
+        }
+        catch (Exception ex)
+        {
+            return "No match found:" + ex.Message;
+        }
+    }
+
+    /// <summary>
+    /// Updates the text of the MessageLabel on the UI thread and ensures the label is visible.
+    /// </summary>
+    /// <param name="text">The new text to be updated in the MessageLabel.</param>
+    private async void UpdateLabel(string text)
+    {
+        try
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                this.MessageLabel.IsVisible = true;
+                this.MessageLabel.Text = text;
+            });
+            await Task.Yield();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", $"An error occurred while updating the label: {ex.Message}");
+        }
+    }
+    /// <summary>
+    /// Configures the audio session for playback using AVAudioSession.
+    /// Sets the category to AVAudioSessionCategory.Playback and activates the session.
+    /// </summary>
+    private void ConfigureAudioSession()
+    {
+        var audioSession = AVAudioSession.SharedInstance();
+        audioSession.SetCategory(AVAudioSessionCategory.Playback);
+        //audioSession.SetMode(AVAudioSessionMode.SpokenAudio);
+        audioSession.SetActive(true);
+    }
+    #endregion
 }
