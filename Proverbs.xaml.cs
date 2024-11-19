@@ -424,7 +424,7 @@ public partial class Proverbs : ContentPage
             AllAICheckBox.IsChecked = false;
         }
     }
-     private async Task DisplayAlertAsync(string title, string message)
+    private async Task DisplayAlertAsync(string title, string message)
     {
         await DisplayAlert(title, message, "OK");
     }

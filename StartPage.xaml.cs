@@ -37,7 +37,14 @@ public partial class StartPage : ContentPage
         await Task.Delay(1000);
         await Navigation.PushAsync(new MainPage());
     }
-
+    private async void OnNavigateToHoroPageClicked(object sender, EventArgs e)
+    {
+        await DisplayAlertAsync("Horoscope message", "Not Implemented yet");
+    }
+    private async Task DisplayAlertAsync(string title, string message)
+    {
+        await DisplayAlert(title, message, "OK");
+    }
     private void OnLanguagePickerChanged(object sender, EventArgs e)
     {
         var picker = sender as Picker;
