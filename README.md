@@ -6,7 +6,7 @@
 * Show MS Cognitive services
 * Show how easy it is to make some fun stuff with .NET and MAUI
 * Experence the ease of use of all the nice MS thingies
-* See the expantion doen the road when more Azure things will be integrated
+* See the expansion doen the road when more Azure things will be integrated
 * Integrate ML (Machine Learning) and DS (Data Science) into the mix
 * Prepare yourself to also see
   * Azure functions
