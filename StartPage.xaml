@@ -6,10 +6,29 @@
     <Grid>
     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
         <!-- Knop voor navigatie naar de MainPage -->
-        <Button Text="Start Zohar Bible"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Clicked="OnNavigateToMainPageClicked" />
+       <StackLayout Spacing="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+           <Button Text="Start Zohar Bible"
+                   BackgroundColor="LightBlue"
+                   TextColor="DarkBlue"
+                   BorderColor="LightYellow"
+                   BorderWidth="2"
+                   CornerRadius="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Clicked="OnNavigateToMainPageClicked" />
+           <Button Text="Start Horoscope"
+                   BackgroundColor="LightBlue"
+                   TextColor="DarkBlue"
+                   BorderColor="LightYellow"
+                   BorderWidth="2"
+                   CornerRadius="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Clicked="OnNavigateToHoroPageClicked" />
+       </StackLayout>
+        <!-- Toevoegen van lege ruimte -->
         <!-- Toevoegen van lege ruimte -->
         <BoxView HeightRequest="80" Color="#1E3A5F" />
         
