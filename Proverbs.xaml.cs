@@ -409,6 +409,7 @@ public partial class Proverbs : ContentPage
             await DisplayAlertAsync("Error", $"An error occurred: {ex.Message}");
         }
     }
+
     #endregion
     
     #region Helper Methods

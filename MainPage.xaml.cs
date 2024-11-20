@@ -13,7 +13,6 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        GlobalVars.AiSelected = "GroK";
         OnOptionButtonClicked(KabbalahButton, EventArgs.Empty);
         UpdateCheckBoxes(GlobalVars.AiSelected);
     }
