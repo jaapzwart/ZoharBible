@@ -6,6 +6,7 @@ public partial class StartPage : ContentPage
     {
         InitializeComponent();
         GlobalVars.AiSelected = "ChatGPT";
+        UpdateCheckBoxes(GlobalVars.AiSelected);
         SpeechSpeedSlider.Value = 90;
         
         // Stel de initiële waarde van de Label in
@@ -96,7 +97,18 @@ public partial class StartPage : ContentPage
     #endregion
 
     #region Helper Methods
+    private void UpdateCheckBoxes(string aiSelected)
+    {
+        ChatGPTCheckBox.IsChecked = aiSelected.Contains("ChatGPT");
+        GroKCheckBox.IsChecked = aiSelected.Contains("GroK");
+        GeminiCheckBox.IsChecked = aiSelected.Contains("Gemini");
+        AllAICheckBox.IsChecked = aiSelected.Contains("AllAI");
 
+        if (!aiSelected.Contains("AllAI"))
+        {
+            AllAICheckBox.IsChecked = false;
+        }
+    }
     private async void UpdateLabel(string text)
     {
         Device.BeginInvokeOnMainThread(() =>

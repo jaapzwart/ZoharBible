@@ -23,7 +23,7 @@ namespace ZoharBible
             if (button != null)
             {
                 var zodiacSign = button.Text;
-                await DisplayAlert(AlertTitle, $"{zodiacSign} button clicked", "OK");
+                // await DisplayAlert(AlertTitle, $"{zodiacSign} button clicked", "OK");
                 GlobalVars._pPortion = "Horoscope " + zodiacSign;
                 GlobalVars.Amida_ = "Horoscope";
                 this.MessageLabel.IsVisible = true;
