@@ -93,11 +93,24 @@ public partial class ChatAnalysis : ContentPage
                      GlobalVars.Amida_ +
                      " and add to it how you can apply it to your behavior for the day, towards your family, friends and other people.";
             }
-           
-            string qp = "Give an analysis on " +
-                        GlobalVars.ProverbToAnalyse +
-                        " from out the perspective of the " +
-                        GlobalVars.TypeOfProverbAnalysis;
+
+            string qp = "";
+            string hAdd = "";
+            if (GlobalVars._pPortion.Contains("Horoscope"))
+            {
+                qp = "Give an analysis on " +
+                            GlobalVars._pPortion + " for date " + DateTime.Now +
+                            " and for the period of a " + GlobalVars.HPeriod;
+                hAdd = "(" + GlobalVars._pPortion + " - " + GlobalVars.HPeriod + ")";
+            }
+            else
+            {
+                qp = "Give an analysis on " +
+                     GlobalVars.ProverbToAnalyse +
+                     " from out the perspective of the " +
+                     GlobalVars.TypeOfProverbAnalysis;
+            }
+
             #endregion
             
             #region Amida and Shema
@@ -157,7 +170,7 @@ public partial class ChatAnalysis : ContentPage
                     Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + translatedText.TrimStart();
+                this.ChatAnalysisText.Text = "ChatGPT: " + hAdd + '\n' + translatedText.TrimStart();
             }
             else if (GlobalVars.AiSelected.Contains("GroK"))
             {
@@ -165,7 +178,7 @@ public partial class ChatAnalysis : ContentPage
                     Secrets.RESTAPI + @"ChatGrok/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text = "Grok: " + '\n' + translatedText.TrimStart().Replace("***", "")
+                this.ChatAnalysisText.Text = "Grok: " + hAdd + '\n' + translatedText.TrimStart().Replace("***", "")
                     .Replace("###", "")
                     .Replace("**", "").Replace("*", "");
             }
@@ -174,7 +187,7 @@ public partial class ChatAnalysis : ContentPage
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
                                                                        + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text = "Gemini: " + '\n' + translatedText.TrimStart();
+                this.ChatAnalysisText.Text = "Gemini: " + hAdd + '\n' + translatedText.TrimStart();
             }
             else if (GlobalVars.AiSelected.Contains("AllAI"))
             {
@@ -183,16 +196,16 @@ public partial class ChatAnalysis : ContentPage
                     Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text += "ChatGPT: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
+                this.ChatAnalysisText.Text += "ChatGPT: " + hAdd + '\n' + translatedText.TrimStart() + '\n' + '\n';
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
                     Secrets.RESTAPI + @"ChatGrok/"
                     + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text += "Grok: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
+                this.ChatAnalysisText.Text += "Grok: " + hAdd + '\n' + translatedText.TrimStart() + '\n' + '\n';
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
                                                                        + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text += "Gemini: " + '\n' + translatedText.TrimStart();
+                this.ChatAnalysisText.Text += "Gemini: " + hAdd + '\n' + translatedText.TrimStart();
             }
             #endregion
         }

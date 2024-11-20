@@ -10,6 +10,7 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static string HPeriod { get; set; } = "Day";
     /// <summary>
     /// Gets or sets the chat analysis data.
     /// </summary>

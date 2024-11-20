@@ -12,93 +12,88 @@ namespace ZoharBible
         public Horoscope()
         {
             InitializeComponent();
-        }
-
-        private void OnButtonClicked_Aries(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Aries
-            DisplayAlert("Horoscope", "Aries button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Taurus(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Taurus
-            DisplayAlert("Horoscope", "Taurus button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Gemini(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Gemini
-            DisplayAlert("Horoscope", "Gemini button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Cancer(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Cancer
-            DisplayAlert("Horoscope", "Cancer button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Leo(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Leo
-            DisplayAlert("Horoscope", "Leo button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Virgo(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Virgo
-            DisplayAlert("Horoscope", "Virgo button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Libra(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Libra
-            DisplayAlert("Horoscope", "Libra button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Scorpio(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Scorpio
-            DisplayAlert("Horoscope", "Scorpio button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Sagittarius(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Sagittarius
-            DisplayAlert("Horoscope", "Sagittarius button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Capricorn(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Capricorn
-            DisplayAlert("Horoscope", "Capricorn button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Aquarius(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Aquarius
-            DisplayAlert("Horoscope", "Aquarius button clicked", "OK");
-        }
-
-        private void OnButtonClicked_Pisces(object sender, EventArgs e)
-        {
-            // Voeg hier jouw logica toe voor Pisces
-            DisplayAlert("Horoscope", "Pisces button clicked", "OK");
+            this.DayCheckBox.IsChecked = true;
         }
         
+        private const string AlertTitle = "Horoscope";
+
+        private async void OnButtonClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var zodiacSign = button.Text;
+                await DisplayAlert(AlertTitle, $"{zodiacSign} button clicked", "OK");
+                GlobalVars._pPortion = "Horoscope " + zodiacSign;
+                GlobalVars.Amida_ = "Horoscope";
+                this.MessageLabel.IsVisible = true;
+                UpdateLabel("Preparing Horoscope Analysis " + '\n'
+                    + GlobalVars._pPortion 
+                    + " - " + GlobalVars.HPeriod);
+                await Task.Delay(1000);
+                await Navigation.PushAsync(new ChatAnalysis());
+                UpdateLabel("...");
+            }
+        }
+        private async void UpdateLabel(string text)
+        {
+            try
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    this.MessageLabel.IsVisible = true;
+                    this.MessageLabel.Text = text;
+                });
+                await Task.Yield();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
         private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
+            string checker = "";
             if (sender is CheckBox selectedCheckBox && e.Value)
             {
                 // Disable all other checkboxes
                 if (selectedCheckBox != DayCheckBox)
+                {
                     DayCheckBox.IsEnabled = false;
+                }
+                else
+                {
+                    checker = "Day";
+                }
+
                 if (selectedCheckBox != WeekCheckBox)
+                {
                     WeekCheckBox.IsEnabled = false;
+                }
+                else
+                {
+                    checker = "Week";
+                }
+
                 if (selectedCheckBox != MonthCheckBox)
+                {
                     MonthCheckBox.IsEnabled = false;
+                }
+                else
+                {
+                    checker = "Month";
+                }
+
                 if (selectedCheckBox != YearCheckBox)
+                {
                     YearCheckBox.IsEnabled = false;
+                }
+                else
+                {
+                    checker = "Year";
+                }
+
+                GlobalVars.HPeriod = checker;
             }
             else
             {
