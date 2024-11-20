@@ -21,23 +21,25 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Text="Aries" Clicked="OnButtonClicked_Aries"/>
-        <Button Grid.Row="0" Grid.Column="1" Text="Taurus" Clicked="OnButtonClicked_Taurus"/>
-        <Button Grid.Row="1" Grid.Column="0" Text="Gemini" Clicked="OnButtonClicked_Gemini"/>
-        <Button Grid.Row="1" Grid.Column="1" Text="Cancer" Clicked="OnButtonClicked_Cancer"/>
-        <Button Grid.Row="2" Grid.Column="0" Text="Leo" Clicked="OnButtonClicked_Leo"/>
-        <Button Grid.Row="2" Grid.Column="1" Text="Virgo" Clicked="OnButtonClicked_Virgo"/>
-        <Button Grid.Row="3" Grid.Column="0" Text="Libra" Clicked="OnButtonClicked_Libra"/>
-        <Button Grid.Row="3" Grid.Column="1" Text="Scorpio" Clicked="OnButtonClicked_Scorpio"/>
-        <Button Grid.Row="4" Grid.Column="0" Text="Sagittarius" Clicked="OnButtonClicked_Sagittarius"/>
-        <Button Grid.Row="4" Grid.Column="1" Text="Capricorn" Clicked="OnButtonClicked_Capricorn"/>
-        <Button Grid.Row="5" Grid.Column="0" Text="Aquarius" Clicked="OnButtonClicked_Aquarius"/>
-        <Button Grid.Row="5" Grid.Column="1" Text="Pisces" Clicked="OnButtonClicked_Pisces"/>
+       <Button Grid.Row="0" Grid.Column="0" Text="Aries" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="0" Grid.Column="1" Text="Taurus" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="1" Grid.Column="0" Text="Gemini" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="1" Grid.Column="1" Text="Cancer" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="2" Grid.Column="0" Text="Leo" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="2" Grid.Column="1" Text="Virgo" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="3" Grid.Column="0" Text="Libra" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="3" Grid.Column="1" Text="Scorpio" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="4" Grid.Column="0" Text="Sagittarius" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="4" Grid.Column="1" Text="Capricorn" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="5" Grid.Column="0" Text="Aquarius" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="5" Grid.Column="1" Text="Pisces" Clicked="OnButtonClicked"/>
+       
         <Grid Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -64,5 +66,23 @@
                 <CheckBox x:Name="YearCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="Yellow" />
             </StackLayout>
         </Grid>
+      <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" HorizontalOptions="Center">
+          <Frame
+              Grid.Row="0"
+              BorderColor="Transparent"
+              BackgroundColor="Transparent"
+              Padding="3"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+              <Label
+                  x:Name="MessageLabel"
+                  BackgroundColor="Transparent"
+                  Text="..."
+                  TextColor="White"
+                  Padding="10"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand" />
+          </Frame>
+      </Grid>
     </Grid>
 </ContentPage>

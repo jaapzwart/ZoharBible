@@ -15,8 +15,20 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         GlobalVars.AiSelected = "GroK";
         OnOptionButtonClicked(KabbalahButton, EventArgs.Empty);
+        UpdateCheckBoxes(GlobalVars.AiSelected);
     }
+    private void UpdateCheckBoxes(string aiSelected)
+    {
+        ChatGPTCheckBox.IsChecked = aiSelected.Contains("ChatGPT");
+        GroKCheckBox.IsChecked = aiSelected.Contains("GroK");
+        GeminiCheckBox.IsChecked = aiSelected.Contains("Gemini");
+        AllAICheckBox.IsChecked = aiSelected.Contains("AllAI");
 
+        if (!aiSelected.Contains("AllAI"))
+        {
+            AllAICheckBox.IsChecked = false;
+        }
+    }
     /// <summary>
     /// Handles the SelectedIndexChanged event of the LanguagePicker.
     /// Updates the current language in the GlobalVars class based on the selected item in the Picker.
