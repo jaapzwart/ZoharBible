@@ -168,7 +168,6 @@ public partial class ChatAnalysis : ContentPage
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
                     Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
-                await DisplayAlert("ChatGPT", responseText, "Ok");
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "ChatGPT: " + hAdd + '\n' + translatedText.TrimStart();
             }
