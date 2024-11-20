@@ -39,7 +39,9 @@ public partial class StartPage : ContentPage
     }
     private async void OnNavigateToHoroPageClicked(object sender, EventArgs e)
     {
-        await DisplayAlertAsync("Horoscope message", "Not Implemented yet");
+        UpdateLabel("Opening Horoscope Page");
+        await Task.Delay(1000);
+        await Navigation.PushAsync(new Horoscope());
     }
     private async Task DisplayAlertAsync(string title, string message)
     {
