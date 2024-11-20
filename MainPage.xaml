@@ -222,7 +222,7 @@
                VerticalOptions="End" />
         
         <!-- Versie label in de rechterbovenhoek -->
-        <Label Text="Versie 1.0.10 - 11/05/2024 (US)"
+        <Label Text="Versie 1.1.0 - 11/05/2024 (US)"
                BackgroundColor="Transparent"
                TextColor="#FFFFFF"
                FontAttributes="Bold"
