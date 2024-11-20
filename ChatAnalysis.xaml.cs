@@ -71,7 +71,6 @@ public partial class ChatAnalysis : ContentPage
             await DisplayAlert("Error", "An error occurred: " + ex.Message, "OK");
         }
     }
-
     /// <summary>
     /// Retrieves and translates text-based analysis of a specific Jewish prayer or proverb.
     /// The text is fetched from an external API based on the selected AI service and
@@ -99,7 +98,7 @@ public partial class ChatAnalysis : ContentPage
             if (GlobalVars._pPortion.Contains("Horoscope"))
             {
                 qp = "Give an analysis on " +
-                            GlobalVars._pPortion + " for date " + DateTime.Now +
+                            GlobalVars._pPortion + " for the current date" +
                             " and for the period of a " + GlobalVars.HPeriod;
                 hAdd = "(" + GlobalVars._pPortion + " - " + GlobalVars.HPeriod + ")";
             }
@@ -169,6 +168,7 @@ public partial class ChatAnalysis : ContentPage
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
                     Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
+                await DisplayAlert("ChatGPT", responseText, "Ok");
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "ChatGPT: " + hAdd + '\n' + translatedText.TrimStart();
             }
