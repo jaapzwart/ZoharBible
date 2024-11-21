@@ -10,6 +10,7 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static bool firstThrow { get; set; } = true;
     public static string theCardT { get; set; } = "THE SUN";
     public static string thePositionT { get; set; } = "1";
     public static bool TAIInfo { get; set; } = false;

@@ -14,13 +14,14 @@ public partial class Proverbs : ContentPage
 {
     /// <summary>
     /// A static string variable that holds the translated text of a proverb or psalm.
-    /// This variable is used to store the result after a proverb or psalm has been retrieved and translated.
+    /// This variable is updated after retrieving and translating a proverb or psalm from a remote service.
     /// </summary>
     public static string translatedText = "";
 
     /// <summary>
     /// The Proverbs class represents a content page within the Zohar Bible application.
-    /// It provides functionality to retrieve and display a random proverb from the Bible.
+    /// It is responsible for initializing the UI components and configuring the
+    /// application based on the user's AI selection for analyzing proverbs.
     /// </summary>
     public Proverbs()
     {
@@ -48,6 +49,7 @@ public partial class Proverbs : ContentPage
         }
     }
     #region Button Event Handlers
+
     /// <summary>
     /// Handles the text changed event for ProverbEditor.
     /// This method enables or disables buttons based on the length of the text in the editor.
@@ -225,6 +227,7 @@ public partial class Proverbs : ContentPage
                 ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
                 // Voeg hier de overige logica voor de knop toe.
             }
+
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Preparing Analysis");
             await Task.Delay(1000);
@@ -277,6 +280,7 @@ public partial class Proverbs : ContentPage
                 ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
                 // Voeg hier de overige logica voor de knop toe.
             }
+
             await GlobalVars.ttsService.StopSpeakingAsync();
         }
         catch (Exception ex)
@@ -291,7 +295,8 @@ public partial class Proverbs : ContentPage
     /// <param name="button">The button whose background color is to be changed.</param>
     /// <param name="temporaryColor">The color to which the button's background will be temporarily changed.</param>
     /// <param name="originalColor">The original color to which the button's background will be reverted.</param>
-    private async void ChangeButtonColorTemporarily(Button button, System.Drawing.Color temporaryColor, System.Drawing.Color originalColor)
+    private async void ChangeButtonColorTemporarily(Button button, System.Drawing.Color temporaryColor,
+        System.Drawing.Color originalColor)
     {
         try
         {
@@ -413,6 +418,11 @@ public partial class Proverbs : ContentPage
     #endregion
     
     #region Helper Methods
+
+    /// <summary>
+    /// Updates the state of various AI-related checkboxes based on the selected AI options.
+    /// </summary>
+    /// <param name="aiSelected">A string representing the selected AI options which may include "ChatGPT", "GroK", "Gemini", or "AllAI".</param>
     private void UpdateCheckBoxes(string aiSelected)
     {
         ChatGPTCheckBox.IsChecked = aiSelected.Contains("ChatGPT");
@@ -425,6 +435,13 @@ public partial class Proverbs : ContentPage
             AllAICheckBox.IsChecked = false;
         }
     }
+
+    /// <summary>
+    /// Displays an alert dialog with the specified title and message.
+    /// </summary>
+    /// <param name="title">The title of the alert dialog.</param>
+    /// <param name="message">The message content of the alert dialog.</param>
+    /// <returns>A task representing the asynchronous operation of displaying the alert.</returns>
     private async Task DisplayAlertAsync(string title, string message)
     {
         await DisplayAlert(title, message, "OK");
@@ -465,7 +482,7 @@ public partial class Proverbs : ContentPage
     /// Otherwise, it returns "No match found".
     /// </summary>
     /// <param name="input">The input string to search for the book name and number.</param>
-    /// <return>A string containing the matched book name and number or "No match found".</return>
+    /// <returns>A string containing the matched book name and number or "No match found".</returns>
     static string ExtractProverbsAndNumber(string input)
     {
         try
