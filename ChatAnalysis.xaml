@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZoharBible.ChatAnalysis"
-             BackgroundColor="DarkBlue">
+             BackgroundColor="#1E3A5F">
     <ContentPage.Resources>
         <Style TargetType="Frame">
             <Setter Property="BorderColor" Value="LightBlue" />
@@ -32,11 +32,33 @@
             <Button
                 Text="Speak the Text"
                 BackgroundColor="DarkBlue"
-                TextColor="Yellow"
-                HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
                 Clicked="OnSpeakButtonClicked"
-                />
+                TextColor="Yellow"
+                HorizontalOptions="FillAndExpand"
+                >
+                <Button.Triggers>
+                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                        <Setter Property="BorderColor" Value="DarkGray" />
+                        <Setter Property="BackgroundColor" Value="LightGray" />
+                        <Setter Property="BorderWidth" Value="1" />
+                    </Trigger>
+                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                        <Setter Property="BorderColor" Value="Gray" />
+                        <Setter Property="BackgroundColor" Value="LightGray" />
+                        <Setter Property="BorderWidth" Value="1" />
+                    </Trigger>
+                </Button.Triggers>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderColor" Value="Black" />
+                        <Setter Property="BorderWidth" Value="1" />
+                        <Setter Property="FontSize" Value="Small" />
+                        <Setter Property="HeightRequest" Value="40" />
+                    </Style>
+                </Button.Style>
+            </Button>
+
             <Button
                 Text="Stop Speaking"
                 BackgroundColor="DarkRed"
@@ -44,7 +66,28 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
                 Clicked="OnStopSpeakButtonClicked"
-            />
+            >
+                <Button.Triggers>
+                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                        <Setter Property="BorderColor" Value="DarkGray" />
+                        <Setter Property="BackgroundColor" Value="LightGray" />
+                        <Setter Property="BorderWidth" Value="1" />
+                    </Trigger>
+                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                        <Setter Property="BorderColor" Value="Gray" />
+                        <Setter Property="BackgroundColor" Value="LightGray" />
+                        <Setter Property="BorderWidth" Value="1" />
+                    </Trigger>
+                </Button.Triggers>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderColor" Value="Black" />
+                        <Setter Property="BorderWidth" Value="1" />
+                        <Setter Property="FontSize" Value="Small" />
+                        <Setter Property="HeightRequest" Value="40" />
+                    </Style>
+                </Button.Style>
+            </Button>
             <!-- Toegevoegd Label -->
             <Label
                 x:Name="messageLabel"

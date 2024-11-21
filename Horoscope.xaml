@@ -27,18 +27,270 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-       <Button Grid.Row="0" Grid.Column="0" Text="Aries" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="0" Grid.Column="1" Text="Taurus" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="1" Grid.Column="0" Text="Gemini" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="1" Grid.Column="1" Text="Cancer" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="2" Grid.Column="0" Text="Leo" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="2" Grid.Column="1" Text="Virgo" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="3" Grid.Column="0" Text="Libra" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="3" Grid.Column="1" Text="Scorpio" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="4" Grid.Column="0" Text="Sagittarius" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="4" Grid.Column="1" Text="Capricorn" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="5" Grid.Column="0" Text="Aquarius" Clicked="OnButtonClicked"/>
-       <Button Grid.Row="5" Grid.Column="1" Text="Pisces" Clicked="OnButtonClicked"/>
+       <Button Grid.Row="0" Grid.Column="0" Text="Aries" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="0" Grid.Column="1" Text="Taurus" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="1" Grid.Column="0" Text="Gemini" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="1" Grid.Column="1" Text="Cancer" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="2" Grid.Column="0" Text="Leo" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="2" Grid.Column="1" Text="Virgo" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="3" Grid.Column="0" Text="Libra" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="3" Grid.Column="1" Text="Scorpio" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="4" Grid.Column="0" Text="Sagittarius" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="4" Grid.Column="1" Text="Capricorn" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="5" Grid.Column="0" Text="Aquarius" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
+       <Button Grid.Row="5" Grid.Column="1" Text="Pisces" Clicked="OnButtonClicked">
+           <Button.Triggers>
+               <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                   <Setter Property="BorderColor" Value="DarkGray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+               <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                   <Setter Property="BorderColor" Value="Gray" />
+                   <Setter Property="BackgroundColor" Value="LightGray" />
+                   <Setter Property="BorderWidth" Value="1" />
+               </Trigger>
+           </Button.Triggers>
+           <Button.Style>
+               <Style TargetType="Button">
+                   <Setter Property="BorderColor" Value="Black" />
+                   <Setter Property="BorderWidth" Value="1" />
+                   <Setter Property="FontSize" Value="Small" />
+                   <Setter Property="HeightRequest" Value="40" />
+               </Style>
+           </Button.Style>
+       </Button>
        
         <Grid Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="Center">
             <Grid.RowDefinitions>
