@@ -18,7 +18,28 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    WidthRequest="200"
-                   Clicked="OnNavigateToMainPageClicked" />
+                   Clicked="OnNavigateToMainPageClicked" >
+               <Button.Triggers>
+                   <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                       <Setter Property="BorderColor" Value="DarkGray" />
+                       <Setter Property="BackgroundColor" Value="LightGray" />
+                       <Setter Property="BorderWidth" Value="1" />
+                   </Trigger>
+                   <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                       <Setter Property="BorderColor" Value="Gray" />
+                       <Setter Property="BackgroundColor" Value="LightGray" />
+                       <Setter Property="BorderWidth" Value="1" />
+                   </Trigger>
+               </Button.Triggers>
+               <Button.Style>
+                   <Style TargetType="Button">
+                       <Setter Property="BorderColor" Value="Black" />
+                       <Setter Property="BorderWidth" Value="1" />
+                       <Setter Property="FontSize" Value="Small" />
+                       <Setter Property="HeightRequest" Value="40" />
+                   </Style>
+               </Button.Style>
+           </Button>
            <Button Text="Start Horoscope"
                    BackgroundColor="LightBlue"
                    TextColor="DarkBlue"
@@ -28,7 +49,28 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    WidthRequest="200"
-                   Clicked="OnNavigateToHoroPageClicked" />
+                   Clicked="OnNavigateToHoroPageClicked" >
+               <Button.Triggers>
+                   <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                       <Setter Property="BorderColor" Value="DarkGray" />
+                       <Setter Property="BackgroundColor" Value="LightGray" />
+                       <Setter Property="BorderWidth" Value="1" />
+                   </Trigger>
+                   <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                       <Setter Property="BorderColor" Value="Gray" />
+                       <Setter Property="BackgroundColor" Value="LightGray" />
+                       <Setter Property="BorderWidth" Value="1" />
+                   </Trigger>
+               </Button.Triggers>
+               <Button.Style>
+                   <Style TargetType="Button">
+                       <Setter Property="BorderColor" Value="Black" />
+                       <Setter Property="BorderWidth" Value="1" />
+                       <Setter Property="FontSize" Value="Small" />
+                       <Setter Property="HeightRequest" Value="40" />
+                   </Style>
+               </Button.Style>
+           </Button>
            <Button Text="Start Tarot"
                    BackgroundColor="LightBlue"
                    TextColor="DarkBlue"
@@ -38,7 +80,28 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    WidthRequest="200"
-                   Clicked="OnNavigateToTarotPageClicked" />
+                   Clicked="OnNavigateToTarotPageClicked" >
+               <Button.Triggers>
+                   <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                       <Setter Property="BorderColor" Value="DarkGray" />
+                       <Setter Property="BackgroundColor" Value="LightGray" />
+                       <Setter Property="BorderWidth" Value="1" />
+                   </Trigger>
+                   <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                       <Setter Property="BorderColor" Value="Gray" />
+                       <Setter Property="BackgroundColor" Value="LightGray" />
+                       <Setter Property="BorderWidth" Value="1" />
+                   </Trigger>
+               </Button.Triggers>
+               <Button.Style>
+                   <Style TargetType="Button">
+                       <Setter Property="BorderColor" Value="Black" />
+                       <Setter Property="BorderWidth" Value="1" />
+                       <Setter Property="FontSize" Value="Small" />
+                       <Setter Property="HeightRequest" Value="40" />
+                   </Style>
+               </Button.Style>
+           </Button>
        </StackLayout>
         <!-- Toevoegen van lege ruimte -->
         <!-- Toevoegen van lege ruimte -->
