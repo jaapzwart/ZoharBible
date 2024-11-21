@@ -15,7 +15,12 @@ public partial class ChabatPage : ContentPage
     {
         InitializeComponent();
     }
-
+    public ChabatPage(string cc)
+    {
+        InitializeComponent();
+        UrlEntry.Text = cc;
+        OnLoadUrlClicked(null, null);
+    }
     #endregion
 
     #region Event Handlers

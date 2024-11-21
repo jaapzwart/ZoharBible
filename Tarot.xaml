@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="ZoharBible.Tarot"
+            BackgroundColor="LightSkyBlue"> <!-- Ocean blue background -->
+    <Grid Padding="10" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" /> <!-- Extra row for checkboxes -->
+            <RowDefinition Height="*" /> <!-- Extra row for message label at the bottom -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- Tarot Cards -->
+        <Frame Padding="0" HasShadow="False" CornerRadius="5" BackgroundColor="Transparent" Grid.Column="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCardTapped" CommandParameter="1"/>
+            </Frame.GestureRecognizers>
+            <Image x:Name="card1Image" Source="http://scrumara.azurewebsites.net/images/taroth/80.jpg" VerticalOptions="FillAndExpand" Aspect="AspectFit"/>
+        </Frame>
+        <Frame Padding="0" HasShadow="False" CornerRadius="5" BackgroundColor="Transparent" Grid.Column="1">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCardTapped" CommandParameter="2"/>
+            </Frame.GestureRecognizers>
+            <Image x:Name="card2Image" Source="http://scrumara.azurewebsites.net/images/taroth/80.jpg" VerticalOptions="FillAndExpand" Aspect="AspectFit"/>
+        </Frame>
+        <Frame Padding="0" HasShadow="False" CornerRadius="5" BackgroundColor="Transparent" Grid.Column="2">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCardTapped" CommandParameter="3"/>
+            </Frame.GestureRecognizers>
+            <Image x:Name="card3Image" Source="http://scrumara.azurewebsites.net/images/taroth/80.jpg" VerticalOptions="FillAndExpand" Aspect="AspectFit"/>
+        </Frame>
+        <!-- Shuffle button -->
+        <Button Grid.Row="1" Grid.ColumnSpan="3" Text="Shuffle"
+                BackgroundColor="LightBlue" TextColor="DarkBlue" BorderColor="Yellow" BorderWidth="2"
+                Clicked="OnShuffleClicked"
+                VerticalOptions="Start" Margin="0,20,0,0" />
+        <!-- CheckBoxes -->
+        <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Start"
+                     Spacing="10"
+                     Margin="0,20,0,10">
+            <StackLayout Orientation="Horizontal" Spacing="2">
+                <CheckBox x:Name="ChatGPTCheckBox"
+                          Color="White"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="ChatGPT"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="2">
+                <CheckBox x:Name="GroKCheckBox"
+                          Color="White"
+                          IsChecked="True"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="GroK"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="2">
+                <CheckBox x:Name="GeminiCheckBox"
+                          Color="White"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="Gemini"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="2">
+                <CheckBox x:Name="AllAICheckBox"
+                          Color="White"
+                          CheckedChanged="OnChatbotCheckBoxChanged" />
+                <Label Text="AllAI"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+        </StackLayout>
+        <!-- New CheckBoxes Section -->
+        <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Spacing="10"
+                     Margin="0,60,0,0">
+            <StackLayout Orientation="Horizontal" Spacing="2">
+                <CheckBox x:Name="OnlineInfoCheckBox"
+                          Color="White"
+                          CheckedChanged="OnInfoCheckBoxChanged" />
+                <Label Text="Online Info"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="2">
+                <CheckBox x:Name="AIInfoCheckBox"
+                          Color="White"
+                          CheckedChanged="OnInfoCheckBoxChanged" />
+                <Label Text="AI Info"
+                       TextColor="White"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+        </StackLayout>
+        <!-- Message Label -->
+        <Frame x:Name="MessageFrame"
+               Grid.Row="3" Grid.ColumnSpan="3"
+               BackgroundColor="Transparent"
+               BorderColor="Yellow"
+               HasShadow="False"
+               Padding="0"
+               CornerRadius="0"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="End"> <!-- Adjusted margin and VerticalOptions -->
+            <Label x:Name="MessageLabel"
+                   Text="..."
+                   TextColor="White"
+                   BackgroundColor="DarkBlue"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="End" 
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Padding="10"/>
+        </Frame>
+    </Grid>
+</ContentPage>

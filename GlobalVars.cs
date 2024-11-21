@@ -10,6 +10,15 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static string theCardT { get; set; } = "THE SUN";
+    public static string thePositionT { get; set; } = "1";
+    public static bool TAIInfo { get; set; } = false;
+
+    public static bool TOnlineInfo { get; set; } = true;
+    public static string cardChosen { get; set; } = "";
+    public static string TCard1 { get; set; } = "http://scrumara.azurewebsites.net/images/taroth/80.jpg";
+    public static string TCard2 { get; set; } = "http://scrumara.azurewebsites.net/images/taroth/80.jpg";
+    public static string TCard3 { get; set; } = "http://scrumara.azurewebsites.net/images/taroth/80.jpg";
     public static string HPeriod { get; set; } = "Day";
     /// <summary>
     /// Gets or sets the chat analysis data.
