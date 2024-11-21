@@ -17,6 +17,7 @@
                    CornerRadius="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
+                   WidthRequest="200"
                    Clicked="OnNavigateToMainPageClicked" />
            <Button Text="Start Horoscope"
                    BackgroundColor="LightBlue"
@@ -26,7 +27,18 @@
                    CornerRadius="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
+                   WidthRequest="200"
                    Clicked="OnNavigateToHoroPageClicked" />
+           <Button Text="Start Tarot"
+                   BackgroundColor="LightBlue"
+                   TextColor="DarkBlue"
+                   BorderColor="LightYellow"
+                   BorderWidth="2"
+                   CornerRadius="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="200"
+                   Clicked="OnNavigateToTarotPageClicked" />
        </StackLayout>
         <!-- Toevoegen van lege ruimte -->
         <!-- Toevoegen van lege ruimte -->

@@ -75,3 +75,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.StartPage.xaml
 build_metadata.AdditionalFiles.TargetPath = StartPage.xaml
 build_metadata.AdditionalFiles.RelativePath = StartPage.xaml
+
+[/Volumes/TT7/Projects/RiderProjects/ZoharBibleFull/Tarot.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.Tarot.xaml
+build_metadata.AdditionalFiles.TargetPath = Tarot.xaml
+build_metadata.AdditionalFiles.RelativePath = Tarot.xaml

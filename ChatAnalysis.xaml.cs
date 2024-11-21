@@ -102,6 +102,12 @@ public partial class ChatAnalysis : ContentPage
                             " and for the period of a " + GlobalVars.HPeriod;
                 hAdd = "(" + GlobalVars._pPortion + " - " + GlobalVars.HPeriod + ")";
             }
+            else if (GlobalVars._pPortion.Contains("Tarot"))
+            {
+                qp = "Give an analysis on the TarotCard" +
+                     GlobalVars.theCardT + " on position " + GlobalVars.thePositionT +
+                     " in a Tarot throw of 3 cards past, present and future.";
+            }
             else
             {
                 qp = "Give an analysis on " +

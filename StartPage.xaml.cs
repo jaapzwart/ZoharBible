@@ -44,6 +44,12 @@ public partial class StartPage : ContentPage
         await Task.Delay(1000);
         await Navigation.PushAsync(new Horoscope());
     }
+    private async void OnNavigateToTarotPageClicked(object sender, EventArgs e)
+    {
+        UpdateLabel("Opening Tarot Page");
+        await Task.Delay(1000);
+        await Navigation.PushAsync(new Tarot());
+    }
     private async Task DisplayAlertAsync(string title, string message)
     {
         await DisplayAlert(title, message, "OK");
