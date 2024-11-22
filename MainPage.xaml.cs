@@ -64,9 +64,12 @@ public partial class MainPage : ContentPage
         try
         {
             await GlobalVars.SetClickedColor(sender);
+            UpdateLabel("Preparing the Screen...");
+            await Task.Delay(1000);
             GlobalVars.Amida_ = "";
             GlobalVars._ProverbOrPsalm = "Proverbs";
             await Navigation.PushAsync(new Proverbs());
+            UpdateLabel("...");
         }
         catch (Exception ex)
         {
@@ -85,9 +88,12 @@ public partial class MainPage : ContentPage
         try
         {
             await GlobalVars.SetClickedColor(sender);
+            UpdateLabel("Preparing the Screen...");
+            await Task.Delay(1000);
             GlobalVars.Amida_ = "";
             GlobalVars._ProverbOrPsalm = "Psalms";
             await Navigation.PushAsync(new Proverbs());
+            UpdateLabel("...");
         }
         catch (Exception ex)
         {
@@ -308,7 +314,6 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            await GlobalVars.SetClickedColor(sender);
             var clickedButton = sender as Button;
             GlobalVars.TypeOfProverbAnalysis = clickedButton.Text; // Save the type of analysis for Proverbs
             if (GlobalVars.TypeOfProverbAnalysis.Contains(("All")))
@@ -337,7 +342,6 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            await GlobalVars.SetClickedColor(sender);
             KabbalahButton.IsEnabled = true;
             ZoharButton.IsEnabled = true;
             MishnaButton.IsEnabled = true;

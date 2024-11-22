@@ -14,6 +14,7 @@ public partial class Tarot : ContentPage
 {
     /// <summary>
     /// Represents the Tarot page of the application.
+    /// It handles all kinda card things and functionalities.
     /// </summary>
     public Tarot()
     {
@@ -746,8 +747,9 @@ public partial class Tarot : ContentPage
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The event data.</param>
-    private void OnShuffleClicked(object sender, EventArgs e)
+    private async void OnShuffleClicked(object sender, EventArgs e)
     {
+        await GlobalVars.SetClickedColor(sender);
         ShuffleDeck();
     }
 }

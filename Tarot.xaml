@@ -54,29 +54,10 @@
         </Frame>
         <!-- Shuffle button -->
         <Button Grid.Row="2" Grid.ColumnSpan="3" Text="Shuffle"
-                BackgroundColor="LightBlue" TextColor="DarkBlue" BorderColor="Yellow" BorderWidth="2"
+                BackgroundColor="#61A0D7" TextColor="DarkBlue" BorderColor="Yellow" BorderWidth="2"
                 Clicked="OnShuffleClicked"
                 VerticalOptions="Start" Margin="0,20,0,0" >
-            <Button.Triggers>
-                <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                    <Setter Property="BorderColor" Value="DarkGray" />
-                    <Setter Property="BackgroundColor" Value="LightGray" />
-                    <Setter Property="BorderWidth" Value="1" />
-                </Trigger>
-                <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                    <Setter Property="BorderColor" Value="Gray" />
-                    <Setter Property="BackgroundColor" Value="LightGray" />
-                    <Setter Property="BorderWidth" Value="1" />
-                </Trigger>
-            </Button.Triggers>
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="BorderColor" Value="Black" />
-                    <Setter Property="BorderWidth" Value="1" />
-                    <Setter Property="FontSize" Value="Small" />
-                    <Setter Property="HeightRequest" Value="40" />
-                </Style>
-            </Button.Style>
+           
         </Button>
         <!-- CheckBoxes -->
         <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="3"

@@ -60,6 +60,7 @@ public partial class StartPage : ContentPage
     /// <param name="e">An EventArgs that contains the event data.</param>
     private async void OnNavigateToMainPageClicked(object sender, EventArgs e)
     {
+        await GlobalVars.SetClickedColor(sender);
         UpdateLabel("Opening Starting Page");
         await Task.Delay(1000);
         await Navigation.PushAsync(new MainPage());
@@ -73,6 +74,7 @@ public partial class StartPage : ContentPage
     /// <param name="e">The event data.</param>
     private async void OnNavigateToHoroPageClicked(object sender, EventArgs e)
     {
+        await GlobalVars.SetClickedColor(sender);
         UpdateLabel("Opening Horoscope Page");
         await Task.Delay(1000);
         await Navigation.PushAsync(new Horoscope());
@@ -85,6 +87,7 @@ public partial class StartPage : ContentPage
     /// <param name="e">Event arguments.</param>
     private async void OnNavigateToTarotPageClicked(object sender, EventArgs e)
     {
+        await GlobalVars.SetClickedColor(sender);
         UpdateLabel("Opening Tarot Page");
         await Task.Delay(1000);
         await Navigation.PushAsync(new Tarot());

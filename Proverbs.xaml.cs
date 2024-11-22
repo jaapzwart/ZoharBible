@@ -85,6 +85,7 @@ public partial class Proverbs : ContentPage
         try
         {
             await GlobalVars.SetClickedColor(sender);
+            GlobalVars._pPortion = "Proverbs";
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Getting Verse");
             await Task.Delay(1000);

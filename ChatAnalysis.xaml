@@ -10,7 +10,6 @@
             <Setter Property="Margin" Value="3" />
         </Style>
     </ContentPage.Resources>
-
     <Frame
         Grid.Row="1"
         BorderColor="LightBlue"
@@ -31,63 +30,26 @@
             <!-- Toegevoegde knop -->
             <Button
                 Text="Speak the Text"
-                BackgroundColor="DarkBlue"
+                BackgroundColor="#61A0D7"
                 VerticalOptions="End"
                 Clicked="OnSpeakButtonClicked"
                 TextColor="Yellow"
                 HorizontalOptions="FillAndExpand"
-                >
-                <Button.Triggers>
-                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                        <Setter Property="BorderColor" Value="DarkGray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                        <Setter Property="BorderColor" Value="Gray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                </Button.Triggers>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="BorderColor" Value="Black" />
-                        <Setter Property="BorderWidth" Value="1" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="HeightRequest" Value="40" />
-                    </Style>
-                </Button.Style>
+                BorderColor="White"
+                BorderWidth="2">
             </Button>
-
+            
             <Button
                 Text="Stop Speaking"
-                BackgroundColor="DarkRed"
+                BackgroundColor="#61A0D7"
                 TextColor="Yellow"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
                 Clicked="OnStopSpeakButtonClicked"
-            >
-                <Button.Triggers>
-                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                        <Setter Property="BorderColor" Value="DarkGray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                        <Setter Property="BorderColor" Value="Gray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                </Button.Triggers>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="BorderColor" Value="Black" />
-                        <Setter Property="BorderWidth" Value="1" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="HeightRequest" Value="40" />
-                    </Style>
-                </Button.Style>
+                BorderColor="White"
+                BorderWidth="2">
             </Button>
+            
             <!-- Toegevoegd Label -->
             <Label
                 x:Name="messageLabel"
