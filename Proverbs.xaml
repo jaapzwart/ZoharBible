@@ -50,33 +50,39 @@
                           <Button
                               x:Name="StartSpeak"
                               Text="Start Speak"
-                              BackgroundColor="LightBlue"
+                              BackgroundColor="#61A0D7"
                               TextColor="DarkBlue"
                               IsEnabled="False"
                               Clicked="OnStartSpeakClicked"
-                              HeightRequest="40">
+                              HeightRequest="40"
+                              BorderColor="#FFFFFF"
+                              BorderWidth="2">
                               
                           </Button>
                       
                           <Button
                               x:Name="StopSpeak"
                               Text="Stop Speak"
-                              BackgroundColor="LightBlue"
+                              BackgroundColor="#61A0D7"
                               TextColor="DarkBlue"
                               IsEnabled="False"
                               Clicked="OnStopSpeakClicked"
-                              HeightRequest="40">
+                              HeightRequest="40"
+                              BorderColor="#FFFFFF"
+                              BorderWidth="2">
                               
                           </Button>
                       
                           <Button
                               x:Name="GetAnalysisButton"
                               Text="Get Analysis"
-                              BackgroundColor="LightBlue"
+                              BackgroundColor="#61A0D7"
                               TextColor="DarkBlue"
                               IsEnabled="False"
                               Clicked="OnGetAnalysisButtonClicked"
-                              HeightRequest="40">
+                              HeightRequest="40"
+                              BorderColor="#FFFFFF"
+                              BorderWidth="2">
                               
                           </Button>
                       </HorizontalStackLayout>
@@ -167,41 +173,49 @@
                     <Button
                         x:Name="KabbalahButton"
                         Text="Kabbalah"
-                        BackgroundColor="LightBlue"
+                        BackgroundColor="#61A0D7"
                         TextColor="DarkBlue"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        Clicked="OnOptionButtonClicked" >
+                        Clicked="OnOptionButtonClicked"
+                        BorderColor="#FFFFFF"
+                        BorderWidth="2" >
                         
                     </Button>
                     <Button
                         x:Name="ZoharButton"
                         Text="Zohar"
-                        BackgroundColor="LightBlue"
+                        BackgroundColor="#61A0D7"
                         TextColor="DarkBlue"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        Clicked="OnOptionButtonClicked" >
+                        Clicked="OnOptionButtonClicked" 
+                        BorderColor="#FFFFFF"
+                        BorderWidth="2" >
                         
                     </Button>
                     <Button
                         x:Name="MishnaButton"
                         Text="Mishna"
-                        BackgroundColor="LightBlue"
+                        BackgroundColor="#61A0D7"
                         TextColor="DarkBlue"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        Clicked="OnOptionButtonClicked" >
+                        Clicked="OnOptionButtonClicked"
+                        BorderColor="#FFFFFF"
+                        BorderWidth="2">
                         
                     </Button>
                     <Button
                         x:Name="AllButton"
                         Text="All"
-                        BackgroundColor="LightBlue"
+                        BackgroundColor="#61A0D7"
                         TextColor="DarkBlue"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        Clicked="OnOptionButtonClicked" >
+                        Clicked="OnOptionButtonClicked"
+                        BorderColor="#FFFFFF"
+                        BorderWidth="2" >
                         
                     </Button>
                     <Button
@@ -212,7 +226,9 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         WidthRequest="50"
-                        Clicked="OnResetButtonClicked" >
+                        Clicked="OnResetButtonClicked"
+                        BorderColor="#FFFFFF"
+                        BorderWidth="2" >
                         
                     </Button>
                 </StackLayout>
@@ -228,8 +244,10 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Clicked="OnGetZoharExplanationButtonClicked"
-                    BackgroundColor="LightBlue"
-                    TextColor="DarkBlue" >
+                    BackgroundColor="#61A0D7"
+                    TextColor="DarkBlue"
+                    BorderColor="#FFFFFF"
+                    BorderWidth="2">
                    
                 </Button>
             </VerticalStackLayout>

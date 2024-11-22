@@ -64,6 +64,7 @@ public partial class ChatAnalysis : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             await GetTranslatedText();
         }
         catch (Exception ex)
@@ -108,6 +109,13 @@ public partial class ChatAnalysis : ContentPage
                      GlobalVars.theCardT + " on position " + GlobalVars.thePositionT +
                      " in a Tarot throw of 3 cards past, present and future.";
             }
+            else if (GlobalVars._pPortion.Contains("Proverbs"))
+            {
+                qp = "Give an analysis on " +
+                     GlobalVars.ProverbToAnalyse +
+                     " from out the perspective of the " +
+                     GlobalVars.TypeOfProverbAnalysis;
+            }
             else
             {
                 qp = "Give an analysis on " +
@@ -115,7 +123,6 @@ public partial class ChatAnalysis : ContentPage
                      " from out the perspective of the " +
                      GlobalVars.TypeOfProverbAnalysis;
             }
-
             #endregion
             
             #region Amida and Shema
@@ -231,6 +238,7 @@ public partial class ChatAnalysis : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             await GlobalVars.ttsService.ConvertTextToSpeechAsync(translatedText);
         }
         catch (Exception ex)
@@ -248,6 +256,7 @@ public partial class ChatAnalysis : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             await GlobalVars.ttsService.StopSpeakingAsync();
         }
         catch (Exception ex)

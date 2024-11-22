@@ -39,6 +39,7 @@ namespace ZoharBible
         /// <param name="e">The event arguments.</param>
         private async void OnButtonClicked(object sender, EventArgs e)
         {
+            await GlobalVars.SetClickedColor(sender);
             var button = sender as Button;
             if (button != null)
             {

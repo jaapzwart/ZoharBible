@@ -26,6 +26,14 @@ public partial class Tarot : ContentPage
     }
 
     /// <summary>
+    /// Displays an alert message indicating that the DummyMethod has been called.
+    /// </summary>
+    private void DummyMethod()
+    {
+        DisplayAlert("Dummy Method", "Dummy Method Called", "OK");
+    }
+    
+    /// <summary>
     /// Updates the state of multiple checkboxes based on the provided selection string.
     /// </summary>
     /// <param name="aiSelected">A string containing the names of the selected AI components.</param>
@@ -746,8 +754,9 @@ public partial class Tarot : ContentPage
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The event data.</param>
-    private void OnShuffleClicked(object sender, EventArgs e)
+    private async void OnShuffleClicked(object sender, EventArgs e)
     {
+        await GlobalVars.SetClickedColor(sender);
         ShuffleDeck();
     }
 }
