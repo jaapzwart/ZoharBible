@@ -14,8 +14,6 @@ public partial class Tarot : ContentPage
 {
     /// <summary>
     /// Represents the Tarot page of the application.
-    /// It handles all kinda card things and functionalities.
-    /// Create some documentation to be able to create a commit.
     /// </summary>
     public Tarot()
     {
@@ -27,6 +25,13 @@ public partial class Tarot : ContentPage
         GlobalVars._pPortion = "Tarot";
     }
 
+    /// <summary>
+    /// A dummy method for displaying a simple alert message.
+    /// </summary>
+    private void DummyMethod()
+    {
+        DisplayAlert("Dummy Method", "Dummy Method Called", "OK");
+    }
     /// <summary>
     /// Updates the state of multiple checkboxes based on the provided selection string.
     /// </summary>
