@@ -26,12 +26,13 @@ public partial class Tarot : ContentPage
     }
 
     /// <summary>
-    /// A dummy method for displaying a simple alert message.
+    /// Displays an alert message indicating that the DummyMethod has been called.
     /// </summary>
     private void DummyMethod()
     {
         DisplayAlert("Dummy Method", "Dummy Method Called", "OK");
     }
+    
     /// <summary>
     /// Updates the state of multiple checkboxes based on the provided selection string.
     /// </summary>
