@@ -17,9 +17,7 @@ public static class GlobalVars
 
     public static bool TOnlineInfo { get; set; } = true;
     public static string cardChosen { get; set; } = "";
-    public static string TCard1 { get; set; } = "http://scrumara.azurewebsites.net/images/taroth/80.jpg";
-    public static string TCard2 { get; set; } = "http://scrumara.azurewebsites.net/images/taroth/80.jpg";
-    public static string TCard3 { get; set; } = "http://scrumara.azurewebsites.net/images/taroth/80.jpg";
+    
     public static string HPeriod { get; set; } = "Day";
     /// <summary>
     /// Gets or sets the chat analysis data.
@@ -116,6 +114,19 @@ public static class GlobalVars
         return repeatedString;
     }
 
+    public static async Task SetClickedColor(object? sender)
+    {
+        var button = sender as Button;
+        if (button != null)
+        {
+            button.IsEnabled = false;
+            button.Background = new SolidColorBrush(Colors.LightGray);
+            // Wacht 1 seconde (1000 milliseconden)
+            await Task.Delay(1000);
+            button.IsEnabled = true;
+            button.Background = new SolidColorBrush(Microsoft.Maui.Graphics.Color.Parse("#61A0D7"));
+        }
+    }
     /// <summary>
     /// Fetches the response string from a specified REST API URL.
     /// </summary>

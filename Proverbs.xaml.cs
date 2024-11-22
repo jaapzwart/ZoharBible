@@ -84,6 +84,7 @@ public partial class Proverbs : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Getting Verse");
             await Task.Delay(1000);
@@ -221,12 +222,7 @@ public partial class Proverbs : ContentPage
     {
         try
         {
-            var button = sender as Button;
-            if (button != null)
-            {
-                ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
-                // Voeg hier de overige logica voor de knop toe.
-            }
+            await GlobalVars.SetClickedColor(sender);
 
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Preparing Analysis");
@@ -250,12 +246,7 @@ public partial class Proverbs : ContentPage
     {
         try
         {
-            var button = sender as Button;
-            if (button != null)
-            {
-                ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
-                // Voeg hier de overige logica voor de knop toe.
-            }
+            await GlobalVars.SetClickedColor(sender);
             await GlobalVars.ttsService.ConvertTextToSpeechAsync(translatedText);
         }
         catch (Exception ex)
@@ -274,12 +265,7 @@ public partial class Proverbs : ContentPage
     {
         try
         {
-            var button = sender as Button;
-            if (button != null)
-            {
-                ChangeButtonColorTemporarily(button, System.Drawing.Color.DarkRed, System.Drawing.Color.LightBlue);
-                // Voeg hier de overige logica voor de knop toe.
-            }
+            await GlobalVars.SetClickedColor(sender);
 
             await GlobalVars.ttsService.StopSpeakingAsync();
         }
@@ -289,27 +275,7 @@ public partial class Proverbs : ContentPage
         }
     }
 
-    /// <summary>
-    /// Temporarily changes the background color of a button, waits for a specified duration, and then reverts it to the original color.
-    /// </summary>
-    /// <param name="button">The button whose background color is to be changed.</param>
-    /// <param name="temporaryColor">The color to which the button's background will be temporarily changed.</param>
-    /// <param name="originalColor">The original color to which the button's background will be reverted.</param>
-    private async void ChangeButtonColorTemporarily(Button button, System.Drawing.Color temporaryColor,
-        System.Drawing.Color originalColor)
-    {
-        try
-        {
-            button.BackgroundColor = Colors.DarkRed;
-            await Task.Delay(1000); // Wacht een seconde.
-            button.BackgroundColor = Colors.LightBlue;
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlertAsync("Error", $"An error occurred: {ex.Message}");
-        }
-    }
-
+   
     /// <summary>
     /// Handles the text changed event of the ProverbNumberEntry.
     /// Validates the entered text to ensure it is a valid number between 0 and 31.
