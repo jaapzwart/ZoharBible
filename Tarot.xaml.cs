@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthKit;
 
 namespace ZoharBible;
 
@@ -723,9 +724,9 @@ public partial class Tarot : ContentPage
         var selectedCards = shuffledDeck.Take(3).ToList();
 
         // Assign the cards to three separate strings
-        GlobalVars.TCard1 = selectedCards[0];
-        GlobalVars.TCard2 = selectedCards[1];
-        GlobalVars.TCard3 = selectedCards[2];
+        Secrets.TCard1 = selectedCards[0];
+        Secrets.TCard2 = selectedCards[1];
+        Secrets.TCard3 = selectedCards[2];
         Onload();
     }
 
@@ -735,9 +736,9 @@ public partial class Tarot : ContentPage
     /// </summary>
     private void Onload()
     {
-        card1Image.Source = GlobalVars.TCard1;
-        card2Image.Source = GlobalVars.TCard2;
-        card3Image.Source = GlobalVars.TCard3;
+        card1Image.Source = Secrets.TCard1;
+        card2Image.Source = Secrets.TCard2;
+        card3Image.Source = Secrets.TCard3;
     }
 
     /// <summary>

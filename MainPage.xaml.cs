@@ -63,6 +63,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             GlobalVars.Amida_ = "";
             GlobalVars._ProverbOrPsalm = "Proverbs";
             await Navigation.PushAsync(new Proverbs());
@@ -83,6 +84,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             GlobalVars.Amida_ = "";
             GlobalVars._ProverbOrPsalm = "Psalms";
             await Navigation.PushAsync(new Proverbs());
@@ -103,6 +105,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             GlobalVars.Amida_ = "Amida";
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Preparing Analysis");
@@ -126,6 +129,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             GlobalVars.Amida_ = "Shema";
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Preparing Analysis");
@@ -216,6 +220,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             string _shema = "SHEMA TIME: " + GlobalVars.GetHttpReturnFromAPIRestLink(
                 Secrets.RESTAPI + @"Google/"
                 + "Give ONLY the time the Shema should be prayed during the day");
@@ -237,6 +242,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             string _amida = "AMIDA TIME: " + GlobalVars.GetHttpReturnFromAPIRestLink(
                 Secrets.RESTAPI + @"Google/"
                 + "Give ONLY the time the Amida should be prayed during the day") + '\n';
@@ -258,6 +264,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             GlobalVars._pPortion = this.TopEntryBox.Text;
             GlobalVars.ProverbToAnalyse = this.TopEntryBox.Text;
             this.MessageLabel.IsVisible = true;
@@ -301,6 +308,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             var clickedButton = sender as Button;
             GlobalVars.TypeOfProverbAnalysis = clickedButton.Text; // Save the type of analysis for Proverbs
             if (GlobalVars.TypeOfProverbAnalysis.Contains(("All")))
@@ -329,6 +337,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             KabbalahButton.IsEnabled = true;
             ZoharButton.IsEnabled = true;
             MishnaButton.IsEnabled = true;
@@ -350,6 +359,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            await GlobalVars.SetClickedColor(sender);
             await Navigation.PushAsync(new ChabatPage());
         }
         catch (Exception ex)

@@ -12,6 +12,7 @@
                    Text="https://www.chabad.org/dailystudy/default_cdo/jewish/Daily-Study.htm"
                    HorizontalOptions="FillAndExpand"
                    Focused="UrlEntry_Focused" 
+                   TextColor="Black"
                    BackgroundColor="WhiteSmoke"/>
                
             <!-- Button to Load the Web Page -->

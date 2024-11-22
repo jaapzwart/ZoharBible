@@ -30,26 +30,7 @@
                    HeightRequest="50"
                    WidthRequest="200"
                    Clicked="OnGetAnalysisButtonClicked">
-               <Button.Triggers>
-                   <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                       <Setter Property="BorderColor" Value="DarkGray" />
-                       <Setter Property="BackgroundColor" Value="LightGray" />
-                       <Setter Property="BorderWidth" Value="1" />
-                   </Trigger>
-                   <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                       <Setter Property="BorderColor" Value="Gray" />
-                       <Setter Property="BackgroundColor" Value="LightGray" />
-                       <Setter Property="BorderWidth" Value="1" />
-                   </Trigger>
-               </Button.Triggers>
-               <Button.Style>
-                   <Style TargetType="Button">
-                       <Setter Property="BorderColor" Value="Black" />
-                       <Setter Property="BorderWidth" Value="1" />
-                       <Setter Property="FontSize" Value="Small" />
-                       <Setter Property="HeightRequest" Value="40" />
-                   </Style>
-               </Button.Style>
+               
            </Button>
            <Button x:Name="ChabatButton"
                    Text="Get Daily Study"
@@ -61,26 +42,7 @@
                    HeightRequest="50"
                    WidthRequest="200"
                    Clicked="OnChabatButtonClicked">
-               <Button.Triggers>
-                   <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                       <Setter Property="BorderColor" Value="DarkGray" />
-                       <Setter Property="BackgroundColor" Value="LightGray" />
-                       <Setter Property="BorderWidth" Value="1" />
-                   </Trigger>
-                   <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                       <Setter Property="BorderColor" Value="Gray" />
-                       <Setter Property="BackgroundColor" Value="LightGray" />
-                       <Setter Property="BorderWidth" Value="1" />
-                   </Trigger>
-               </Button.Triggers>
-               <Button.Style>
-                   <Style TargetType="Button">
-                       <Setter Property="BorderColor" Value="Black" />
-                       <Setter Property="BorderWidth" Value="1" />
-                       <Setter Property="FontSize" Value="Small" />
-                       <Setter Property="HeightRequest" Value="40" />
-                   </Style>
-               </Button.Style>
+               
            </Button>
        </StackLayout>
                 
@@ -99,26 +61,7 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Clicked="OnShemaTimeButtonClicked">
-                <Button.Triggers>
-                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                        <Setter Property="BorderColor" Value="DarkGray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                        <Setter Property="BorderColor" Value="Gray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                </Button.Triggers>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="BorderColor" Value="Black" />
-                        <Setter Property="BorderWidth" Value="1" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="HeightRequest" Value="40" />
-                    </Style>
-                </Button.Style>
+                
             </Button>
             <Button x:Name="AmidaTimeButton"
                     Text="Amida Time"
@@ -133,26 +76,7 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Clicked="OnAmidaTimeButtonClicked">
-                <Button.Triggers>
-                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                        <Setter Property="BorderColor" Value="DarkGray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                        <Setter Property="BorderColor" Value="Gray" />
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                        <Setter Property="BorderWidth" Value="1" />
-                    </Trigger>
-                </Button.Triggers>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="BorderColor" Value="Black" />
-                        <Setter Property="BorderWidth" Value="1" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="HeightRequest" Value="40" />
-                    </Style>
-                </Button.Style>
+               
             </Button>
         </StackLayout>
         
@@ -172,26 +96,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnGetProverbButtonClicked">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BorderColor" Value="DarkGray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                        <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                            <Setter Property="BorderColor" Value="Gray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                    </Button.Triggers>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="BorderColor" Value="Black" />
-                            <Setter Property="BorderWidth" Value="1" />
-                            <Setter Property="FontSize" Value="Small" />
-                            <Setter Property="HeightRequest" Value="40" />
-                        </Style>
-                    </Button.Style>
+                    
                 </Button>
                 <Button x:Name="PsalmsButton"
                         Text="Get a random Psalm"
@@ -205,26 +110,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnGetPsalmsButtonClicked">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BorderColor" Value="DarkGray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                        <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                            <Setter Property="BorderColor" Value="Gray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                    </Button.Triggers>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="BorderColor" Value="Black" />
-                            <Setter Property="BorderWidth" Value="1" />
-                            <Setter Property="FontSize" Value="Small" />
-                            <Setter Property="HeightRequest" Value="40" />
-                        </Style>
-                    </Button.Style>
+                   
                 </Button>
                 <Button x:Name="AmidaButton"
                         Text="Get the Amida"
@@ -238,26 +124,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnGetAmidaButtonClicked">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BorderColor" Value="DarkGray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                        <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                            <Setter Property="BorderColor" Value="Gray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                    </Button.Triggers>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="BorderColor" Value="Black" />
-                            <Setter Property="BorderWidth" Value="1" />
-                            <Setter Property="FontSize" Value="Small" />
-                            <Setter Property="HeightRequest" Value="40" />
-                        </Style>
-                    </Button.Style>
+                    
                 </Button>
                 <Button x:Name="ShemaButton"
                         Text="Get the Shema"
@@ -271,26 +138,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnGetShemaButtonClicked">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BorderColor" Value="DarkGray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                        <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                            <Setter Property="BorderColor" Value="Gray" />
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                            <Setter Property="BorderWidth" Value="1" />
-                        </Trigger>
-                    </Button.Triggers>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="BorderColor" Value="Black" />
-                            <Setter Property="BorderWidth" Value="1" />
-                            <Setter Property="FontSize" Value="Small" />
-                            <Setter Property="HeightRequest" Value="40" />
-                        </Style>
-                    </Button.Style>
+                   
                 </Button>
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center"
@@ -343,26 +191,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked" >
-                        <Button.Triggers>
-                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                <Setter Property="BorderColor" Value="DarkGray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                                <Setter Property="BorderColor" Value="Gray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                        </Button.Triggers>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="BorderColor" Value="Black" />
-                                <Setter Property="BorderWidth" Value="1" />
-                                <Setter Property="FontSize" Value="Small" />
-                                <Setter Property="HeightRequest" Value="40" />
-                            </Style>
-                        </Button.Style>
+                        
                     </Button>
                     <Button
                         x:Name="ZoharButton"
@@ -372,26 +201,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked" >
-                        <Button.Triggers>
-                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                <Setter Property="BorderColor" Value="DarkGray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                                <Setter Property="BorderColor" Value="Gray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                        </Button.Triggers>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="BorderColor" Value="Black" />
-                                <Setter Property="BorderWidth" Value="1" />
-                                <Setter Property="FontSize" Value="Small" />
-                                <Setter Property="HeightRequest" Value="40" />
-                            </Style>
-                        </Button.Style>
+                        
                     </Button>
                     <Button
                         x:Name="MishnaButton"
@@ -401,26 +211,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked" >
-                        <Button.Triggers>
-                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                <Setter Property="BorderColor" Value="DarkGray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                                <Setter Property="BorderColor" Value="Gray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                        </Button.Triggers>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="BorderColor" Value="Black" />
-                                <Setter Property="BorderWidth" Value="1" />
-                                <Setter Property="FontSize" Value="Small" />
-                                <Setter Property="HeightRequest" Value="40" />
-                            </Style>
-                        </Button.Style>
+                        
                     </Button>
                     <Button
                         x:Name="AllButton"
@@ -430,26 +221,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked" >
-                        <Button.Triggers>
-                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                <Setter Property="BorderColor" Value="DarkGray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                                <Setter Property="BorderColor" Value="Gray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                        </Button.Triggers>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="BorderColor" Value="Black" />
-                                <Setter Property="BorderWidth" Value="1" />
-                                <Setter Property="FontSize" Value="Small" />
-                                <Setter Property="HeightRequest" Value="40" />
-                            </Style>
-                        </Button.Style>
+                        
                     </Button>
                     <Button
                         x:Name="ResetButton"
@@ -460,26 +232,7 @@
                         VerticalOptions="Center"
                         WidthRequest="50"
                         Clicked="OnResetButtonClicked" >
-                        <Button.Triggers>
-                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                <Setter Property="BorderColor" Value="DarkGray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                                <Setter Property="BorderColor" Value="Gray" />
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                <Setter Property="BorderWidth" Value="1" />
-                            </Trigger>
-                        </Button.Triggers>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="BorderColor" Value="Black" />
-                                <Setter Property="BorderWidth" Value="1" />
-                                <Setter Property="FontSize" Value="Small" />
-                                <Setter Property="HeightRequest" Value="40" />
-                            </Style>
-                        </Button.Style>
+                        
                     </Button>
                 </StackLayout>
             </StackLayout>
