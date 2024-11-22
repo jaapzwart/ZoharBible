@@ -15,7 +15,7 @@ public partial class Tarot : ContentPage
     /// <summary>
     /// Represents the Tarot page of the application.
     /// It handles all kinda card things and functionalities.
-    /// So this is cool.
+    /// Create some documentation to be able to create a commit.
     /// </summary>
     public Tarot()
     {
