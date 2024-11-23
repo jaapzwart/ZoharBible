@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZoharBible")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+fc777cf1cf7e238210bd8a8b1f1bc51c3dad9e81")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+9e32475dd8bc81f4f9ad5bfbc6ee8de3a16d0019")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZoharBible")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZoharBible")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
