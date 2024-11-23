@@ -23,7 +23,6 @@
           "net8.0-maccatalyst"
         ],
         "sources": {
-          "/Users/jaapzwart/.dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,6 +54,10 @@
         "net8.0-android34.0": {
           "targetAlias": "net8.0-android",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
             "Microsoft.CognitiveServices.Speech": {
               "target": "Package",
               "version": "[1.41.1, )"
@@ -81,9 +84,17 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "OpenAI.API": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Plugin.Maui.Audio": {
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "WindowsAzure.Storage": {
+              "target": "Package",
+              "version": "[9.3.3, )"
             }
           },
           "imports": [
@@ -110,6 +121,10 @@
         "net8.0-ios18.0": {
           "targetAlias": "net8.0-ios",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
             "Microsoft.CognitiveServices.Speech": {
               "target": "Package",
               "version": "[1.41.1, )"
@@ -136,9 +151,17 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "OpenAI.API": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Plugin.Maui.Audio": {
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "WindowsAzure.Storage": {
+              "target": "Package",
+              "version": "[9.3.3, )"
             }
           },
           "imports": [
@@ -165,6 +188,10 @@
         "net8.0-maccatalyst18.0": {
           "targetAlias": "net8.0-maccatalyst",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
             "Microsoft.CognitiveServices.Speech": {
               "target": "Package",
               "version": "[1.41.1, )"
@@ -191,9 +218,17 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "OpenAI.API": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Plugin.Maui.Audio": {
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "WindowsAzure.Storage": {
+              "target": "Package",
+              "version": "[9.3.3, )"
             }
           },
           "imports": [
@@ -220,7 +255,22 @@
         }
       },
       "runtimes": {
+        "android-arm": {
+          "#import": []
+        },
+        "android-arm64": {
+          "#import": []
+        },
+        "android-x64": {
+          "#import": []
+        },
+        "android-x86": {
+          "#import": []
+        },
         "iossimulator-arm64": {
+          "#import": []
+        },
+        "maccatalyst-arm64": {
           "#import": []
         }
       }
