@@ -5,6 +5,7 @@
 // You have to make it work for your own environment.
 // The code is example code.
 //-------------------------------------------------------
+
 /*
 using System.Net;
 using System.Text.RegularExpressions;
@@ -15,8 +16,8 @@ using Microsoft.OpenApi;
 using Nest;
 using OpenAI_API.Completions;
 using OpenAI.API.Completions;
-*/
-/*
+
+
 /// <summary>
 /// The ChatGPT class contains methods for translating text using the OpenAI GPT-3.5-turbo API
 /// and utilizes Azure Blob Storage for storing and reading data.
@@ -146,4 +147,3 @@ namespace ZoharBible.RESTAPI_AI_CODE
     }
 }
 */
-

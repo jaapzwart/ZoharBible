@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="ZoharBible.Tarot"
-            BackgroundColor="#1E3A5F"> <!-- Ocean blue background -->
+            xmlns:local="clr-namespace:ZoharBible"
+            BackgroundColor="{x:Static local:Themes.PageBackgroundC}">
     <Grid Padding="10" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,17 +22,17 @@
         <Label Text="PAST" 
                Grid.Row="0" Grid.Column="0"
                HorizontalOptions="Center" 
-               TextColor="Yellow" 
+               TextColor="{x:Static local:Themes.ButtonTextC}" 
                FontAttributes="Bold"/>
         <Label Text="PRESENT" 
                Grid.Row="0" Grid.Column="1"
                HorizontalOptions="Center" 
-               TextColor="Yellow" 
+               TextColor="{x:Static local:Themes.ButtonTextC}" 
                FontAttributes="Bold"/>
         <Label Text="FUTURE" 
                Grid.Row="0" Grid.Column="2"
                HorizontalOptions="Center" 
-               TextColor="Yellow" 
+               TextColor="{x:Static local:Themes.ButtonTextC}" 
                FontAttributes="Bold"/>
         <!-- Tarot Cards -->
         <Frame Padding="0" HasShadow="False" CornerRadius="5" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="0">
@@ -54,7 +55,7 @@
         </Frame>
         <!-- Shuffle button -->
         <Button Grid.Row="2" Grid.ColumnSpan="3" Text="Shuffle"
-                BackgroundColor="#61A0D7" TextColor="DarkBlue" BorderColor="Yellow" BorderWidth="2"
+                BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}" TextColor="{x:Static local:Themes.ButtonTextC}" BorderColor="{x:Static local:Themes.ButtonBorderC}" BorderWidth="2"
                 Clicked="OnShuffleClicked"
                 VerticalOptions="Start" Margin="0,20,0,0" >
            
@@ -67,35 +68,35 @@
                      Margin="0,20,0,10">
             <StackLayout Orientation="Horizontal" Spacing="2">
                 <CheckBox x:Name="ChatGPTCheckBox"
-                          Color="White"
+                          Color="{x:Static local:Themes.ButtonTextC}"
                           CheckedChanged="OnChatbotCheckBoxChanged" />
                 <Label Text="ChatGPT"
-                       TextColor="White"
+                       TextColor="{x:Static local:Themes.ButtonTextC}"
                        VerticalTextAlignment="Center" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" Spacing="2">
                 <CheckBox x:Name="GroKCheckBox"
-                          Color="White"
+                          Color="{x:Static local:Themes.ButtonTextC}"
                           IsChecked="True"
                           CheckedChanged="OnChatbotCheckBoxChanged" />
                 <Label Text="GroK"
-                       TextColor="White"
+                       TextColor="{x:Static local:Themes.ButtonTextC}"
                        VerticalTextAlignment="Center" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" Spacing="2">
                 <CheckBox x:Name="GeminiCheckBox"
-                          Color="White"
+                          Color="{x:Static local:Themes.ButtonTextC}"
                           CheckedChanged="OnChatbotCheckBoxChanged" />
                 <Label Text="Gemini"
-                       TextColor="White"
+                       TextColor="{x:Static local:Themes.ButtonTextC}"
                        VerticalTextAlignment="Center" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" Spacing="2">
                 <CheckBox x:Name="AllAICheckBox"
-                          Color="White"
+                          Color="{x:Static local:Themes.ButtonTextC}"
                           CheckedChanged="OnChatbotCheckBoxChanged" />
                 <Label Text="AllAI"
-                       TextColor="White"
+                       TextColor="{x:Static local:Themes.ButtonTextC}"
                        VerticalTextAlignment="Center" />
             </StackLayout>
         </StackLayout>
@@ -107,18 +108,18 @@
                      Margin="0,40,0,10"> <!-- Increased the top margin to create double space -->
             <StackLayout Orientation="Horizontal" Spacing="2">
                 <CheckBox x:Name="OnlineInfoCheckBox"
-                          Color="White"
+                          Color="{x:Static local:Themes.ButtonTextC}"
                           CheckedChanged="OnInfoCheckBoxChanged" />
                 <Label Text="Online Info"
-                       TextColor="White"
+                       TextColor="{x:Static local:Themes.ButtonTextC}"
                        VerticalTextAlignment="Center" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" Spacing="2">
                 <CheckBox x:Name="AIInfoCheckBox"
-                          Color="White"
+                          Color="{x:Static local:Themes.ButtonTextC}"
                           CheckedChanged="OnInfoCheckBoxChanged" />
                 <Label Text="AI Info"
-                       TextColor="White"
+                       TextColor="{x:Static local:Themes.ButtonTextC}"
                        VerticalTextAlignment="Center" />
             </StackLayout>
         </StackLayout>
@@ -134,7 +135,7 @@
                HorizontalOptions="FillAndExpand"
                VerticalOptions="End"> <!-- Adjusted margin and VerticalOptions -->
             <Label x:Name="MessageLabel"
-                   TextColor="White"
+                   TextColor="{x:Static local:Themes.ButtonTextC}"
                    BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="End" 

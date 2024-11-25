@@ -35,6 +35,7 @@ public partial class StartPage : ContentPage
         base.OnAppearing();
         LanguagePicker.SelectedItem = "en";
         this.MessageLabel.Text = "...";
+        GlobalVars._IntroPage = false;
     }
 
     #endregion

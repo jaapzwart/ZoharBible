@@ -10,6 +10,9 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static bool _IntroPage { get; set; } = true;
+    public static bool _StandardTheme { get; set; } = true;
+    public static string moodOMeter { get; set; } = "80";
     public static bool firstThrow { get; set; } = true;
     public static string theCardT { get; set; } = "THE SUN";
     public static string thePositionT { get; set; } = "1";
@@ -117,14 +120,40 @@ public static class GlobalVars
     public static async Task SetClickedColor(object? sender)
     {
         var button = sender as Button;
-        if (button != null)
+
+        if (GlobalVars._StandardTheme)
         {
-            button.IsEnabled = false;
-            button.Background = new SolidColorBrush(Colors.LightGray);
-            // Wacht 1 seconde (1000 milliseconden)
-            await Task.Delay(1000);
-            button.IsEnabled = true;
-            button.Background = new SolidColorBrush(Microsoft.Maui.Graphics.Color.Parse("#61A0D7"));
+            if (button != null)
+            {
+                button.IsEnabled = false;
+                button.Background = new SolidColorBrush(Colors.LightGray);
+                await Task.Delay(1000);
+                button.IsEnabled = true;
+                button.Background = new SolidColorBrush(Microsoft.Maui.Graphics.Color.Parse("#61A0D7"));
+            }
+        }
+        else if (_IntroPage)
+        {
+            if (button != null)
+            {
+                button.IsEnabled = false;
+                button.Background = new SolidColorBrush(Colors.LightGray);
+                await Task.Delay(1000);
+                button.IsEnabled = true;
+                button.Background = new SolidColorBrush(Microsoft.Maui.Graphics.Color.Parse("#61A0D7"));
+            }
+        }
+        else
+        {
+            if (button != null)
+            {
+                button.IsEnabled = false;
+                button.Background = new SolidColorBrush(Colors.LightGray);
+                // Wacht 1 seconde (1000 milliseconden)
+                await Task.Delay(1000);
+                button.IsEnabled = true;
+                button.Background = Themes.ButtonBackgroundC;
+            }
         }
     }
     /// <summary>

@@ -41,7 +41,11 @@ public partial class Tarot : ContentPage
             AllAICheckBox.IsChecked = false;
         }
     }
-
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        GlobalVars._IntroPage = false;
+    }
     /// <summary>
     /// Updates the text and visibility of the label on the main thread.
     /// </summary>

@@ -32,6 +32,12 @@ public partial class ChatAnalysis : ContentPage
             this.messageLabel.Text = GlobalVars._pPortion;
         ConfigureAudioSession();
     }
+    
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        GlobalVars._IntroPage = false;
+    }
 
     /// <summary>
     /// Configures the audio session for the application, setting the category to Playback
