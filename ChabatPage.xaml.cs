@@ -34,9 +34,10 @@ public partial class ChabatPage : ContentPage
     /// </summary>
     /// <param name="sender">The source of the event, typically the button that was clicked.</param>
     /// <param name="e">Event data containing information about the click event.</param>
-    private void OnLoadUrlClicked(object sender, EventArgs e)
+    private async void OnLoadUrlClicked(object sender, EventArgs e)
     {
         // Get the URL from the entry
+        await GlobalVars.SetClickedColor(sender);
         string url = UrlEntry.Text;
         if (UrlEntry.Text.Contains("zohar"))
             url = "https://zohar.com";

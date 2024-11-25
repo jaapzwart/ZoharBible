@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZoharBible.Horoscope"
-             BackgroundColor="#1E3A5F">
+             xmlns:local="clr-namespace:ZoharBible"
+             BackgroundColor="{x:Static local:Themes.PageBackgroundC}">
     <ContentPage.Resources>
         <Style TargetType="Button">
             <Setter Property="CornerRadius" Value="20" />
             <Setter Property="Margin" Value="10" />
-            <Setter Property="BackgroundColor" Value="LightBlue" />
-            <Setter Property="BorderColor" Value="Yellow" />
-            <Setter Property="TextColor" Value="DarkBlue" />
+            <Setter Property="BackgroundColor" Value="{x:Static local:Themes.ButtonBackgroundC}" />
+            <Setter Property="BorderColor" Value="{x:Static local:Themes.ButtonBorderC}" />
+            <Setter Property="TextColor" Value="{x:Static local:Themes.ButtonTextC}" />
         </Style>
     </ContentPage.Resources>
     <Grid>
@@ -28,18 +29,18 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
-       <Button Grid.Row="0" Grid.Column="0" Text="Aries" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="0" Grid.Column="1" Text="Taurus" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="1" Grid.Column="0" Text="Gemini" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="1" Grid.Column="1" Text="Cancer" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="2" Grid.Column="0" Text="Leo" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="2" Grid.Column="1" Text="Virgo" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="3" Grid.Column="0" Text="Libra" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="3" Grid.Column="1" Text="Scorpio" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="4" Grid.Column="0" Text="Sagittarius" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="4" Grid.Column="1" Text="Capricorn" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="5" Grid.Column="0" Text="Aquarius" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
-       <Button Grid.Row="5" Grid.Column="1" Text="Pisces" Clicked="OnButtonClicked" BackgroundColor="#61A0D7" BorderColor="White" BorderWidth="2"/>
+       <Button Grid.Row="0" Grid.Column="0" Text="Aries" Clicked="OnButtonClicked" />
+       <Button Grid.Row="0" Grid.Column="1" Text="Taurus" Clicked="OnButtonClicked" />
+       <Button Grid.Row="1" Grid.Column="0" Text="Gemini" Clicked="OnButtonClicked" />
+       <Button Grid.Row="1" Grid.Column="1" Text="Cancer" Clicked="OnButtonClicked" />
+       <Button Grid.Row="2" Grid.Column="0" Text="Leo" Clicked="OnButtonClicked" />
+       <Button Grid.Row="2" Grid.Column="1" Text="Virgo" Clicked="OnButtonClicked" />
+       <Button Grid.Row="3" Grid.Column="0" Text="Libra" Clicked="OnButtonClicked" />
+       <Button Grid.Row="3" Grid.Column="1" Text="Scorpio" Clicked="OnButtonClicked" />
+       <Button Grid.Row="4" Grid.Column="0" Text="Sagittarius" Clicked="OnButtonClicked" />
+       <Button Grid.Row="4" Grid.Column="1" Text="Capricorn" Clicked="OnButtonClicked" />
+       <Button Grid.Row="5" Grid.Column="0" Text="Aquarius" Clicked="OnButtonClicked" />
+       <Button Grid.Row="5" Grid.Column="1" Text="Pisces" Clicked="OnButtonClicked" />
        
         <Grid Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="Center">
             <Grid.RowDefinitions>
@@ -51,20 +52,20 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center" Margin="10">
-                <Label Text="Day" VerticalOptions="Center" TextColor="White" WidthRequest="40" />
-                <CheckBox x:Name="DayCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="Yellow" />
+                <Label Text="Day" VerticalOptions="Center" TextColor="{x:Static local:Themes.ButtonTextC}" WidthRequest="40" />
+                <CheckBox x:Name="DayCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="{x:Static local:Themes.ButtonTextC}" />
             </StackLayout>
             <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center" Margin="10">
-                <Label Text="Week" VerticalOptions="Center" TextColor="White" WidthRequest="40" />
-                <CheckBox x:Name="WeekCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="Yellow" />
+                <Label Text="Week" VerticalOptions="Center" TextColor="{x:Static local:Themes.ButtonTextC}" WidthRequest="40" />
+                <CheckBox x:Name="WeekCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="{x:Static local:Themes.ButtonTextC}" />
             </StackLayout>
             <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center" Margin="10">
-                <Label Text="Month" VerticalOptions="Center" TextColor="White" WidthRequest="40" />
-                <CheckBox x:Name="MonthCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="Yellow" />
+                <Label Text="Month" VerticalOptions="Center" TextColor="{x:Static local:Themes.ButtonTextC}" WidthRequest="40" />
+                <CheckBox x:Name="MonthCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="{x:Static local:Themes.ButtonTextC}" />
             </StackLayout>
             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center" Margin="10">
-                <Label Text="Year" VerticalOptions="Center" TextColor="White" WidthRequest="40" />
-                <CheckBox x:Name="YearCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="Yellow" />
+                <Label Text="Year" VerticalOptions="Center" TextColor="{x:Static local:Themes.ButtonTextC}" WidthRequest="40" />
+                <CheckBox x:Name="YearCheckBox" CheckedChanged="OnCheckBoxCheckedChanged" Color="{x:Static local:Themes.ButtonTextC}" />
             </StackLayout>
         </Grid>
       <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" HorizontalOptions="Center">
@@ -79,7 +80,7 @@
                   x:Name="MessageLabel"
                   BackgroundColor="Transparent"
                   Text="..."
-                  TextColor="White"
+                  TextColor="{x:Static local:Themes.ButtonTextC}"
                   Padding="10"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="FillAndExpand" />

@@ -25,6 +25,11 @@ namespace ZoharBible
             InitializeComponent();
             this.DayCheckBox.IsChecked = true;
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            GlobalVars._IntroPage = false;
+        }
 
         /// <summary>
         /// A constant string representing the Alert Title used in the Horoscope view.

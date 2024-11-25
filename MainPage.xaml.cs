@@ -16,6 +16,11 @@ public partial class MainPage : ContentPage
         OnOptionButtonClicked(KabbalahButton, EventArgs.Empty);
         UpdateCheckBoxes(GlobalVars.AiSelected);
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        GlobalVars._IntroPage = false;
+    }
     private void UpdateCheckBoxes(string aiSelected)
     {
         ChatGPTCheckBox.IsChecked = aiSelected.Contains("ChatGPT");

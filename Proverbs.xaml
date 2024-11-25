@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ZoharBible"
              x:Class="ZoharBible.Proverbs"
-             BackgroundColor="#1E3A5F">
+             BackgroundColor="{x:Static local:Themes.PageBackgroundC}">
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
@@ -14,23 +15,23 @@
             </Grid.RowDefinitions>
             <Frame
                 Grid.Row="0"
-                BorderColor="LightBlue"
-                BackgroundColor="LightBlue"
+                BorderColor="{x:Static local:Themes.ButtonBorderC}"
+                BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
                 Padding="3"
                 HorizontalOptions="FillAndExpand">
                 <Label
                     x:Name="MessageLabel"
-                    BackgroundColor="DarkBlue"
+                    BackgroundColor="{x:Static local:Themes.MessageLabelBackgroundC}"
                     Text="..."
-                    TextColor="White"
+                    TextColor="{x:Static local:Themes.MessageLabelTextC}"
                     Padding="10"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="1"
-                BorderColor="LightBlue"
-                BackgroundColor="LightBlue"
+                BorderColor="{x:Static local:Themes.ButtonBorderC}"
+                BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
                 CornerRadius="0"
                 Padding="5">
                 <StackLayout>
@@ -39,10 +40,10 @@
                         HeightRequest="300"
                         AutoSize="TextChanges"
                         FontSize="18"
-                        BackgroundColor="Green"
-                        TextColor="YellowGreen"
+                        BackgroundColor="{x:Static local:Themes._AnalyzeBack}"
+                        TextColor="{x:Static local:Themes._AnalyzeText}"
                         Placeholder="A random verse appears here..."
-                        PlaceholderColor="YellowGreen"
+                        PlaceholderColor="{x:Static local:Themes.ButtonTextC}"
                         VerticalOptions="FillAndExpand"
                         TextChanged="OnProverbEditorTextChanged" />
                     <StackLayout Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
@@ -50,12 +51,12 @@
                           <Button
                               x:Name="StartSpeak"
                               Text="Start Speak"
-                              BackgroundColor="#61A0D7"
-                              TextColor="DarkBlue"
+                              BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                              TextColor="{x:Static local:Themes.ButtonTextC}"
                               IsEnabled="False"
                               Clicked="OnStartSpeakClicked"
                               HeightRequest="40"
-                              BorderColor="#FFFFFF"
+                              BorderColor="{x:Static local:Themes.ButtonBorderC}"
                               BorderWidth="2">
                               
                           </Button>
@@ -63,12 +64,12 @@
                           <Button
                               x:Name="StopSpeak"
                               Text="Stop Speak"
-                              BackgroundColor="#61A0D7"
-                              TextColor="DarkBlue"
+                              BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                              TextColor="{x:Static local:Themes.ButtonTextC}"
                               IsEnabled="False"
                               Clicked="OnStopSpeakClicked"
                               HeightRequest="40"
-                              BorderColor="#FFFFFF"
+                              BorderColor="{x:Static local:Themes.ButtonBorderC}"
                               BorderWidth="2">
                               
                           </Button>
@@ -76,12 +77,12 @@
                           <Button
                               x:Name="GetAnalysisButton"
                               Text="Get Analysis"
-                              BackgroundColor="#61A0D7"
-                              TextColor="DarkBlue"
+                              BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                              TextColor="{x:Static local:Themes.ButtonTextC}"
                               IsEnabled="False"
                               Clicked="OnGetAnalysisButtonClicked"
                               HeightRequest="40"
-                              BorderColor="#FFFFFF"
+                              BorderColor="{x:Static local:Themes.ButtonBorderC}"
                               BorderWidth="2">
                               
                           </Button>
@@ -103,7 +104,7 @@
                              Margin="0,0,0,10">
                     <Label
                         Text="Give Verse Number or 0 for random"
-                        TextColor="White"
+                        TextColor="{x:Static local:Themes.ButtonTextC}"
                         VerticalTextAlignment="Center" />
                     <Entry
                         x:Name="ProverbNumberEntry"
@@ -122,17 +123,17 @@
                              Spacing="3"
                              Margin="0,0,0,10">
                     <CheckBox x:Name="PartCheckBox"
-                              Color="White"
+                              Color="{x:Static local:Themes.ButtonTextC}"
                               IsChecked="True"
                               CheckedChanged="OnCheckBoxChanged" />
                     <Label Text="Part"
-                           TextColor="White"
+                           TextColor="{x:Static local:Themes.ButtonTextC}"
                            VerticalTextAlignment="Center" />
                     <CheckBox x:Name="FullCheckBox"
-                              Color="White"
+                              Color="{x:Static local:Themes.ButtonTextC}"
                               CheckedChanged="OnCheckBoxChanged" />
                     <Label Text="Full"
-                           TextColor="White"
+                           TextColor="{x:Static local:Themes.ButtonTextC}"
                            VerticalTextAlignment="Center" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal"
@@ -141,29 +142,29 @@
                              Spacing="3"
                              Margin="0,0,0,10">
                     <CheckBox x:Name="ChatGPTCheckBox"
-                              Color="White"
+                              Color="{x:Static local:Themes.ButtonTextC}"
                               CheckedChanged="OnChatbotCheckBoxChanged" />
                     <Label Text="ChatGPT"
-                           TextColor="White"
+                           TextColor="{x:Static local:Themes.ButtonTextC}"
                            VerticalTextAlignment="Center" />
                     <CheckBox x:Name="GroKCheckBox"
-                              Color="White"
+                              Color="{x:Static local:Themes.ButtonTextC}"
                               IsChecked="True"
                               CheckedChanged="OnChatbotCheckBoxChanged" />
                     <Label Text="GroK"
-                           TextColor="White"
+                           TextColor="{x:Static local:Themes.ButtonTextC}"
                            VerticalTextAlignment="Center" />
                     <CheckBox x:Name="GeminiCheckBox"
-                              Color="White"
+                              Color="{x:Static local:Themes.ButtonTextC}"
                               CheckedChanged="OnChatbotCheckBoxChanged" />
                     <Label Text="Gemini"
-                           TextColor="White"
+                           TextColor="{x:Static local:Themes.ButtonTextC}"
                            VerticalTextAlignment="Center" />
                     <CheckBox x:Name="AllAICheckBox"
-                              Color="White"
+                              Color="{x:Static local:Themes.ButtonTextC}"
                               CheckedChanged="OnChatbotCheckBoxChanged" />
                     <Label Text="AllAI"
-                           TextColor="White"
+                           TextColor="{x:Static local:Themes.ButtonTextC}"
                            VerticalTextAlignment="Center" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal"
@@ -173,61 +174,61 @@
                     <Button
                         x:Name="KabbalahButton"
                         Text="Kabbalah"
-                        BackgroundColor="#61A0D7"
-                        TextColor="DarkBlue"
+                        BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                        TextColor="{x:Static local:Themes.ButtonTextC}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked"
-                        BorderColor="#FFFFFF"
+                        BorderColor="{x:Static local:Themes.ButtonBorderC}"
                         BorderWidth="2" >
                         
                     </Button>
                     <Button
                         x:Name="ZoharButton"
                         Text="Zohar"
-                        BackgroundColor="#61A0D7"
-                        TextColor="DarkBlue"
+                        BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                        TextColor="{x:Static local:Themes.ButtonTextC}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked" 
-                        BorderColor="#FFFFFF"
+                        BorderColor="{x:Static local:Themes.ButtonBorderC}"
                         BorderWidth="2" >
                         
                     </Button>
                     <Button
                         x:Name="MishnaButton"
                         Text="Mishna"
-                        BackgroundColor="#61A0D7"
-                        TextColor="DarkBlue"
+                        BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                        TextColor="{x:Static local:Themes.ButtonTextC}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked"
-                        BorderColor="#FFFFFF"
+                        BorderColor="{x:Static local:Themes.ButtonBorderC}"
                         BorderWidth="2">
                         
                     </Button>
                     <Button
                         x:Name="AllButton"
                         Text="All"
-                        BackgroundColor="#61A0D7"
-                        TextColor="DarkBlue"
+                        BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                        TextColor="{x:Static local:Themes.ButtonTextC}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Clicked="OnOptionButtonClicked"
-                        BorderColor="#FFFFFF"
+                        BorderColor="{x:Static local:Themes.ButtonBorderC}"
                         BorderWidth="2" >
                         
                     </Button>
                     <Button
                         x:Name="ResetButton"
                         Text=""
-                        BackgroundColor="Green"
-                        TextColor="White"
+                        BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                        TextColor="{x:Static local:Themes.ButtonTextC}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         WidthRequest="50"
                         Clicked="OnResetButtonClicked"
-                        BorderColor="#FFFFFF"
+                        BorderColor="{x:Static local:Themes.ButtonBorderC}"
                         BorderWidth="2" >
                         
                     </Button>
@@ -244,9 +245,9 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Clicked="OnGetZoharExplanationButtonClicked"
-                    BackgroundColor="#61A0D7"
-                    TextColor="DarkBlue"
-                    BorderColor="#FFFFFF"
+                    BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
+                    TextColor="{x:Static local:Themes.ButtonTextC}"
+                    BorderColor="{x:Static local:Themes.ButtonBorderC}"
                     BorderWidth="2">
                    
                 </Button>

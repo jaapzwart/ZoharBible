@@ -48,6 +48,11 @@ public partial class Proverbs : ContentPage
             DisplayAlert("Error", $"There was an error during initialization: {ex.Message}", "OK");
         }
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        GlobalVars._IntroPage = false;
+    }
     #region Button Event Handlers
 
     /// <summary>
