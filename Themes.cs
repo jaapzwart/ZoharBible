@@ -9,9 +9,9 @@ namespace ZoharBible
         private static string _buttonBorder = "#FFFFFF";
         private static string _buttonText = "#FFFFFF";
         private static string _analyzeBackground = "#00FF00";
-        private static string _analyzeText = "#33FF33";
+        private static string _analyzeText = "#000000";
         private static string _messageLabelBackground = "#00008B";
-        private static string _messageLabelText = "#000000";
+        private static string _messageLabelText = "#00FF00";
 
         public static Color PageBackgroundC { get; set; } = Color.FromHex(_pageBackground);
         public static Color ButtonBackgroundC { get; set; } = Color.FromHex(_buttonBackground);

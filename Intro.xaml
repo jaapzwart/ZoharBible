@@ -15,13 +15,17 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
             <!-- Voeg een spacer toe voor wat ruimte tussen de items -->
             <BoxView HeightRequest="20" BackgroundColor="{x:Static local:Themes.PageBackgroundC}" Grid.Row="0" />
             
-            <Button Text="Start Zohar Bible"
+            <Button Text="Start App"
                     BackgroundColor="{x:Static local:Themes.ButtonBackgroundC}"
                     TextColor="DarkBlue"
                     BorderColor="{x:Static local:Themes.ButtonBorderC}"
@@ -75,11 +79,47 @@
             <!-- Label die de waarde van de slider aangeeft -->
             <Label x:Name="SliderValueLabel"
                    TextColor="Yellow"
-                   Text="{Binding Source={x:Reference ValueSlider}, Path=Value, StringFormat='Slider Value: {0:F0}'}"
+                   Text= "{Binding Source={x:Reference ValueSlider}, Path=Value, StringFormat='Slider Value: {0:F0}'}"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    Grid.Row="7" />
             
+            <!-- Voeg een extra ruimte toe tussen de sliders -->
+            <BoxView HeightRequest="20" BackgroundColor="{x:Static local:Themes.PageBackgroundC}" Grid.Row="8" />
+            
+            <!-- Titel voor de nieuwe slider -->
+            <Grid Grid.Row="9">
+                <Label Text="ChatGPT Creativity"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Label Text="Strict"
+                       TextColor="White"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"/>
+                <Label Text="Less Strict"
+                       TextColor="White"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"/>
+            </Grid>
+
+            <!-- Nieuwe slider met schaal van 0.1 tot 1 -->
+            <Slider x:Name="CreativitySlider"
+                    Minimum="0.1"
+                    Maximum="1.0"
+                    Value="0.5"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"
+                    ValueChanged="OnCreativitySliderValueChanged"
+                    Grid.Row="10" />
+            
+            <!-- Label die de waarde van de nieuwe slider aangeeft -->
+            <Label x:Name="CreativitySliderValueLabel"
+                   TextColor="Yellow"
+                   Text="{Binding Source={x:Reference CreativitySlider}, Path=Value, StringFormat='{0:F1}'}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Row="11" Margin="10,0,0,0"/>
             <Label x:Name="MessageLabel"
                    BackgroundColor="DarkBlue"
                    Text="..."
@@ -87,7 +127,7 @@
                    Padding="10"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="End"
-                   Grid.Row="8" />
+                   Grid.Row="12" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

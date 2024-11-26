@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,17 @@ public partial class Intro : ContentPage
         base.OnAppearing();
         GlobalVars._IntroPage = true;
     }
+    private void OnCreativitySliderValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        double newValue = e.NewValue;
+        GlobalVars.ChatGPTTemp = newValue;
+        // Update de tekst van het bijbehorende label om de nieuwe waarde van de slider weer te geven
+        CreativitySliderValueLabel.Text = $"Creativity: {newValue:F1}";
+    }
     private async void OnNavigateToStarterPageClicked(object sender, EventArgs e)
     {
+        await GlobalVars.writeFileToBlob(GlobalVars.ChatGPTTemp.ToString("0.0", CultureInfo.InvariantCulture),
+            "temperatureChatGPT");
         if(this.StandardThemeCheckBox.IsChecked == false)
             Themes.SetMoodColors(Convert.ToInt32(GlobalVars.moodOMeter));
         await GlobalVars.SetClickedColor(sender);
