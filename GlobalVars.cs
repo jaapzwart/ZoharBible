@@ -1,6 +1,8 @@
 using System.Net;
 using System.Text;
 using Microsoft.CognitiveServices.Speech;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 
 namespace ZoharBible;
@@ -10,6 +12,7 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static double ChatGPTTemp { get; set; } = 0.1;
     public static bool _IntroPage { get; set; } = true;
     public static bool _StandardTheme { get; set; } = true;
     public static string moodOMeter { get; set; } = "80";
@@ -182,6 +185,41 @@ public static class GlobalVars
             GlobalVars.ChatAnalysis = "Analysis";
             return responseText;
 
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
+    }
+    /// <summary>
+    /// Uploads a text string to an Azure Blob Storage and returns a status message.
+    /// </summary>
+    /// <param name="toWrite">The text string to be uploaded to the blob storage.</param>
+    /// <param name="fileName">The name of the file to be created in the blob storage.</param>
+    /// <returns>A string indicating success or an error message.</returns>
+    public static async Task<string> writeFileToBlob(string toWrite, string fileName)
+    {
+        try
+        {
+            // Initialise client in a different place if you like
+            string connS = Secrets._blobConnection;
+            CloudStorageAccount account = CloudStorageAccount.Parse(connS);
+            var blobClient = account.CreateCloudBlobClient();
+
+            // Make sure container is there
+            var blobContainer = blobClient.GetContainerReference(Secrets._blobReference);
+            await blobContainer.CreateIfNotExistsAsync();
+
+            WebClient wc = new WebClient();
+            using (Stream fs = wc.OpenWrite(Secrets._blobTemp + fileName))
+            {
+                TextWriter tw = new StreamWriter(fs);
+                CloudBlockBlob blockBlob = blobContainer.GetBlockBlobReference(
+                    fileName);
+                await blockBlob.UploadTextAsync(toWrite);
+                //tw.Flush();
+            }
+            return "Success";
         }
         catch (Exception ex)
         {

@@ -80,7 +80,7 @@
                   x:Name="MessageLabel"
                   BackgroundColor="Transparent"
                   Text="..."
-                  TextColor="{x:Static local:Themes.ButtonTextC}"
+                  TextColor="{x:Static local:Themes.MessageLabelTextC}"
                   Padding="10"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="FillAndExpand" />

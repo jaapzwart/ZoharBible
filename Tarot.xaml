@@ -135,7 +135,7 @@
                HorizontalOptions="FillAndExpand"
                VerticalOptions="End"> <!-- Adjusted margin and VerticalOptions -->
             <Label x:Name="MessageLabel"
-                   TextColor="{x:Static local:Themes.ButtonTextC}"
+                   TextColor="{x:Static local:Themes.MessageLabelTextC}"
                    BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="End" 
