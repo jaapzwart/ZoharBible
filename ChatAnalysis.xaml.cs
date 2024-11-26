@@ -19,6 +19,8 @@ public partial class ChatAnalysis : ContentPage
     /// original response obtained from the AI service APIs.
     /// </summary>
     private string translatedText = "";
+    
+    private Label _labelFromPage1;
 
     /// <summary>
     /// The ChatAnalysis class is a content page within the Zohar Bible application.
@@ -27,6 +29,15 @@ public partial class ChatAnalysis : ContentPage
     public ChatAnalysis()
     {
         InitializeComponent();
+        OnButtonClicked(this, EventArgs.Empty);
+        if (GlobalVars.Amida_.Contains("Parshat"))
+            this.messageLabel.Text = GlobalVars._pPortion;
+        ConfigureAudioSession();
+    }
+    public ChatAnalysis(Label label)
+    {
+        InitializeComponent();
+        _labelFromPage1 = label;
         OnButtonClicked(this, EventArgs.Empty);
         if (GlobalVars.Amida_.Contains("Parshat"))
             this.messageLabel.Text = GlobalVars._pPortion;
@@ -121,6 +132,14 @@ public partial class ChatAnalysis : ContentPage
                      GlobalVars.ProverbToAnalyse +
                      " from out the perspective of the " +
                      GlobalVars.TypeOfProverbAnalysis;
+                
+                if (GlobalVars._Dialogue)
+                {
+                    qp += "Give a final question at the end on the content of your analysis " +
+                          " and place that question at the end of a new line with space between" +
+                          " the previous text. So the question must stand in its own space.";
+                    
+                }
             }
             else
             {
@@ -187,6 +206,12 @@ public partial class ChatAnalysis : ContentPage
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
                     Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
+                if (GlobalVars._Dialogue)
+                {
+                    GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
+                    responseText += "\n\n" + DoDialogue(GlobalVars._DialogueQuestion);
+                }
+                
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "ChatGPT: " + hAdd + '\n' + translatedText.TrimStart();
             }
@@ -195,6 +220,12 @@ public partial class ChatAnalysis : ContentPage
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
                     Secrets.RESTAPI + @"ChatGrok/"
                     + qp);
+                if (GlobalVars._Dialogue)
+                {
+                    GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
+                    DoDialogue(GlobalVars._DialogueQuestion);
+                }
+
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "Grok: " + hAdd + '\n' + translatedText.TrimStart().Replace("***", "")
                     .Replace("###", "")
@@ -203,7 +234,13 @@ public partial class ChatAnalysis : ContentPage
             else if (GlobalVars.AiSelected.Contains("Gemini"))
             {
                 responseText = GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
-                                                                       + qp);
+                    + qp);
+                if (GlobalVars._Dialogue)
+                {
+                    GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
+                    DoDialogue(GlobalVars._DialogueQuestion);
+                }
+
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 this.ChatAnalysisText.Text = "Gemini: " + hAdd + '\n' + translatedText.TrimStart();
             }
@@ -232,6 +269,67 @@ public partial class ChatAnalysis : ContentPage
             await DisplayAlert("Error", "An error occurred while fetching or translating the text: " + ex.Message,
                 "OK");
         }
+    }
+
+    /// <summary>
+    /// Processes a given question by generating a dialogue response using the configured AI models.
+    /// Depending on the AI models selected, it updates the dialogue with responses from different AI sources,
+    /// and prepares additional questions to continue the dialogue.
+    /// </summary>
+    /// <param name="question">The initial question to which the dialogue is responding.</param>
+    /// <returns>A string containing the dialogue responses from the selected AI models.</returns>
+    private string DoDialogue(string question)
+    {
+        string _dialogue = "";
+        string qOrg = question;
+        if (GlobalVars.AiSelected.Contains("ChatGPT"))
+        {
+            UpdateLabelCaller("Preparing dialogue Gemini");
+            question += " End with a new question.";
+            _dialogue = "\n\n" + "GEMINI - " + "\n\n" + GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
+                + question);
+            GlobalVars._DialogueQuestion = GetQuestion(_dialogue).Replace(":", "");
+            UpdateLabelCaller("Starting with Grok dialogue.");
+            _dialogue += "\n\n" + "GROK - " + "\n\n" + GlobalVars.GetHttpReturnFromAPIRestLink(
+                Secrets.RESTAPI + @"ChatGrok/"
+                                + GlobalVars._DialogueQuestion);
+        }
+        if (GlobalVars.AiSelected.Contains("Grok"))
+        {
+            
+        }
+        if (GlobalVars.AiSelected.Contains("Gemini"))
+        {
+            
+        }
+
+        return _dialogue;
+    }
+    private async void UpdateLabelCaller(string text)
+    {
+        try
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                _labelFromPage1.Text = text;
+            });
+            await Task.Yield();
+        }
+        catch (Exception ex)
+        {
+            
+        }
+    }
+    private string GetQuestion(string input)
+    {
+        // Split the string into lines
+        var lines = input.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+        // Find the last line that starts with a capital letter
+        var lastCapitalizedLine = lines
+            .LastOrDefault(line => !string.IsNullOrWhiteSpace(line) && char.IsUpper(line.TrimStart()[0]));
+       
+        return lastCapitalizedLine;
     }
 
     /// <summary>
