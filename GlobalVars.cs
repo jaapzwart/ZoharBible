@@ -12,6 +12,8 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static bool _Dialogue { get; set; } = false;
+    public static string _DialogueQuestion { get; set; } = "";
     public static double ChatGPTTemp { get; set; } = 0.1;
     public static bool _IntroPage { get; set; } = true;
     public static bool _StandardTheme { get; set; } = true;

@@ -68,4 +68,10 @@ public partial class Intro : ContentPage
             Themes.SetMoodColors(Convert.ToInt32(GlobalVars.moodOMeter));
         }
     }
+
+    private void DialogueCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        
+        GlobalVars._Dialogue = e.Value;
+    }
 }

@@ -54,6 +54,16 @@
                           VerticalOptions="Center"
                           HorizontalOptions="Center"
                           CheckedChanged="OnStandardThemeCheckBoxCheckedChanged"/>
+                <Label Text="AI Dialogue"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Margin="20,0,0,0" />
+                <CheckBox x:Name="DialogueCheckBox"
+                          IsChecked="False"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"
+                          CheckedChanged="DialogueCheckBox_CheckedChanged" />
             </StackLayout>
             
             <!-- Voeg een spacer toe voor wat ruimte tussen de checkbox en de slider -->
@@ -102,7 +112,6 @@
                        HorizontalOptions="End"
                        VerticalOptions="Center"/>
             </Grid>
-
             <!-- Nieuwe slider met schaal van 0.1 tot 1 -->
             <Slider x:Name="CreativitySlider"
                     Minimum="0.1"

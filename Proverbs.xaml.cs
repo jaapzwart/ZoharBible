@@ -233,7 +233,8 @@ public partial class Proverbs : ContentPage
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Preparing Analysis");
             await Task.Delay(1000);
-            await Navigation.PushAsync(new ChatAnalysis());
+            var ccHat = new ChatAnalysis(this.MessageLabel);
+            await Navigation.PushAsync(ccHat);
             UpdateLabel("...");
         }
         catch (Exception ex)
