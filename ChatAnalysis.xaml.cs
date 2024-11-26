@@ -270,7 +270,14 @@ public partial class ChatAnalysis : ContentPage
                 "OK");
         }
     }
-    
+
+    /// <summary>
+    /// Processes a given question by generating a dialogue response using the configured AI models.
+    /// Depending on the AI models selected, it updates the dialogue with responses from different AI sources,
+    /// and prepares additional questions to continue the dialogue.
+    /// </summary>
+    /// <param name="question">The initial question to which the dialogue is responding.</param>
+    /// <returns>A string containing the dialogue responses from the selected AI models.</returns>
     private string DoDialogue(string question)
     {
         string _dialogue = "";
