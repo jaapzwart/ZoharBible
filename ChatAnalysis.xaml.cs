@@ -20,8 +20,6 @@ public partial class ChatAnalysis : ContentPage
     /// </summary>
     private string translatedText = "";
     
-    private Label _labelFromPage1;
-
     /// <summary>
     /// The ChatAnalysis class is a content page within the Zohar Bible application.
     /// It provides functionality to retrieve and display a text-based analysis of a specific proverb.
@@ -29,25 +27,22 @@ public partial class ChatAnalysis : ContentPage
     public ChatAnalysis()
     {
         InitializeComponent();
-        OnButtonClicked(this, EventArgs.Empty);
         if (GlobalVars.Amida_.Contains("Parshat"))
             this.messageLabel.Text = GlobalVars._pPortion;
+        UpdateLabelCaller("Preparing first analysis...");
         ConfigureAudioSession();
     }
-    public ChatAnalysis(Label label)
-    {
-        InitializeComponent();
-        _labelFromPage1 = label;
-        OnButtonClicked(this, EventArgs.Empty);
-        if (GlobalVars.Amida_.Contains("Parshat"))
-            this.messageLabel.Text = GlobalVars._pPortion;
-        ConfigureAudioSession();
-    }
-    
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await Task.Delay(1000);  // Deze vertraging zorgt ervoor dat de pagina volledig is geladen.
         GlobalVars._IntroPage = false;
+        await AfterAppearingLogic();
+    }
+    private async Task AfterAppearingLogic()
+    {
+        await OnButtonClicked(this, EventArgs.Empty);
+        await UpdateLabelCaller("...");
     }
 
     /// <summary>
@@ -77,7 +72,7 @@ public partial class ChatAnalysis : ContentPage
     /// </summary>
     /// <param name="sender">The source of the event. Typically, this is the Button that was clicked.</param>
     /// <param name="args">Provides data for the event.</param>
-    private async void OnButtonClicked(object sender, EventArgs args)
+    private async Task OnButtonClicked(object sender, EventArgs args)
     {
         try
         {
@@ -135,9 +130,9 @@ public partial class ChatAnalysis : ContentPage
                 
                 if (GlobalVars._Dialogue)
                 {
-                    qp += "Give a final question at the end on the content of your analysis " +
+                    qp += "Give a final question and ONLY a final question at the end on the content of your analysis " +
                           " and place that question at the end of a new line with space between" +
-                          " the previous text. So the question must stand in its own space.";
+                          " the previous text.";
                     
                 }
             }
@@ -155,47 +150,64 @@ public partial class ChatAnalysis : ContentPage
             {
                 if (GlobalVars.AiSelected.Contains("ChatGPT"))
                 {
-                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
+                    responseText = DialogueCleaner(responseText);
+                    if (GlobalVars._Dialogue)
+                    {
+                        GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
+                        responseText += await DoDialogue(GlobalVars._DialogueQuestion);
+                    }
                     translatedText = await Translator.TranslateTextToGiven(responseText);
-                    this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + translatedText;
+                    this.ChatAnalysisText.Text = "CHATGPT: " + '\n\n' + translatedText;
                 }
                 else if (GlobalVars.AiSelected.Contains("GroK"))
                 {
-                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        Secrets.RESTAPI + @"ChatGrok/"
-                        + qq);
+                    responseText = await Secrets.GetGrok(qq);
+                    responseText = DialogueCleaner(responseText);
+                    if (GlobalVars._Dialogue)
+                    {
+                        GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
+                        responseText += await DoDialogue(GlobalVars._DialogueQuestion);
+                    }
                     translatedText = await Translator.TranslateTextToGiven(responseText);
-                    this.ChatAnalysisText.Text = "GroK: " + '\n' + translatedText.TrimStart().Replace("***", "")
+                    this.ChatAnalysisText.Text = "\n\n" + "GROK: " + "\n\n" + translatedText.TrimStart().Replace("***", "")
                         .Replace("###", "")
                         .Replace("**", "").Replace("*", "");
                 }
                 else if (GlobalVars.AiSelected.Contains("Gemini"))
                 {
-                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
+                    responseText = DialogueCleaner(responseText);
+                    if (GlobalVars._Dialogue)
+                    {
+                        GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
+                        responseText += await DoDialogue(GlobalVars._DialogueQuestion);
+                    }
                     translatedText = await Translator.TranslateTextToGiven(responseText);
-                    this.ChatAnalysisText.Text = "Gemini: " + '\n' + translatedText.TrimStart();
+                    this.ChatAnalysisText.Text = "\n\n" + "GOOGLE: " + "\n\n" + translatedText.TrimStart();
                 }
                 else if (GlobalVars.AiSelected.Contains("AllAI"))
                 {
-                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
-                    this.ChatAnalysisText.Text = "ChatGPT: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
-                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                        Secrets.RESTAPI + @"ChatGrok/"
-                        + qq);
+                    translatedText = DialogueCleaner(translatedText);
+                    this.ChatAnalysisText.Text = "\n\n" + "CHATGPT: " + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
+                    responseText = await Secrets.GetGrok(qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
-                    this.ChatAnalysisText.Text += "Grok: " + '\n' + translatedText.TrimStart() + '\n' + '\n';
-                    responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                    translatedText = DialogueCleaner(translatedText);
+                    this.ChatAnalysisText.Text += "\n\n" + "GROK: " + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
+                    responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"ChatGPT/"
                         + qq);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
-                    this.ChatAnalysisText.Text += "Gemini: " + '\n' + translatedText.TrimStart();
+                    translatedText = DialogueCleaner(translatedText);
+                    this.ChatAnalysisText.Text += "\n\n" + "GOOGLE: " + "\n\n" + translatedText.TrimStart();
                 }
             }
             #endregion
@@ -203,13 +215,14 @@ public partial class ChatAnalysis : ContentPage
             #region Proverb analysis
             else if (GlobalVars.AiSelected.Contains("ChatGPT"))
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                     Secrets.RESTAPI + @"ChatGPT/"
                     + qp);
+                responseText = DialogueCleaner(responseText);
                 if (GlobalVars._Dialogue)
                 {
                     GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
-                    responseText += "\n\n" + DoDialogue(GlobalVars._DialogueQuestion);
+                    responseText += "\n\n" + await DoDialogue(GlobalVars._DialogueQuestion);
                 }
                 
                 translatedText = await Translator.TranslateTextToGiven(responseText);
@@ -217,28 +230,27 @@ public partial class ChatAnalysis : ContentPage
             }
             else if (GlobalVars.AiSelected.Contains("GroK"))
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGrok/"
-                    + qp);
+                responseText = await Secrets.GetGrok(qp);
+                responseText = DialogueCleaner(responseText);
                 if (GlobalVars._Dialogue)
                 {
                     GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
-                    DoDialogue(GlobalVars._DialogueQuestion);
+                    responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                 }
-
+                
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text = "Grok: " + hAdd + '\n' + translatedText.TrimStart().Replace("***", "")
-                    .Replace("###", "")
-                    .Replace("**", "").Replace("*", "");
+                this.ChatAnalysisText.Text = "Grok: " + hAdd + '\n' + translatedText.TrimStart();
             }
             else if (GlobalVars.AiSelected.Contains("Gemini"))
             {
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
+                responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
                     + qp);
+                responseText = DialogueCleaner(responseText);
+                
                 if (GlobalVars._Dialogue)
                 {
                     GlobalVars._DialogueQuestion += GetQuestion(responseText).Replace(":", "");
-                    DoDialogue(GlobalVars._DialogueQuestion);
+                    responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                 }
 
                 translatedText = await Translator.TranslateTextToGiven(responseText);
@@ -247,20 +259,20 @@ public partial class ChatAnalysis : ContentPage
             else if (GlobalVars.AiSelected.Contains("AllAI"))
             {
                 this.ChatAnalysisText.Text = "All AI ANalysis: " + '\n' + '\n';
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGPT/"
-                    + qp);
+                responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
+                    Secrets.RESTAPI + @"ChatGPT/" + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text += "ChatGPT: " + hAdd + '\n' + translatedText.TrimStart() + '\n' + '\n';
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGrok/"
-                    + qp);
+                translatedText = DialogueCleaner(translatedText);
+                this.ChatAnalysisText.Text += "\n\n" + "CHATGPT: " + hAdd + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
+                responseText = await Secrets.GetGrok(qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text += "Grok: " + hAdd + '\n' + translatedText.TrimStart() + '\n' + '\n';
-                responseText = GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
-                                                                       + qp);
+                translatedText = DialogueCleaner(translatedText);
+                this.ChatAnalysisText.Text += "\n\n" + "GROK: " + hAdd + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
+                responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
+                    Secrets.RESTAPI + @"Google/" + qp);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
-                this.ChatAnalysisText.Text += "Gemini: " + hAdd + '\n' + translatedText.TrimStart();
+                translatedText = DialogueCleaner(translatedText);
+                this.ChatAnalysisText.Text += "\n\n" + "GOOGLE: " + hAdd + "\n\n" + translatedText.TrimStart();
             }
             #endregion
         }
@@ -269,6 +281,7 @@ public partial class ChatAnalysis : ContentPage
             await DisplayAlert("Error", "An error occurred while fetching or translating the text: " + ex.Message,
                 "OK");
         }
+        
     }
 
     /// <summary>
@@ -278,40 +291,92 @@ public partial class ChatAnalysis : ContentPage
     /// </summary>
     /// <param name="question">The initial question to which the dialogue is responding.</param>
     /// <returns>A string containing the dialogue responses from the selected AI models.</returns>
-    private string DoDialogue(string question)
+    // TODO: Down code is a bit Groggy: needs refactoring.
+    private async Task<string> DoDialogue(string question)
     {
         string _dialogue = "";
         string qOrg = question;
         if (GlobalVars.AiSelected.Contains("ChatGPT"))
         {
-            UpdateLabelCaller("Preparing dialogue Gemini");
+            await UpdateLabelCaller("Preparing dialogue Grok");
+            await Task.Delay(1000);
             question += " End with a new question.";
-            _dialogue = "\n\n" + "GEMINI - " + "\n\n" + GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
-                + question);
+            _dialogue = "\n\n" + "GROK - " + "\n\n" + await Secrets.GetGrok(question);
+            _dialogue = DialogueCleaner(_dialogue);
             GlobalVars._DialogueQuestion = GetQuestion(_dialogue).Replace(":", "");
-            UpdateLabelCaller("Starting with Grok dialogue.");
-            _dialogue += "\n\n" + "GROK - " + "\n\n" + GlobalVars.GetHttpReturnFromAPIRestLink(
-                Secrets.RESTAPI + @"ChatGrok/"
+            await UpdateLabelCaller("Starting with Google dialogue.");
+            await Task.Delay(1000);
+            _dialogue += "\n\n" + "GOOGLE - " + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
+                Secrets.RESTAPI + @"Google/"
                                 + GlobalVars._DialogueQuestion);
+            _dialogue = DialogueCleaner(_dialogue);
+            await UpdateLabelCaller("Done.");
         }
-        if (GlobalVars.AiSelected.Contains("Grok"))
+        if (GlobalVars.AiSelected.Contains("GroK"))
         {
-            
+            UpdateLabelCaller("Preparing dialogue ChatGPT");
+            await Task.Delay(1000);
+            question += " And give a final question at the end on the content of your analysis " +
+                        " and place that question at the end of your analysis.";
+            _dialogue = await GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"ChatGPT/"
+                + question);
+            _dialogue = DialogueCleaner(_dialogue);
+            _dialogue = "\n\n" + "CHATGPT - " + "\n\n" + GlobalVars.DeleteAllBeforeFirstCapitalLetter(_dialogue);
+            GlobalVars._DialogueQuestion = GetQuestion(_dialogue).Replace(":", "");
+            GlobalVars._DialogueQuestion = await GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"ChatGPT/"
+                + "Create a question from "
+                + GlobalVars._DialogueQuestion);
+            GlobalVars._DialogueQuestion = GlobalVars._DialogueQuestion.Replace("(", " ").Replace(")", " ")
+                .Replace(":", " ").Replace("-", " ").Replace("\n\n", "");
+            _dialogue += "\n\n" + GlobalVars._DialogueQuestion.Replace("(", " ").Replace(")", " ")
+                .Replace(":", " ").Replace("-", " ").Replace("\n\n", "");
+            UpdateLabelCaller("Starting with Google dialogue.");
+            await Task.Delay(1000);
+            _dialogue += "\n\n" + "GOOGLE - " + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
+                Secrets.RESTAPI + @"Google/"
+                                + GlobalVars._DialogueQuestion);
+            _dialogue = DialogueCleaner(_dialogue);
         }
         if (GlobalVars.AiSelected.Contains("Gemini"))
         {
-            
+            await UpdateLabelCaller("Preparing dialogue Grok");
+            await Task.Delay(1000);
+            question += " End with a new question.";
+            _dialogue = "\n\n" + "GROK - " + "\n\n" + await Secrets.GetGrok(question);
+            _dialogue = DialogueCleaner(_dialogue);
+            GlobalVars._DialogueQuestion = GetQuestion(_dialogue).Replace(":", "");
+            await UpdateLabelCaller("Starting with ChatGPT dialogue.");
+            await Task.Delay(1000);
+            _dialogue += "\n\n" + "GOOGLE - " + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
+                Secrets.RESTAPI + @"ChatGPT/"
+                                + GlobalVars._DialogueQuestion);
+            _dialogue = DialogueCleaner(_dialogue);
+            await UpdateLabelCaller("Done.");
         }
 
         return _dialogue;
     }
-    private async void UpdateLabelCaller(string text)
+
+    private static string DialogueCleaner(string _dialogue)
+    {
+        _dialogue = _dialogue.Replace(":", " ").Replace("(", " ").Replace(")", " ")
+            .Replace("-", " ").Replace("*", "").Replace(" -", " ").Replace(" - ", " ")
+            .Replace("***", "")
+            .Replace("###", "")
+            .Replace("**", "").Replace("*", "");
+
+        _dialogue = Regex.Replace(_dialogue, @"[^\S\r\n]+", " ").Trim();
+        
+        return _dialogue;
+    }
+
+    private async Task UpdateLabelCaller(string text)
     {
         try
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                _labelFromPage1.Text = text;
+                this.messageLabel.Text = text;
             });
             await Task.Yield();
         }
