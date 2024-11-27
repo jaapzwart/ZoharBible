@@ -236,7 +236,7 @@ public partial class ChatAnalysis : ContentPage
                 responseText = DialogueCleaner(responseText);
                 if (GlobalVars._Dialogue)
                 {
-                    GlobalVars._DialogueQuestion += GetQuestion(responseText)
+                    GlobalVars._DialogueQuestion += GetQuestion(responseText);
                     responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                 }
                 
@@ -330,10 +330,8 @@ public partial class ChatAnalysis : ContentPage
             GlobalVars._DialogueQuestion = await GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"ChatGPT/"
                 + "Create a question from "
                 + GlobalVars._DialogueQuestion);
-            GlobalVars._DialogueQuestion = GlobalVars._DialogueQuestion.Replace("(", " ").Replace(")", " ")
-                .Replace(":", " ").Replace("-", " ").Replace("\n\n", "");
-            _dialogue += "\n\n" + GlobalVars._DialogueQuestion.Replace("(", " ").Replace(")", " ")
-                .Replace(":", " ").Replace("-", " ").Replace("\n\n", "");
+            GlobalVars._DialogueQuestion = DialogueCleaner(GlobalVars._DialogueQuestion);
+            _dialogue += "\n\n" + GlobalVars._DialogueQuestion;
             UpdateLabelCaller("Starting with Google dialogue.");
             await Task.Delay(1000);
             _dialogue += "\n\n" + "GOOGLE - " + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
