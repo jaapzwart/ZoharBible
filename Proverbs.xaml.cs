@@ -102,11 +102,11 @@ public partial class Proverbs : ContentPage
                 {
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
                         responseText =
-                            GlobalVars.GetHttpReturnFromAPIRestLink(
+                            await GlobalVars.GetHttpReturnFromAPIRestLink(
                                 Secrets.RESTAPI + @"BibleProverbsPart");
                     else
                         responseText =
-                            GlobalVars.GetHttpReturnFromAPIRestLink(
+                            await GlobalVars.GetHttpReturnFromAPIRestLink(
                                 Secrets.RESTAPI + @"BiblePsalmsPart");
                     responseText = AddCommaToPsalmOrProverbName(responseText);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
@@ -115,11 +115,11 @@ public partial class Proverbs : ContentPage
                 {
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
                         responseText =
-                            GlobalVars.GetHttpReturnFromAPIRestLink(
+                            await GlobalVars.GetHttpReturnFromAPIRestLink(
                                 Secrets.RESTAPI + @"BibleProverbs");
                     else
                         responseText =
-                            GlobalVars.GetHttpReturnFromAPIRestLink(
+                            await GlobalVars.GetHttpReturnFromAPIRestLink(
                                 Secrets.RESTAPI + @"BiblePsalms");
                     responseText = AddCommaToPsalmOrProverbName(responseText);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
@@ -130,11 +130,11 @@ public partial class Proverbs : ContentPage
                 if (PartCheckBox.IsChecked)
                 {
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
-                        responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                        responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                             Secrets.RESTAPI + @"BibleProverbsPart/EN" +
                             this.ProverbNumberEntry.Text);
                     else
-                        responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                        responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                             Secrets.RESTAPI + @"BiblePsalmsPart/EN" +
                             this.ProverbNumberEntry.Text);
                     responseText = AddCommaToPsalmOrProverbName(responseText);
@@ -143,11 +143,11 @@ public partial class Proverbs : ContentPage
                 else
                 {
                     if (GlobalVars._ProverbOrPsalm.Contains("Proverbs"))
-                        responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                        responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                             Secrets.RESTAPI + @"BibleProverbs/EN" +
                             this.ProverbNumberEntry.Text);
                     else
-                        responseText = GlobalVars.GetHttpReturnFromAPIRestLink(
+                        responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                             Secrets.RESTAPI + @"BiblePsalms/EN" +
                             this.ProverbNumberEntry.Text);
                     responseText = AddCommaToPsalmOrProverbName(responseText);
@@ -233,8 +233,7 @@ public partial class Proverbs : ContentPage
             this.MessageLabel.IsVisible = true;
             UpdateLabel("Preparing Analysis");
             await Task.Delay(1000);
-            var ccHat = new ChatAnalysis(this.MessageLabel);
-            await Navigation.PushAsync(ccHat);
+            await Navigation.PushAsync(new ChatAnalysis());
             UpdateLabel("...");
         }
         catch (Exception ex)

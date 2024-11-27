@@ -1,9 +1,11 @@
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
+using ZoharBible;
 
 namespace ZoharBible;
 
@@ -12,6 +14,7 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static string _dialogueTextReturn { get; set; } = "";
     public static bool _Dialogue { get; set; } = false;
     public static string _DialogueQuestion { get; set; } = "";
     public static double ChatGPTTemp { get; set; } = 0.1;
@@ -166,7 +169,7 @@ public static class GlobalVars
     /// </summary>
     /// <param name="theLinkAPI">The URL of the REST API to fetch the response from.</param>
     /// <returns>The response string from the REST API, or an error message if an exception occurs.</returns>
-    public static string GetHttpReturnFromAPIRestLink(string theLinkAPI)
+    public static async Task<string> GetHttpReturnFromAPIRestLink(string theLinkAPI)
     {
         // This method has some troubles getting the string from the REST API in good format.
         try
@@ -228,7 +231,18 @@ public static class GlobalVars
             return ex.Message;
         }
     }
+
+    public static string DeleteAllBeforeFirstCapitalLetter(string input)
+    {
+        // Regular expression to match the first capital letter and everything after it
+        const string pattern = @"[A-Z].*";
+        Regex regex = new Regex(pattern, RegexOptions.Compiled);
+        Match match = regex.Match(input);
+
+        return match.Success ? input.Substring(match.Index) : input;
+    }
 }
+
 
 /// <summary>
 /// Provides methods to translate text to a specified language.
