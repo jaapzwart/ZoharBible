@@ -276,6 +276,7 @@ public partial class MainPage : ContentPage
         try
         {
             await GlobalVars.SetClickedColor(sender);
+            GlobalVars.Amida_ = "AnalyzeDailyStudy";
             GlobalVars._pPortion = this.TopEntryBox.Text;
             GlobalVars.ProverbToAnalyse = this.TopEntryBox.Text;
             this.MessageLabel.IsVisible = true;
