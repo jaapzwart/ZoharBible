@@ -97,6 +97,15 @@ public partial class ChatAnalysis : ContentPage
             string responseText = "";
             string qq = "";
             
+            if (GlobalVars._Dialogue)
+            {
+                GlobalVars._extraDialogueActionsForQuestion = " Formulate a final question as the LAST" +
+                                                              " paragraph of your text based on your analysis.";
+            }
+            else
+            {
+                GlobalVars._extraDialogueActionsForQuestion = "";
+            }
             #region Init Amida Shema and Proverb
             if (GlobalVars.Amida_.Contains("Amida") || GlobalVars.Amida_.Contains("Shema"))
             {
@@ -104,6 +113,17 @@ public partial class ChatAnalysis : ContentPage
                      " and after that give a deep analysis of the Jewish" +
                      GlobalVars.Amida_ +
                      " and add to it how you can apply it to your behavior for the day, towards your family, friends and other people.";
+                
+                if (GlobalVars._Dialogue)
+                {
+                    GlobalVars._extraDialogueActionsForQuestion +=
+                        " On the content of the Jewish " + GlobalVars.Amida_ +
+                        " and after that give a deep analysis of the Jewish" +
+                        GlobalVars.Amida_ +
+                        " and add to it how you can apply it to your behavior for the day";
+                    qq += GlobalVars._extraDialogueActionsForQuestion;
+
+                }
             }
 
             string qp = "";
@@ -113,13 +133,33 @@ public partial class ChatAnalysis : ContentPage
                 qp = "Give an analysis on " +
                             GlobalVars._pPortion + " for the current date" +
                             " and for the period of a " + GlobalVars.HPeriod;
+                
+                if (GlobalVars._Dialogue)
+                {
+                    GlobalVars._extraDialogueActionsForQuestion +=
+                        " On " +
+                        GlobalVars._pPortion + " for the current date" +
+                        " and for the period of a " + GlobalVars.HPeriod;
+                    qp += GlobalVars._extraDialogueActionsForQuestion;
+
+                }
                 hAdd = "(" + GlobalVars._pPortion + " - " + GlobalVars.HPeriod + ")";
             }
             else if (GlobalVars._pPortion.Contains("Tarot"))
             {
-                qp = "Give an analysis on the TarotCard" +
+                qp = "Give an analysis on the TarotCard " +
                      GlobalVars.theCardT + " on position " + GlobalVars.thePositionT +
                      " in a Tarot throw of 3 cards past, present and future.";
+                
+                if (GlobalVars._Dialogue)
+                {
+                    GlobalVars._extraDialogueActionsForQuestion +=
+                        " On the TarotCard " +
+                        GlobalVars.theCardT + " on position " + GlobalVars.thePositionT +
+                        " in a Tarot throw of 3 cards past, present and future.";
+                    qp += GlobalVars._extraDialogueActionsForQuestion;
+
+                }
             }
             else if (GlobalVars._pPortion.Contains("Proverbs"))
             {
@@ -130,10 +170,12 @@ public partial class ChatAnalysis : ContentPage
                 
                 if (GlobalVars._Dialogue)
                 {
-                    qp += "Give a final question and ONLY a final question at the end on the content of your analysis " +
-                          " and place that question at the end of a new line with space between" +
-                          " the previous text.";
-                    
+                    GlobalVars._extraDialogueActionsForQuestion += 
+                        " Related to " +
+                        GlobalVars.ProverbToAnalyse +
+                        " from out the perspective of the " +
+                        GlobalVars.TypeOfProverbAnalysis;
+                    qp += GlobalVars._extraDialogueActionsForQuestion;
                 }
             }
             else
@@ -142,6 +184,17 @@ public partial class ChatAnalysis : ContentPage
                      GlobalVars.ProverbToAnalyse +
                      " from out the perspective of the " +
                      GlobalVars.TypeOfProverbAnalysis;
+                
+                if (GlobalVars._Dialogue)
+                {
+                    GlobalVars._extraDialogueActionsForQuestion += 
+                        " Related to " +
+                        GlobalVars.ProverbToAnalyse +
+                        " from out the perspective of the " +
+                        GlobalVars.TypeOfProverbAnalysis;
+                    qp += GlobalVars._extraDialogueActionsForQuestion;
+
+                }
             }
             #endregion
             
@@ -152,60 +205,60 @@ public partial class ChatAnalysis : ContentPage
                 {
                     responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"ChatGPT/"
-                        + qq);
-                    responseText = DialogueCleaner(responseText);
+                        + qq + GlobalVars._extraDialogueActionsForQuestion);
+                    responseText = DialogueCleaner(responseText) + '\n' + '\n';
                     if (GlobalVars._Dialogue)
                     {
-                        GlobalVars._DialogueQuestion += GetQuestion(responseText);
+                        GlobalVars._DialogueQuestion = GetQuestion(responseText);
                         responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                     }
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     translatedText = DialogueCleaner(translatedText);
-                    this.ChatAnalysisText.Text = "\n\n" + "CHATGPT: " + "\n\n" + translatedText;
+                    this.ChatAnalysisText.Text = "\n\n" + "CHATGPT: " + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
                 }
                 else if (GlobalVars.AiSelected.Contains("GroK"))
                 {
-                    responseText = await Secrets.GetGrok(qq);
-                    responseText = DialogueCleaner(responseText);
+                    responseText = await Secrets.GetGrok(qq + GlobalVars._extraDialogueActionsForQuestion);
+                    responseText = DialogueCleaner(responseText) + '\n' + '\n';
                     if (GlobalVars._Dialogue)
                     {
-                        GlobalVars._DialogueQuestion += GetQuestion(responseText);
+                        GlobalVars._DialogueQuestion = GetQuestion(responseText);
                         responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                     }
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     translatedText = DialogueCleaner(translatedText);
-                    this.ChatAnalysisText.Text = "\n\n" + "GROK: " + "\n\n" + translatedText.TrimStart();
+                    this.ChatAnalysisText.Text = "\n\n" + "GROK: " + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
                 }
                 else if (GlobalVars.AiSelected.Contains("Gemini"))
                 {
                     responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"Google/"
-                        + qq);
-                    responseText = DialogueCleaner(responseText);
+                        + qq + GlobalVars._extraDialogueActionsForQuestion);
+                    responseText = DialogueCleaner(responseText) + '\n' + '\n';
                     if (GlobalVars._Dialogue)
                     {
-                        GlobalVars._DialogueQuestion += GetQuestion(responseText);
+                        GlobalVars._DialogueQuestion = GetQuestion(responseText);
                         responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                     }
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     translatedText = DialogueCleaner(translatedText);
-                    this.ChatAnalysisText.Text = "\n\n" + "GOOGLE: " + "\n\n" + translatedText.TrimStart();
+                    this.ChatAnalysisText.Text = "\n\n" + "GOOGLE: " + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
                 }
                 else if (GlobalVars.AiSelected.Contains("AllAI"))
                 {
                     responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"ChatGPT/"
-                        + qq);
+                        + qq + GlobalVars._extraDialogueActionsForQuestion);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     translatedText = DialogueCleaner(translatedText);
                     this.ChatAnalysisText.Text = "\n\n" + "CHATGPT: " + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
-                    responseText = await Secrets.GetGrok(qq);
+                    responseText = await Secrets.GetGrok(qq + GlobalVars._extraDialogueActionsForQuestion);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     translatedText = DialogueCleaner(translatedText);
                     this.ChatAnalysisText.Text += "\n\n" + "GROK: " + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
                     responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                         Secrets.RESTAPI + @"ChatGPT/"
-                        + qq);
+                        + qq + GlobalVars._extraDialogueActionsForQuestion);
                     translatedText = await Translator.TranslateTextToGiven(responseText);
                     translatedText = DialogueCleaner(translatedText);
                     this.ChatAnalysisText.Text += "\n\n" + "GOOGLE: " + "\n\n" + translatedText.TrimStart();
@@ -218,25 +271,26 @@ public partial class ChatAnalysis : ContentPage
             {
                 responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
                     Secrets.RESTAPI + @"ChatGPT/"
-                    + qp);
-                responseText = DialogueCleaner(responseText);
+                    + qp + GlobalVars._extraDialogueActionsForQuestion);
+                responseText = DialogueCleaner(responseText) + '\n' + '\n';
                 if (GlobalVars._Dialogue)
                 {
-                    GlobalVars._DialogueQuestion += GetQuestion(responseText);
+                    GlobalVars._DialogueQuestion = GetQuestion(responseText);
                     responseText += "\n\n" + await DoDialogue(GlobalVars._DialogueQuestion);
                 }
                 
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 translatedText = DialogueCleaner(translatedText);
-                this.ChatAnalysisText.Text = "\n\n" + "CHATGPT: " + hAdd + "\n\n" + translatedText.TrimStart();
+                this.ChatAnalysisText.Text = "\n\n" + "CHATGPT: " + hAdd + "\n\n" + translatedText.TrimStart()
+                    + "\n\n";
             }
             else if (GlobalVars.AiSelected.Contains("GroK"))
             {
-                responseText = await Secrets.GetGrok(qp);
-                responseText = DialogueCleaner(responseText);
+                responseText = await Secrets.GetGrok(qp + GlobalVars._extraDialogueActionsForQuestion);
+                responseText = DialogueCleaner(responseText) + '\n' + '\n';
                 if (GlobalVars._Dialogue)
                 {
-                    GlobalVars._DialogueQuestion += GetQuestion(responseText);
+                    GlobalVars._DialogueQuestion = GetQuestion(responseText);
                     responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                 }
                 
@@ -247,12 +301,12 @@ public partial class ChatAnalysis : ContentPage
             else if (GlobalVars.AiSelected.Contains("Gemini"))
             {
                 responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"Google/"
-                    + qp);
-                responseText = DialogueCleaner(responseText);
+                    + qp + GlobalVars._extraDialogueActionsForQuestion);
+                responseText = DialogueCleaner(responseText) + '\n' + '\n';
                 
                 if (GlobalVars._Dialogue)
                 {
-                    GlobalVars._DialogueQuestion += GetQuestion(responseText);
+                    GlobalVars._DialogueQuestion = GetQuestion(responseText);
                     responseText += await DoDialogue(GlobalVars._DialogueQuestion);
                 }
 
@@ -264,16 +318,16 @@ public partial class ChatAnalysis : ContentPage
             {
                 this.ChatAnalysisText.Text = "All AI ANalysis: " + '\n' + '\n';
                 responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGPT/" + qp);
+                    Secrets.RESTAPI + @"ChatGPT/" + qp + GlobalVars._extraDialogueActionsForQuestion);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 translatedText = DialogueCleaner(translatedText);
                 this.ChatAnalysisText.Text += "\n\n" + "CHATGPT: " + hAdd + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
-                responseText = await Secrets.GetGrok(qp);
+                responseText = await Secrets.GetGrok(qp + GlobalVars._extraDialogueActionsForQuestion);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 translatedText = DialogueCleaner(translatedText);
                 this.ChatAnalysisText.Text += "\n\n" + "GROK: " + hAdd + "\n\n" + translatedText.TrimStart() + '\n' + '\n';
                 responseText = await GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"Google/" + qp);
+                    Secrets.RESTAPI + @"Google/" + qp + GlobalVars._extraDialogueActionsForQuestion);
                 translatedText = await Translator.TranslateTextToGiven(responseText);
                 translatedText = DialogueCleaner(translatedText);
                 this.ChatAnalysisText.Text += "\n\n" + "GOOGLE: " + hAdd + "\n\n" + translatedText.TrimStart();
@@ -299,20 +353,34 @@ public partial class ChatAnalysis : ContentPage
     private async Task<string> DoDialogue(string question)
     {
         string _dialogue = "";
-        string qOrg = question;
+        string qOrg = " End your analysis with a new question and ONLY a question as the final" +
+            " paragraph.";
         if (GlobalVars.AiSelected.Contains("ChatGPT"))
         {
             await UpdateLabelCaller("Preparing dialogue Grok");
             await Task.Delay(1000);
-            question += " End with a new question.";
-            _dialogue = "\n\n" + "GROK - " + "\n\n" + await Secrets.GetGrok(question);
+            
+            GlobalVars._DialogueQuestion = GetQuestion(question);
+            await CreateQuestionBasedOnAIProvider(GlobalVars._DialogueQuestion, "ChatGPT");
+
+            
+            _dialogue = "\n\n" + "GROK - " + "\n\n"  +
+                        "Building further on the part " + '\n' +
+                        GlobalVars._DialogueQuestion + "\n\n" + await Secrets.GetGrok(GlobalVars._DialogueQuestion
+                            + qOrg + GlobalVars._extraDialogueActionsForQuestion);
             _dialogue = DialogueCleaner(_dialogue);
-            GlobalVars._DialogueQuestion = GetQuestion(_dialogue).Replace(":", "");
+            
+            GlobalVars._DialogueQuestion = GetQuestion(_dialogue);
+            await CreateQuestionBasedOnAIProvider(GlobalVars._DialogueQuestion, "Grok");
+            
             await UpdateLabelCaller("Starting with Google dialogue.");
             await Task.Delay(1000);
-            _dialogue += "\n\n" + "GOOGLE - " + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
+            _dialogue += "\n\n" + "GOOGLE - " + "\n\n" +
+                "Building further on the part " + '\n' +
+                GlobalVars._DialogueQuestion + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
                 Secrets.RESTAPI + @"Google/"
-                                + GlobalVars._DialogueQuestion);
+                                + GlobalVars._DialogueQuestion
+                                + GlobalVars._extraDialogueActionsForQuestion);
             _dialogue = DialogueCleaner(_dialogue);
             await UpdateLabelCaller("Done.");
         }
@@ -320,43 +388,99 @@ public partial class ChatAnalysis : ContentPage
         {
             UpdateLabelCaller("Preparing dialogue ChatGPT");
             await Task.Delay(1000);
-            question += " And give a final question at the end on the content of your analysis " +
-                        " and place that question at the end of your analysis.";
-            _dialogue = await GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"ChatGPT/"
-                + question);
-            _dialogue = DialogueCleaner(_dialogue);
-            _dialogue = "\n\n" + "CHATGPT - " + "\n\n" + GlobalVars.DeleteAllBeforeFirstCapitalLetter(_dialogue);
-            GlobalVars._DialogueQuestion = GetQuestion(_dialogue).Replace(":", "");
-            GlobalVars._DialogueQuestion = await GlobalVars.GetHttpReturnFromAPIRestLink(Secrets.RESTAPI + @"ChatGPT/"
-                + "Create a question from "
-                + GlobalVars._DialogueQuestion);
-            GlobalVars._DialogueQuestion = DialogueCleaner(GlobalVars._DialogueQuestion);
-            _dialogue += "\n\n" + GlobalVars._DialogueQuestion;
+            
+            GlobalVars._DialogueQuestion = GetQuestion(question);
+            await CreateQuestionBasedOnAIProvider(GlobalVars._DialogueQuestion, "Grok");
+            
+            string __dialogue = await GlobalVars.GetHttpReturnFromAPIRestLink(
+                Secrets.RESTAPI + @"ChatGPT/"
+                                + GlobalVars._DialogueQuestion + qOrg
+                                + GlobalVars._extraDialogueActionsForQuestion);
+            
+            __dialogue = GlobalVars.DeleteAllBeforeFirstCapitalLetter(__dialogue);
+            __dialogue = "\n\n" + "CHATGPT - " + "\n\n" + 
+                         "Building further on the part " + '\n' + 
+                         GlobalVars._DialogueQuestion + "\n\n"
+                         + __dialogue;
+            _dialogue = DialogueCleaner(__dialogue);
+            
+            GlobalVars._DialogueQuestion = GetQuestion(_dialogue);
+            await CreateQuestionBasedOnAIProvider(GlobalVars._DialogueQuestion, "ChatGPT");
+
             UpdateLabelCaller("Starting with Google dialogue.");
             await Task.Delay(1000);
-            _dialogue += "\n\n" + "GOOGLE - " + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
-                Secrets.RESTAPI + @"Google/"
-                                + GlobalVars._DialogueQuestion);
+            _dialogue += "\n\n" + "GOOGLE - " + "\n\n"  +
+                         "Building further on the part " + '\n' +
+                         GlobalVars._DialogueQuestion + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
+                             Secrets.RESTAPI + @"Google/"
+                                             + GlobalVars._DialogueQuestion
+                                             + GlobalVars._extraDialogueActionsForQuestion);
             _dialogue = DialogueCleaner(_dialogue);
         }
         if (GlobalVars.AiSelected.Contains("Gemini"))
         {
             await UpdateLabelCaller("Preparing dialogue Grok");
             await Task.Delay(1000);
-            question += " End with a new question.";
-            _dialogue = "\n\n" + "GROK - " + "\n\n" + await Secrets.GetGrok(question);
+            
+            GlobalVars._DialogueQuestion = GetQuestion(question);
+            await CreateQuestionBasedOnAIProvider(GlobalVars._DialogueQuestion, "Gemini");
+            
+            _dialogue = "\n\n" + "GROK - " + "\n\n"  +
+                        "Building further on the part " + '\n' +
+                        GlobalVars._DialogueQuestion  + "\n\n" + await Secrets.GetGrok(GlobalVars._DialogueQuestion
+                        + qOrg + GlobalVars._extraDialogueActionsForQuestion);
             _dialogue = DialogueCleaner(_dialogue);
-            GlobalVars._DialogueQuestion = GetQuestion(_dialogue).Replace(":", "");
+            
+            GlobalVars._DialogueQuestion = GetQuestion(_dialogue);
+            await CreateQuestionBasedOnAIProvider(GlobalVars._DialogueQuestion, "Grok");
+            
             await UpdateLabelCaller("Starting with ChatGPT dialogue.");
             await Task.Delay(1000);
-            _dialogue += "\n\n" + "GOOGLE - " + "\n\n" + await GlobalVars.GetHttpReturnFromAPIRestLink(
+            string __dialogue = await GlobalVars.GetHttpReturnFromAPIRestLink(
                 Secrets.RESTAPI + @"ChatGPT/"
-                                + GlobalVars._DialogueQuestion);
-            _dialogue = DialogueCleaner(_dialogue);
+                                + GlobalVars._DialogueQuestion
+                                + GlobalVars._extraDialogueActionsForQuestion);
+            __dialogue = GlobalVars.DeleteAllBeforeFirstCapitalLetter(__dialogue);
+            __dialogue = DialogueCleaner(__dialogue);
+            __dialogue = "\n\n" + "CHATGPT - " + "\n\n" + 
+                         "Building further on the part " + '\n' + 
+                         GlobalVars._DialogueQuestion + "\n\n" +  __dialogue;
+            _dialogue += __dialogue;
             await UpdateLabelCaller("Done.");
         }
 
         return _dialogue;
+    }
+
+    private async Task CreateQuestionBasedOnAIProvider(string _dialogue, string AIProvider)
+    {
+        if (!_dialogue.EndsWith('?'))
+        {
+            string qText = "Create a question and ONLY a question without any other text based on ";
+            if (AIProvider.Contains("ChatGPT"))
+            {
+                GlobalVars._DialogueQuestion = GetQuestion(_dialogue);
+                GlobalVars._DialogueQuestion = await GlobalVars.GetHttpReturnFromAPIRestLink(
+                    Secrets.RESTAPI + @"ChatGPT/" +
+                    qText + GlobalVars._DialogueQuestion);
+                GlobalVars._DialogueQuestion = GetQuestion(GlobalVars._DialogueQuestion);
+            }
+            else if (AIProvider.Contains("Grok"))
+            {
+                GlobalVars._DialogueQuestion = GetQuestion(_dialogue);
+                GlobalVars._DialogueQuestion = await Secrets.GetGrok(
+                    qText + GlobalVars._DialogueQuestion);
+                GlobalVars._DialogueQuestion = GetQuestion(GlobalVars._DialogueQuestion);
+            }
+            else if (AIProvider.Contains("Gemini"))
+            {
+                GlobalVars._DialogueQuestion = GetQuestion(_dialogue);
+                GlobalVars._DialogueQuestion = await GlobalVars.GetHttpReturnFromAPIRestLink(
+                    Secrets.RESTAPI + @"Google/" +
+                    qText + GlobalVars._DialogueQuestion);
+                GlobalVars._DialogueQuestion = GetQuestion(GlobalVars._DialogueQuestion);
+            }
+        }
     }
 
     private static string DialogueCleaner(string _dialogue)
@@ -367,7 +491,7 @@ public partial class ChatAnalysis : ContentPage
             .Replace("###", "")
             .Replace("**", "").Replace("*", "");
 
-        _dialogue = Regex.Replace(_dialogue, @"[^\S\r\n]+", " ").Trim();
+        _dialogue = Regex.Replace(_dialogue, @"[^\S\r\n,.]+", " ").Trim();
         
         return _dialogue;
     }
