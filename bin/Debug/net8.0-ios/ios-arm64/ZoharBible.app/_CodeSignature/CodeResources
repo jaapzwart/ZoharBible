@@ -12,9 +12,17 @@
 		<data>
 		K1q0gGbl8+T+gR4tbnmNk9WmJKQ=
 		</data>
+		<key>Azure.AI.TextAnalytics.dll</key>
+		<data>
+		Qaetm1sQCSEZV84c7PGkP0vZhgs=
+		</data>
+		<key>Azure.Core.dll</key>
+		<data>
+		2fLyvHozfYP9afX3veCHtEA7boM=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		fuBtln2B5vRGn/M0PxrmoOzu+Vc=
+		8eAUOiFQ1/feHeFeoRWq9Xf6eZU=
 		</data>
 		<key>MauiInfo.plist</key>
 		<data>
@@ -223,6 +231,30 @@
 		<key>MonoTouchDebugConfiguration.txt</key>
 		<data>
 		oowkf1sL6T19nanXUObgmuayWqM=
+		</data>
+		<key>NAudio.Asio.dll</key>
+		<data>
+		sByD7FH3plSNG6u15f+NW5RJZaE=
+		</data>
+		<key>NAudio.Core.dll</key>
+		<data>
+		zMCTHizz1teeJMHyjZyWtAwTGvY=
+		</data>
+		<key>NAudio.Midi.dll</key>
+		<data>
+		y4dLKiVhI5tbHDCklXQilxb19i0=
+		</data>
+		<key>NAudio.Wasapi.dll</key>
+		<data>
+		ikXwQA9rxG0lQSA0X9Xjm2ybcaE=
+		</data>
+		<key>NAudio.WinMM.dll</key>
+		<data>
+		CZkXiUneUQpH2H3juKEXoAPFcu4=
+		</data>
+		<key>NAudio.dll</key>
+		<data>
+		G3CoMqPKTMUU4Jf8+sOURNc+rCQ=
 		</data>
 		<key>Newtonsoft.Json.dll</key>
 		<data>
@@ -479,6 +511,10 @@
 		<key>System.Linq.dll</key>
 		<data>
 		q/IBnmX+bpItsIOZXpcV/d7pRFI=
+		</data>
+		<key>System.Memory.Data.dll</key>
+		<data>
+		iZ+Sc9p9nLdtL4bB+rVFmB7ByX4=
 		</data>
 		<key>System.Memory.dll</key>
 		<data>
@@ -906,15 +942,15 @@
 		</data>
 		<key>ZoharBible.dll</key>
 		<data>
-		OA4jEjvlH82O/BbEtpCvsArhVs8=
+		tkZRQ3c5ySJAmq2p9YB73JJHc38=
 		</data>
 		<key>ZoharBible.pdb</key>
 		<data>
-		ibJ3dKHViP7NPPdV20bkVoeeUR0=
+		mZjb22JZVbE+ocW48j4MmyD+/AA=
 		</data>
 		<key>aot-instances.aotdata.arm64</key>
 		<data>
-		Ko/MEGNKd+tmgMBZClVisLSeBLw=
+		vLRDk5duPf24fIiTNuTmbH6aHwQ=
 		</data>
 		<key>appicon60x60@2x.png</key>
 		<data>
@@ -1271,6 +1307,20 @@
 			<key>hash2</key>
 			<data>
 			+V6416ac1dVBGqETJVChis4MmxmG9PqxhkXFY6pbqyM=
+			</data>
+		</dict>
+		<key>Azure.AI.TextAnalytics.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Fcs3qEOX7Sw8DO5wtRNqx/7WHYXZaALhqD09Rok9A0Q=
+			</data>
+		</dict>
+		<key>Azure.Core.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DHy8dWjMSeDboqf8KeFI4PEzd0DMgO9D3BB+Q4kQev8=
 			</data>
 		</dict>
 		<key>MauiInfo.plist</key>
@@ -1635,6 +1685,48 @@
 			<key>hash2</key>
 			<data>
 			RS51BO98d+zhJWK1abJOyD5jB4nYJnWJPtL2DZyA/zw=
+			</data>
+		</dict>
+		<key>NAudio.Asio.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ygN4AhcTmzf39baSHVne+40kmIMVsWsWenf6iMqn0A8=
+			</data>
+		</dict>
+		<key>NAudio.Core.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/PST/Eei9HimUwOIa5dfvb9xTLsfLXn3/Ol+S7FrAag=
+			</data>
+		</dict>
+		<key>NAudio.Midi.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8kbimSF5exc7VCKWhemXoR+cw4j6HlicISMoq9epTr4=
+			</data>
+		</dict>
+		<key>NAudio.Wasapi.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YY7w5J1k56Zt/mS79q6BcFudloPYqfMh5cMCTWZr34I=
+			</data>
+		</dict>
+		<key>NAudio.WinMM.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dJoB67te3YsaA8UmOwTeasrez1LkzITXQSvG6T8YCVg=
+			</data>
+		</dict>
+		<key>NAudio.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MdiauJFxl48LolgahfL7Q3BXcCwcRswF7K3diY/mC7c=
 			</data>
 		</dict>
 		<key>Newtonsoft.Json.dll</key>
@@ -2076,6 +2168,13 @@
 			<key>hash2</key>
 			<data>
 			7xfQuMVwHgIoN4Ug+FbDWi2IQExEdR4JwSGywMHd4tM=
+			</data>
+		</dict>
+		<key>System.Memory.Data.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KTyl2GNY+yzgDaAsY+78s0Ron8DGNrYcl8PxsVqAqlE=
 			</data>
 		</dict>
 		<key>System.Memory.dll</key>
@@ -2824,21 +2923,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			279vJjivvTqmB7PZHF+uU+hGl27pxD9eoG7xN98aKrc=
+			+qmocZzLjr3l9D11v+OapLrZVgS0uuZXSLubwwzQCYQ=
 			</data>
 		</dict>
 		<key>ZoharBible.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8JN2NngrJGZpTuLxVxoB6DQ2uViIBmpNb0pso571ewM=
+			FjSmAdTn2rculUaQGgtny+kxcYEb5rE/bynw+nIaOlY=
 			</data>
 		</dict>
 		<key>aot-instances.aotdata.arm64</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RbbSJHlyH4SHJpjcZLlQw3SUA4RlUOH6M0i2hB+ZEHA=
+			VGb/biQYY8cJyqiwvIJ7ezZkYcpmEbIRnnlSWWAfkFo=
 			</data>
 		</dict>
 		<key>appicon60x60@2x.png</key>

@@ -4,9 +4,14 @@
              xmlns:local="clr-namespace:ZoharBible"
              x:Class="ZoharBible.Intro"
              BackgroundColor="{x:Static local:Themes.PageBackgroundC}">
-    <ContentPage.Content>
+       <ContentPage.BindingContext>
+              <local:MainViewModel />
+       </ContentPage.BindingContext>
+       <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -137,6 +142,31 @@
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="End"
                    Grid.Row="12" />
+            <VerticalStackLayout Grid.Row="13" Padding="20" Spacing="15">
+                   <Label x:Name="StatusLabel" Text="Press Record to start." 
+                          FontSize="Medium" HorizontalOptions="Center" />
+
+                   <Button x:Name="RecordButton" Text="Start Recording" 
+                           Clicked="OnRecordButtonClicked" />
+
+                   <Button x:Name="StopButton" Text="Stop Recording" 
+                           Clicked="OnStopButtonClicked" 
+                           IsEnabled="False" />
+
+                   <Button x:Name="PlayButton" Text="Play Recording" 
+                           Clicked="OnPlayButtonClicked" 
+                           IsEnabled="False" />
+            </VerticalStackLayout>
+            <!-- <StackLayout Grid.Row="14"> -->
+            <!--        <Button Text="Transcribe" Command="{Binding TranscribeCommand}" /> -->
+            <!--        <Label Text="{Binding Result}" /> -->
+            <!-- </StackLayout> -->
+            <StackLayout Grid.Row="14">
+                   <Button Text="Transcribe" Clicked="OnTranscribeClicked"  />
+                   <Label x:Name="VoiceLabel" Text="..." 
+                          FontSize="Medium" HorizontalOptions="Center" />
+            </StackLayout>
         </Grid>
+              
     </ContentPage.Content>
 </ContentPage>
