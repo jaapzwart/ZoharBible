@@ -144,6 +144,7 @@
                    Grid.Row="12" />
             <VerticalStackLayout Grid.Row="13" Padding="20" Spacing="15">
                    <Label x:Name="StatusLabel" Text="Press Record to start." 
+                          TextColor="White"
                           FontSize="Medium" HorizontalOptions="Center" />
 
                    <Button x:Name="RecordButton" Text="Start Recording" 
@@ -164,7 +165,8 @@
             <StackLayout Grid.Row="14">
                    <Button Text="Transcribe" Clicked="OnTranscribeClicked"  />
                    <Label x:Name="VoiceLabel" Text="..." 
-                          FontSize="Medium" HorizontalOptions="Center" />
+                          FontSize="Medium" HorizontalOptions="Center" 
+                          TextColor="White"/>
             </StackLayout>
         </Grid>
               

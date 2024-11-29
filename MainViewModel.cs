@@ -28,7 +28,7 @@ public class MainViewModel : INotifyPropertyChanged
 
     private async Task TranscribeAudio()
     {
-        Result = await AzureSpeechToText.TranscribeAudioAsync("audiofile.wav", "zoekwoord");
+        Result = await AzureSpeechToText.TranscribeAudioAsync("audiofile.wav", ["zoekwoord"]);
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
