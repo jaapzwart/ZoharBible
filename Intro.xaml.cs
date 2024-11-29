@@ -4,16 +4,28 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AVFoundation;
+using Foundation;
+using System.IO;
 
 namespace ZoharBible;
 
 public partial class Intro : ContentPage
 {
+    private readonly IAudioService _audioService;
     public Intro()
     {
         InitializeComponent();
         GlobalVars._StandardTheme = true;
         GlobalVars._IntroPage = true;
+    }
+    public Intro(IAudioService audioService)
+    {
+        InitializeComponent();
+        GlobalVars._StandardTheme = true;
+        GlobalVars._IntroPage = true;
+        _audioService = audioService;
+        _audioService.IncreaseMicrophoneSensitivity();
     }
     protected override void OnAppearing()
     {
@@ -74,4 +86,65 @@ public partial class Intro : ContentPage
         
         GlobalVars._Dialogue = e.Value;
     }
+    
+    #region recording
+    private void OnRecordButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            _audioService.StartRecording();
+            StatusLabel.Text = "Recording...";
+            RecordButton.IsEnabled = false;
+            StopButton.IsEnabled = true;
+            PlayButton.IsEnabled = false;
+        }
+        catch (Exception ex)
+        {
+            StatusLabel.Text = $"Error: {ex.Message}";
+        }
+    }
+
+    private void OnStopButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            _audioService.StopRecording();
+            StatusLabel.Text = "Recording stopped.";
+            RecordButton.IsEnabled = true;
+            StopButton.IsEnabled = false;
+            PlayButton.IsEnabled = true;
+        }
+        catch (Exception ex)
+        {
+            StatusLabel.Text = $"Error: {ex.Message}";
+        }
+    }
+
+    private void OnPlayButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            _audioService.PlayRecording();
+            StatusLabel.Text = "Playing recording...";
+        }
+        catch (Exception ex)
+        {
+            StatusLabel.Text = $"Error: {ex.Message}";
+        }
+    }
+    private async void OnTranscribeClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            string _filePathIn = Path.Combine(Microsoft.Maui.Storage.FileSystem.AppDataDirectory, "recording.wav");
+
+            string returN = await AzureSpeechToText.TranscribeAudioAsync(_filePathIn, "James");
+            VoiceLabel.Text = returN;
+        }
+        catch (Exception ex)
+        {
+            VoiceLabel.Text = $"Error: {ex.Message}";
+        }
+    }
+    #endregion
 }
