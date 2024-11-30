@@ -31,7 +31,7 @@ namespace ZoharBible
 
         public ImageGeneratorViewModel()
         {
-            _grokClient = new GrokImageGeneratorClient("xai-1ELRAf9qbDzhzpcq0DfZD0gmKAIofmoYiDRtc3mVLzmzQxlqkoHI8hj6ReHo0wYruDNbaPxPjMQL0kad");
+            _grokClient = new GrokImageGeneratorClient(<key>);
             GenerateImageCommand = new Command(async () => await GenerateImageAsync());
         }
 
