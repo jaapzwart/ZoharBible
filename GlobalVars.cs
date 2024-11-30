@@ -14,11 +14,6 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
-    public static string DallE_Image_string
-    {
-        get;
-        set;
-    } = "";
     public static bool HeyComputerStartTalk { get; set; } = true;
     public static string  _extraDialogueActionsForQuestion { get; set; } = " Formulate a final question as the last paragraph based on your analysis.";
     public static string _dialogueTextReturn { get; set; } = "";
