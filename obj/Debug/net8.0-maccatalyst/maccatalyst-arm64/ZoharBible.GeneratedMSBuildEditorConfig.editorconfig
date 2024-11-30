@@ -40,6 +40,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.ChatAnalysis.xa
 build_metadata.AdditionalFiles.TargetPath = ChatAnalysis.xaml
 build_metadata.AdditionalFiles.RelativePath = ChatAnalysis.xaml
 
+[/Volumes/TT7/Projects/RiderProjects/ZoharBibleFull/HeyComputer.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.HeyComputer.xaml
+build_metadata.AdditionalFiles.TargetPath = HeyComputer.xaml
+build_metadata.AdditionalFiles.RelativePath = HeyComputer.xaml
+
 [/Volumes/TT7/Projects/RiderProjects/ZoharBibleFull/Horoscope.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.Horoscope.xaml
@@ -87,3 +93,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.Tarot.xaml
 build_metadata.AdditionalFiles.TargetPath = Tarot.xaml
 build_metadata.AdditionalFiles.RelativePath = Tarot.xaml
+
+[/Volumes/TT7/Projects/RiderProjects/ZoharBibleFull/TestAudioRecording.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ZoharBible.TestAudioRecording.xaml
+build_metadata.AdditionalFiles.TargetPath = TestAudioRecording.xaml
+build_metadata.AdditionalFiles.RelativePath = TestAudioRecording.xaml

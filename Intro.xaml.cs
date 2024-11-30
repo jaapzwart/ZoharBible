@@ -1,38 +1,25 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AVFoundation;
-using Foundation;
-using System.IO;
-using Azure;
-using Azure.AI.TextAnalytics;
+using Microsoft.VisualBasic;
 
 namespace ZoharBible;
 
 public partial class Intro : ContentPage
 {
-    private readonly IAudioService _audioService;
+    
     public Intro()
     {
         InitializeComponent();
         GlobalVars._StandardTheme = true;
         GlobalVars._IntroPage = true;
+        this.DialogueCheckBox.IsChecked = GlobalVars._Dialogue;
     }
-    public Intro(IAudioService audioService)
-    {
-        InitializeComponent();
-        GlobalVars._StandardTheme = true;
-        GlobalVars._IntroPage = true;
-        _audioService = audioService;
-        _audioService.IncreaseMicrophoneSensitivity();
-    }
+   
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        this.MessageLabel.Text = "...";
         GlobalVars._IntroPage = true;
+        this.DialogueCheckBox.IsChecked = GlobalVars._Dialogue;
     }
     private void OnCreativitySliderValueChanged(object sender, ValueChangedEventArgs e)
     {
@@ -51,6 +38,25 @@ public partial class Intro : ContentPage
         UpdateLabel("Opening Starting Page");
         await Task.Delay(1000);
         await Navigation.PushAsync(new StartPage());
+    }
+    private async void OnNavigateToTestAudioPageClicked(object sender, EventArgs e)
+    {
+        if(this.StandardThemeCheckBox.IsChecked == false)
+            Themes.SetMoodColors(Convert.ToInt32(GlobalVars.moodOMeter));
+        await GlobalVars.SetClickedColor(sender);
+        UpdateLabel("Opening Test Audio Page");
+        await Task.Delay(1000);
+        await Navigation.PushAsync(new TestAudioRecording());
+    }
+    private async void OnNavigateToHeyComputerPageClicked(object sender, EventArgs e)
+    {
+        if(this.StandardThemeCheckBox.IsChecked == false)
+            Themes.SetMoodColors(Convert.ToInt32(GlobalVars.moodOMeter));
+        GlobalVars.HeyComputerStartTalk = true;
+        await GlobalVars.SetClickedColor(sender);
+        UpdateLabel("Opening 'Hey Computer' Page");
+        await Task.Delay(1000);
+        await Navigation.PushAsync(new HeyComputer());
     }
     private async void UpdateLabel(string text)
     {
@@ -88,139 +94,4 @@ public partial class Intro : ContentPage
         
         GlobalVars._Dialogue = e.Value;
     }
-    
-    #region recording
-    private async void OnRecordButtonClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            _audioService.StartRecording();
-            StatusLabel.Text = "Recording...";
-            await Task.Delay(1000);
-            StatusLabel.Text = "...";
-            RecordButton.IsEnabled = false;
-            StopButton.IsEnabled = true;
-            PlayButton.IsEnabled = false;
-        }
-        catch (Exception ex)
-        {
-            StatusLabel.Text = $"Error: {ex.Message}";
-        }
-    }
-
-    private async void OnStopButtonClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            _audioService.StopRecording();
-            StatusLabel.Text = "Recording stopped.";
-            await Task.Delay(1000);
-            StatusLabel.Text = "...";
-            RecordButton.IsEnabled = true;
-            StopButton.IsEnabled = false;
-            PlayButton.IsEnabled = true;
-        }
-        catch (Exception ex)
-        {
-            StatusLabel.Text = $"Error: {ex.Message}";
-        }
-    }
-
-    private async void OnPlayButtonClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            _audioService.PlayRecording();
-            StatusLabel.Text = "Playing recording...";
-            await Task.Delay(1000);
-            StatusLabel.Text = "...";
-            
-        }
-        catch (Exception ex)
-        {
-            StatusLabel.Text = $"Error: {ex.Message}";
-        }
-    }
-    private async void OnTranscribeClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            StatusLabel.Text = "Transcribing...";
-            await Task.Delay(1000);
-            string _filePathIn = Path.Combine(Microsoft.Maui.Storage.FileSystem.AppDataDirectory, "recording.wav");
-            List<string> keywords = new List<string>();
-            keywords.Add("Dialogue");
-            keywords.Add("dialogue");
-            keywords.Add("Dialog");
-            keywords.Add("dialog");
-            keywords.Add("Who");
-            keywords.Add("who");
-            string returN = await AzureSpeechToText.TranscribeAudioAsync(_filePathIn, keywords);
-            
-            //******************************************************
-            // This this be the sensing of the content of the text
-            //******************************************************
-            // string endpoint = Secrets.wToTClientAzure;
-            // string apiKey = Secrets.wToTSubscription;
-            // var credential = new AzureKeyCredential(apiKey);
-            // var textAnalyticsClient = new TextAnalyticsClient(new Uri(endpoint), credential);
-            // var tt = new AngryWordDetector(textAnalyticsClient);
-            // await tt.AnalyzeText(returN);
-            //******************************************************
-
-            if (returN.Contains("Dialogue", StringComparison.OrdinalIgnoreCase) 
-                && returN.Contains("Started", StringComparison.OrdinalIgnoreCase))
-            {
-                VoiceLabel.Text = returN;
-                string dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGPT/"
-                                    + "Tell the user you will start the checkbox called AI dialoque" +
-                                    " to enable a dialoque between the AI providers.");
-                await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
-                this.DialogueCheckBox.IsChecked = true;
-            }
-            if (returN.Contains("Dialogue", StringComparison.OrdinalIgnoreCase) 
-                && returN.Contains("Stopped", StringComparison.OrdinalIgnoreCase))
-            {
-                VoiceLabel.Text = returN;
-                string dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGPT/"
-                                    + "Tell the user you will stop the checkbox called AI dialoque" +
-                                    " to disable the dialoque between the AI providers.");
-                await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
-                this.DialogueCheckBox.IsChecked = false;
-            }
-            if (returN.Contains("Hello", StringComparison.OrdinalIgnoreCase) 
-                && returN.Contains("World", StringComparison.OrdinalIgnoreCase))
-            {
-                VoiceLabel.Text = returN;
-                string dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGPT/"
-                                    + "Tell the user that this is a new era of the old example of the 'Hello World'" +
-                                    " example program that was always used when new programming languages were introduced." +
-                                    " Now this current version of the 'Hello Work' is the door to a new world, a world " +
-                                    " where AI is your companion.");
-                await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
-                this.DialogueCheckBox.IsChecked = false;
-            }
-            if (returN.Contains("Command not found"))
-            {
-                VoiceLabel.Text = returN;
-                string dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
-                    Secrets.RESTAPI + @"ChatGPT/"
-                                    + "Tell the user you did not find the the command valid " +
-                                    " and you can not help the user.");
-                await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
-                this.DialogueCheckBox.IsChecked = false;
-            }
-
-            VoiceLabel.Text = "...";
-            StatusLabel.Text = "...";
-        }
-        catch (Exception ex)
-        {
-            VoiceLabel.Text = $"Error: {ex.Message}";
-        }
-    }
-    #endregion
 }
