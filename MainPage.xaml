@@ -201,9 +201,9 @@
 
         <!-- Berichtlabel onderaan -->
         <Label x:Name="MessageLabel"
-               BackgroundColor="{x:Static local:Themes.MessageLabelBackgroundC}"
                Text="..."
                TextColor="{x:Static local:Themes.MessageLabelTextC}"
+               BackgroundColor="{x:Static local:Themes.MessageLabelBackgroundC}"
                Padding="10"
                HorizontalOptions="FillAndExpand"
                VerticalOptions="End" />

@@ -14,6 +14,7 @@ namespace ZoharBible;
 /// </summary>
 public static class GlobalVars
 {
+    public static bool HeyComputerStartTalk { get; set; } = true;
     public static string  _extraDialogueActionsForQuestion { get; set; } = " Formulate a final question as the last paragraph based on your analysis.";
     public static string _dialogueTextReturn { get; set; } = "";
     public static bool _Dialogue { get; set; } = false;

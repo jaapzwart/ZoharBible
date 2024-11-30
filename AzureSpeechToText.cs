@@ -1,4 +1,6 @@
 using System;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
@@ -13,10 +15,7 @@ namespace ZoharBible
 
         public static async Task<string> TranscribeAudioAsync(string filepath, List<string> keyword)
         {
-            string dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
-                Secrets.RESTAPI + @"ChatGPT/"
-                                + "Thank the user for the command and tell the user you are busy interpreting the commend given" +
-                                " and you ask from some patience..");
+            string dSentiment = "Working on your command. Patience please.";
             await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
             var config = SpeechConfig.FromSubscription(Secrets.wToTSubscription, Secrets.llocation);
 
@@ -56,6 +55,41 @@ namespace ZoharBible
                          || result.Text.Contains("you", StringComparison.OrdinalIgnoreCase)))
                     {
                         return "This is the new version of 'Hello World'.";
+                    }
+                    if (result.Text.Contains("Elon", StringComparison.OrdinalIgnoreCase) ||
+                        result.Text.Contains("X", StringComparison.OrdinalIgnoreCase) ||
+                        result.Text.Contains("Grok", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dSentiment = "Elon is busy working on your text.";
+                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        dSentiment = await Secrets.GetGrok(
+                                            result.Text);
+                        string originalText = dSentiment;
+                        string cleanedText = Regex.Replace(originalText, @"[^a-zA-Z0-9]", "");
+                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        return "Talked Elon.";
+                    }
+                    if (result.Text.Contains("Bill", StringComparison.OrdinalIgnoreCase) ||
+                        result.Text.Contains("Microsoft", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dSentiment = "Bill is busy working on your text.";
+                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
+                            Secrets.RESTAPI + @"ChatGPT/"
+                                            + result.Text);
+                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        return "Talked Bill.";
+                    }
+                    if (result.Text.Contains("Google", StringComparison.OrdinalIgnoreCase) ||
+                        result.Text.Contains("Gemini", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dSentiment = "Google is busy working on your text.";
+                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
+                            Secrets.RESTAPI + @"Google/"
+                                            + result.Text);
+                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        return "Talked Gemini.";
                     }
                     return "Command not found.";
                 }
