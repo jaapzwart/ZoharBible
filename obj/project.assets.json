@@ -3842,7 +3842,7 @@
         }
       }
     },
-    "net8.0-android34.0/iossimulator-arm64": {
+    "net8.0-android34.0/ios-arm64": {
       "Azure.AI.TextAnalytics/5.3.0": {
         "type": "package",
         "dependencies": {
@@ -4215,7 +4215,7 @@
           }
         },
         "native": {
-          "runtimes/iossimulator-arm64/native/libMicrosoft.CognitiveServices.Speech.core.a": {}
+          "runtimes/ios-arm64/native/libMicrosoft.CognitiveServices.Speech.core.a": {}
         },
         "build": {
           "build/net6.0-android/Microsoft.CognitiveServices.Speech.targets": {}
@@ -10042,7 +10042,7 @@
         }
       }
     },
-    "net8.0-ios18.0/iossimulator-arm64": {
+    "net8.0-ios18.0/ios-arm64": {
       "Azure.AI.TextAnalytics/5.3.0": {
         "type": "package",
         "dependencies": {
@@ -10402,7 +10402,7 @@
           }
         },
         "native": {
-          "runtimes/iossimulator-arm64/native/libMicrosoft.CognitiveServices.Speech.core.a": {}
+          "runtimes/ios-arm64/native/libMicrosoft.CognitiveServices.Speech.core.a": {}
         },
         "build": {
           "build/net6.0-ios/Microsoft.CognitiveServices.Speech.targets": {}
@@ -15471,7 +15471,7 @@
         }
       }
     },
-    "net8.0-maccatalyst18.0/iossimulator-arm64": {
+    "net8.0-maccatalyst18.0/ios-arm64": {
       "Azure.AI.TextAnalytics/5.3.0": {
         "type": "package",
         "dependencies": {
@@ -15831,7 +15831,7 @@
           }
         },
         "native": {
-          "runtimes/iossimulator-arm64/native/libMicrosoft.CognitiveServices.Speech.core.a": {}
+          "runtimes/ios-arm64/native/libMicrosoft.CognitiveServices.Speech.core.a": {}
         },
         "build": {
           "build/Microsoft.CognitiveServices.Speech.props": {}
@@ -27007,7 +27007,7 @@
       }
     },
     "runtimes": {
-      "iossimulator-arm64": {
+      "ios-arm64": {
         "#import": []
       }
     }
