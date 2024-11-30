@@ -9,8 +9,15 @@ namespace ZoharBible
         public HeyComputer()
         {
             InitializeComponent();
+            // var viewModel = new ImageGeneratorViewModel();
+            // this.BindingContext = viewModel;
+            
+            var viewModel = new MainViewModelChatGPT();
+            this.BindingContext = viewModel;
+            
             IAudioService audioService = new AudioService();
             _audioService = audioService;
+            
             _audioService.IncreaseMicrophoneSensitivity();
             object sender = this.BlinkingButton;
             EventArgs e = new EventArgs();
@@ -76,6 +83,7 @@ namespace ZoharBible
                 keywords.Add("Bill");
                 string returN = await AzureSpeechToText.TranscribeAudioAsync(_filePathIn, keywords);
                 VoiceLabel.Text = returN;
+                SetImageSource(returN);
                 while (true)
                 {
                     await button.AnimateBorderColor(Color.FromArgb("#00FFFFFF"), 500);
@@ -99,6 +107,24 @@ namespace ZoharBible
             }
             
         }
+
+        private void SetImageSource(string imageReturn)
+        {
+            if (imageReturn.Contains("Talked Bill"))
+            {
+                GlobalVars.DallE_Image_string = "Create an image of Bill Gates as the weird Einstein";
+            }
+
+            if (imageReturn.Contains("Talked Elon"))
+            {
+                GlobalVars.DallE_Image_string = "Create an image of Elon Musk as the weird Einstein";
+            }
+
+            if (imageReturn.Contains("Talked Gemini"))
+            {
+                GlobalVars.DallE_Image_string = "Create an image of he crazy Einstein";
+            }
+        }
         #region Audio
         private async void OnStopSpeakClicked(object sender, EventArgs e)
         {
@@ -111,6 +137,7 @@ namespace ZoharBible
                  await DisplayAlert("Error", $"An error occurred: {ex.Message}","OK");
             }
         }
+
         #endregion
     }
 
