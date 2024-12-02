@@ -20,6 +20,10 @@
 		<data>
 		2fLyvHozfYP9afX3veCHtEA7boM=
 		</data>
+		<key>CommunityToolkit.Maui.MediaElement.dll</key>
+		<data>
+		eVULSUoQCcxngDFeS+bafl5ehNM=
+		</data>
 		<key>Info.plist</key>
 		<data>
 		8eAUOiFQ1/feHeFeoRWq9Xf6eZU=
@@ -283,6 +287,10 @@
 		<key>PrivacyInfo.xcprivacy</key>
 		<data>
 		NrEzOj9hMeFN+P8LKBnOjYC1Nao=
+		</data>
+		<key>RestSharp.dll</key>
+		<data>
+		Gdwe4bexqMUKYNNsBQxwW54pOIc=
 		</data>
 		<key>Settings.bundle/Root.plist</key>
 		<data>
@@ -942,15 +950,15 @@
 		</data>
 		<key>ZoharBible.dll</key>
 		<data>
-		sp5vF4QMmrcBhbnPatitopUPws8=
+		EGVi3KAi+hu25O+YpdOzKW4S8hc=
 		</data>
 		<key>ZoharBible.pdb</key>
 		<data>
-		wodgMZKr8Svb4mg/uSSpScY9ZG0=
+		XRNoxj4Ka5vxlngd4bMpHuQBIZc=
 		</data>
 		<key>aot-instances.aotdata.arm64</key>
 		<data>
-		z3v3Ckwd23EIBQO3pYgpSbpdU44=
+		xHYch6R4tHRiIV5+Te1Evrmpy3E=
 		</data>
 		<key>appicon60x60@2x.png</key>
 		<data>
@@ -1321,6 +1329,13 @@
 			<key>hash2</key>
 			<data>
 			DHy8dWjMSeDboqf8KeFI4PEzd0DMgO9D3BB+Q4kQev8=
+			</data>
+		</dict>
+		<key>CommunityToolkit.Maui.MediaElement.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gm2LEByKYmCMd/iwhBRSAFTDtVHDH45JKA9o765RRPY=
 			</data>
 		</dict>
 		<key>MauiInfo.plist</key>
@@ -1769,6 +1784,13 @@
 			<key>hash2</key>
 			<data>
 			ws/AMWu1eQEQGPBLkMjMg+IcyOfKiCYsMhPbI55q+qk=
+			</data>
+		</dict>
+		<key>RestSharp.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KFaDKaGGNGR+WflBwGiybS141J1sO+wb537SFqMoEOA=
 			</data>
 		</dict>
 		<key>Settings.bundle/Root.plist</key>
@@ -2923,21 +2945,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+623xiqwAFu8WpsRghIaik+Jk5NqS2eOD1oK8BP9//0=
+			4Zs+PNVRtVFsQItFu+19g+BG/yGzh3YQ30yh23/6Ygk=
 			</data>
 		</dict>
 		<key>ZoharBible.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NiNcV7Euq/IvD9NF5kCNTcIdi8DTuehCzk+jLiI0ju0=
+			hCLV5154lZr4Rh+UEdML5hlB1TvlNCEeMhHsQ5eByX4=
 			</data>
 		</dict>
 		<key>aot-instances.aotdata.arm64</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PzixBBiwONwTD6SdMfHfBfeEhTVd4yG+HP3OL5aKKEo=
+			3NNfoxbrefBd6DcixgKFqR/nFfkJZqcBXT+53wmtozs=
 			</data>
 		</dict>
 		<key>appicon60x60@2x.png</key>

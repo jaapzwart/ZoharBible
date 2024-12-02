@@ -8,64 +8,6 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ZoharBible
 {
-    public class ImageGeneratorViewModel : INotifyPropertyChanged
-    {
-        private ImageSource _generatedImage;
-
-        public ImageSource GeneratedImage
-        {
-            get => _generatedImage;
-            set
-            {
-                if (_generatedImage != value)
-                {
-                    _generatedImage = value;
-                    OnPropertyChanged(nameof(GeneratedImage));
-                }
-            }
-        }
-
-        public Command GenerateImageCommand { get; }
-
-        private readonly GrokImageGeneratorClient _grokClient;
-
-        public ImageGeneratorViewModel()
-        {
-
-            _grokClient = new GrokImageGeneratorClient("key");
-
-            GenerateImageCommand = new Command(async () => await GenerateImageAsync());
-        }
-
-        public async Task GenerateImageAsync()
-        {
-            try
-            {
-                string prompt = "A futuristic cityscape at night";
-                byte[] imageBytes = await _grokClient.GenerateImageAsync(prompt);
-
-                // Convert byte array to ImageSource
-                using (var stream = new MemoryStream(imageBytes))
-                {
-                    GeneratedImage = ImageSource.FromStream(() => stream);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions, possibly update UI to show error
-                
-                Console.WriteLine($"Failed to generate image: {ex.Message}");
-            }
-        }
-
-        // INotifyPropertyChanged implementation for UI updates
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
     public class MainViewModelChatGPT : INotifyPropertyChanged
     {
         private string _generatedImageUrl;

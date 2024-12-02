@@ -1,3 +1,6 @@
+using System.Data;
+using System.Security.Cryptography.X509Certificates;
+using CommunityToolkit.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 
@@ -11,6 +14,11 @@ namespace ZoharBible
             InitializeComponent();
             // var viewModel = new ImageGeneratorViewModel();
             // this.BindingContext = viewModel;
+            
+            //MauiApp.CreateBuilder().UseMauiApp<App>().UseMauiCommunityToolkitMediaElement();
+            
+            GeneratedImage.WidthRequest = DeviceDisplay.MainDisplayInfo.Width / 2;
+            VideoPlayer.WidthRequest = DeviceDisplay.MainDisplayInfo.Width / 2;
             
             var viewModel = new MainViewModelChatGPT();
             this.BindingContext = viewModel;
@@ -60,6 +68,7 @@ namespace ZoharBible
         }
         private async void OnButtonClicked(object sender, EventArgs e)
         {
+            this.VideoPlayer.IsVisible = false;
             var button = sender as Button;
             if (button == null)
                 return;
@@ -113,16 +122,43 @@ namespace ZoharBible
             if (imageReturn.Contains("Talked Bill"))
             {
                 GlobalVars.DallE_Image_string = "Create an image of Bill Gates as the weird Einstein";
+                GlobalVars.videoTalked = "Bill";
+                if (GlobalVars.AIInteractive)
+                {
+                    GlobalVars.videoTalked = "Interactive";
+                    GlobalVars.videoTalkedText = GlobalVars.AIInteractiveText;
+                }
+                else
+                    GlobalVars.videoTalkedText = "This is the return from Bill Gates";
+                OnCreateVideoClipClicked(null, EventArgs.Empty);
             }
 
             if (imageReturn.Contains("Talked Elon"))
             {
                 GlobalVars.DallE_Image_string = "Create an image of Elon Musk as the weird Einstein";
+                GlobalVars.videoTalked = "Elon";
+                if(GlobalVars.AIInteractive)
+                {
+                    GlobalVars.videoTalked = "Interactive";
+                    GlobalVars.videoTalkedText = GlobalVars.AIInteractiveText;
+                }
+                else
+                    GlobalVars.videoTalkedText = "This is the return from Elon Musk";
+                OnCreateVideoClipClicked(null, EventArgs.Empty);
             }
 
             if (imageReturn.Contains("Talked Gemini"))
             {
                 GlobalVars.DallE_Image_string = "Create an image of he crazy Einstein";
+                GlobalVars.videoTalked = "Google";
+                if(GlobalVars.AIInteractive)
+                {
+                    GlobalVars.videoTalked = "Interactive";
+                    GlobalVars.videoTalkedText = GlobalVars.AIInteractiveText;
+                }
+                else
+                    GlobalVars.videoTalkedText = "This is the return from Google";
+                OnCreateVideoClipClicked(null, EventArgs.Empty);
             }
         }
         #region Audio
@@ -135,6 +171,110 @@ namespace ZoharBible
             catch (Exception ex)
             {
                  await DisplayAlert("Error", $"An error occurred: {ex.Message}","OK");
+            }
+        }
+
+        private async void OnAIInteractiveChanged(object? sender, EventArgs e)
+        {
+            if (GlobalVars.AIInteractive)
+            {
+                GlobalVars.AIInteractive = false;
+                this.CheckboxAIInteractive.IsChecked = false;
+            }
+            else
+            {
+                GlobalVars.AIInteractive = true;
+                this.CheckboxAIInteractive.IsChecked = true;
+            }
+        }
+
+        private async void OnCreateVideoClipClicked(object? sender, EventArgs e)
+        {
+            try
+            {
+                //-----------------------------------------------------------
+                // Down needed to create an animation image on a new device.
+                //-----------------------------------------------------------
+                this.VideoPlayer.IsVisible = true;
+                //GlobalVars.videoTalked = "Bill";
+                //GlobalVars.anim = true;
+                //-----------------------------------------------------------
+                
+                string theVideo = "";
+                if (GlobalVars.anim)
+                    theVideo = await DoVideoClipLipSync.CreateAnimationAvatar(GlobalVars.videoTalkedText);
+                else
+                    theVideo = await DoVideoClipLipSync.CreateClipAvatar(GlobalVars.videoTalkedText);
+                if (GlobalVars.videoFileExists)
+                {
+                    await PlayVideosInSequenceAsync();
+                }
+                else
+                {
+                    string urll = await DoVideoClipLipSync.GetVideoClip(theVideo);
+                    await LoadAndPlayVideo(urll);    
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"An error occurred: {ex.Message}","OK");
+            }
+        }
+        private async Task PlayVideosInSequenceAsync()
+        {
+            VideoPlayer.MediaEnded += OnFirstVideoEnded;
+
+            // Start de eerste video
+            VideoPlayer.Source = await DoVideoClipLipSync.PlayExistingVideo(GlobalVars.videoFilePath);
+            GlobalVars.videoFileExists = false;
+            GlobalVars.videoFilePath = "";
+            GlobalVars.anim = true;
+        }
+
+        private async void OnFirstVideoEnded(object sender, EventArgs e)
+        {
+            VideoPlayer.MediaEnded -= OnFirstVideoEnded;
+
+            await DoVideoClipLipSync.CreateAnimationAvatar(GlobalVars.videoTalkedText);
+
+            // Start de tweede video
+            var localFilePath = await DoVideoClipLipSync.PlayExistingVideo(GlobalVars.videoFilePath);
+            VideoPlayer.Source = localFilePath;
+            GlobalVars.videoFileExists = false;
+            GlobalVars.videoFilePath = "";
+            GlobalVars.anim = false;
+        }
+        
+        
+        private async void UpdateLabel(string text)
+        {
+            try
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    this.MessageLabel.IsVisible = true;
+                    this.MessageLabel.Text = text;
+                });
+                await Task.Yield();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Message:" + ex.Message, "OK");
+            }
+        }
+
+        private async Task LoadAndPlayVideo(string vidUrl)
+        {
+            try
+            {
+                string localFilePath = await DoVideoClipLipSync.DownloadVideoAsync(vidUrl);
+                VideoPlayer.Source = localFilePath;
+                
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to load video: {ex.Message}", "OK");
             }
         }
 
