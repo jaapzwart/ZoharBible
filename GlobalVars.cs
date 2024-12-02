@@ -19,6 +19,14 @@ public static class GlobalVars
         get;
         set;
     } = "";
+
+    public static bool AIInteractive { get; set; } = false;
+    public static string AIInteractiveText { get; set; } = "";
+    public static bool anim { get; set; } = false;
+    public static string videoTalkedText { get; set; } = "Bill";
+    public static bool videoFileExists { get; set; } = false;
+    public static string videoFilePath { get; set; } = "";
+    public static string videoTalked { get; set; } = "Elon";
     public static bool HeyComputerStartTalk { get; set; } = true;
     public static string  _extraDialogueActionsForQuestion { get; set; } = " Formulate a final question as the last paragraph based on your analysis.";
     public static string _dialogueTextReturn { get; set; } = "";

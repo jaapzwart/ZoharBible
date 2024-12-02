@@ -36,26 +36,6 @@ namespace ZoharBible
                 if (isInKeywords) // Recording found in the keywords?
                 {
                     
-                    if (result.Text.Contains("Dialogue", StringComparison.OrdinalIgnoreCase) &&
-                        (result.Text.Contains("Activate", StringComparison.OrdinalIgnoreCase)
-                        || result.Text.Contains("Start", StringComparison.OrdinalIgnoreCase)))
-                    {
-                        GlobalVars._Dialogue = true;
-                        return "AI Dialogue checkbox will be started.";
-                    }
-                    if (result.Text.Contains("Dialogue", StringComparison.OrdinalIgnoreCase) &&
-                             (result.Text.Contains("Deactivate", StringComparison.OrdinalIgnoreCase)
-                              || result.Text.Contains("Stop", StringComparison.OrdinalIgnoreCase)))
-                    {
-                        GlobalVars._Dialogue = false;
-                        return "AI Dialogue checkbox will be stopped.";
-                    }
-                    if (result.Text.Contains("Who", StringComparison.OrdinalIgnoreCase) &&
-                        (result.Text.Contains("are", StringComparison.OrdinalIgnoreCase)
-                         || result.Text.Contains("you", StringComparison.OrdinalIgnoreCase)))
-                    {
-                        return "This is the new version of 'Hello World'.";
-                    }
                     if (result.Text.Contains("Elon", StringComparison.OrdinalIgnoreCase) ||
                         result.Text.Contains("X", StringComparison.OrdinalIgnoreCase) ||
                         result.Text.Contains("Grok", StringComparison.OrdinalIgnoreCase))
@@ -65,8 +45,13 @@ namespace ZoharBible
                         dSentiment = await Secrets.GetGrok(
                                             result.Text);
                         string originalText = dSentiment;
-                        string cleanedText = Regex.Replace(originalText, @"[^a-zA-Z0-9]", "");
-                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        GlobalVars.AIInteractiveText = dSentiment;
+                        if (!GlobalVars.AIInteractive)
+                        {
+                            await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                            await GlobalVars.ttsService.StopSpeakingAsync();
+                        }
+
                         return "Talked Elon.";
                     }
                     if (result.Text.Contains("Bill", StringComparison.OrdinalIgnoreCase) ||
@@ -77,7 +62,14 @@ namespace ZoharBible
                         dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
                             Secrets.RESTAPI + @"ChatGPT/"
                                             + result.Text);
-                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        
+                        string originalText = dSentiment;
+                        GlobalVars.AIInteractiveText = dSentiment;
+                        if (!GlobalVars.AIInteractive)
+                        {
+                            await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                            await GlobalVars.ttsService.StopSpeakingAsync();
+                        }
                         return "Talked Bill.";
                     }
                     if (result.Text.Contains("Google", StringComparison.OrdinalIgnoreCase) ||
@@ -88,8 +80,34 @@ namespace ZoharBible
                         dSentiment = await GlobalVars.GetHttpReturnFromAPIRestLink(
                             Secrets.RESTAPI + @"Google/"
                                             + result.Text);
-                        await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                        string originalText = dSentiment;
+                        GlobalVars.AIInteractiveText = dSentiment;
+                        if (!GlobalVars.AIInteractive)
+                        {
+                            await GlobalVars.ttsService.ConvertTextToSpeechAsync(dSentiment);
+                            await GlobalVars.ttsService.StopSpeakingAsync();
+                        }
                         return "Talked Gemini.";
+                    }
+                    if (result.Text.Contains("Dialogue", StringComparison.OrdinalIgnoreCase) &&
+                        (result.Text.Contains("Activate", StringComparison.OrdinalIgnoreCase)
+                         || result.Text.Contains("Start", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        GlobalVars._Dialogue = true;
+                        return "AI Dialogue checkbox will be started.";
+                    }
+                    if (result.Text.Contains("Dialogue", StringComparison.OrdinalIgnoreCase) &&
+                        (result.Text.Contains("Deactivate", StringComparison.OrdinalIgnoreCase)
+                         || result.Text.Contains("Stop", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        GlobalVars._Dialogue = false;
+                        return "AI Dialogue checkbox will be stopped.";
+                    }
+                    if (result.Text.Contains("Who", StringComparison.OrdinalIgnoreCase) &&
+                        (result.Text.Contains("are", StringComparison.OrdinalIgnoreCase)
+                         || result.Text.Contains("you", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        return "This is the new version of 'Hello World'.";
                     }
                     return "Command not found.";
                 }
