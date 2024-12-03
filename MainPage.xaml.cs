@@ -8,7 +8,7 @@ namespace ZoharBible;
 public partial class MainPage : ContentPage
 {
     /// <summary>
-    /// Represents the main page of the ZoharBible application.
+    /// Initializes a new instance of the <see cref="MainPage"/> class.
     /// </summary>
     public MainPage()
     {
@@ -16,11 +16,20 @@ public partial class MainPage : ContentPage
         OnOptionButtonClicked(KabbalahButton, EventArgs.Empty);
         UpdateCheckBoxes(GlobalVars.AiSelected);
     }
+
+    /// <summary>
+    /// Called when the page becomes visible, updates global state for page navigation.
+    /// </summary>
     protected override void OnAppearing()
     {
         base.OnAppearing();
         GlobalVars._IntroPage = false;
     }
+
+    /// <summary>
+    /// Updates the checkboxes based on the currently selected AI model.
+    /// </summary>
+    /// <param name="aiSelected">A string indicating which AI models are selected.</param>
     private void UpdateCheckBoxes(string aiSelected)
     {
         ChatGPTCheckBox.IsChecked = aiSelected.Contains("ChatGPT");
@@ -33,6 +42,7 @@ public partial class MainPage : ContentPage
             AllAICheckBox.IsChecked = false;
         }
     }
+
     /// <summary>
     /// Handles the SelectedIndexChanged event of the LanguagePicker.
     /// Updates the current language in the GlobalVars class based on the selected item in the Picker.
@@ -47,7 +57,7 @@ public partial class MainPage : ContentPage
             if (picker != null)
             {
                 GlobalVars.lLanguage_ = picker.SelectedItem as string;
-                // Voor debuggen of verdere verwerking
+                // For debugging or further processing
                 await DisplayAlert("Geselecteerde taal", GlobalVars.lLanguage_, "OK");
             }
         }
@@ -322,7 +332,7 @@ public partial class MainPage : ContentPage
         {
             var clickedButton = sender as Button;
             GlobalVars.TypeOfProverbAnalysis = clickedButton.Text; // Save the type of analysis for Proverbs
-            if (GlobalVars.TypeOfProverbAnalysis.Contains(("All")))
+            if (GlobalVars.TypeOfProverbAnalysis.Contains("All"))
                 GlobalVars.TypeOfProverbAnalysis = " Kabbalah and the Zohar and the Mishna";
             foreach (var child in (clickedButton.Parent as StackLayout).Children)
             {
