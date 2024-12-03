@@ -5,7 +5,6 @@ using Microsoft.CognitiveServices.Speech;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
-using ZoharBible;
 
 namespace ZoharBible;
 
@@ -20,6 +19,7 @@ public static class GlobalVars
         set;
     } = "";
 
+    public static string LanguageChoosenByFullName { get; set; } = "en-US-JennyNeural";
     public static bool AIInteractive { get; set; } = false;
     public static string AIInteractiveText { get; set; } = "";
     public static bool anim { get; set; } = false;
@@ -100,7 +100,7 @@ public static class GlobalVars
     /// as well as the language and voice used in text-to-speech conversion.
     /// Default value is "English".
     /// </summary>
-    public static string lLanguage_ { get; set; } = "English";
+    public static string lLanguage_ { get; set; } = "en";
 
     /// <summary>
     /// Gets or sets the speech speed for text-to-speech conversion.
@@ -139,7 +139,18 @@ public static class GlobalVars
         string repeatedString = new string(character, repeatCount);
         return repeatedString;
     }
+    public static string DialogueCleaner(string _dialogue)
+    {
+        _dialogue = _dialogue.Replace(":", " ").Replace("(", " ").Replace(")", " ")
+            .Replace("-", " ").Replace("*", "").Replace(" -", " ").Replace(" - ", " ")
+            .Replace("***", "")
+            .Replace("###", "")
+            .Replace("**", "").Replace("*", "");
 
+        _dialogue = Regex.Replace(_dialogue, @"[^\S\r\n,.]+", " ").Trim();
+        
+        return _dialogue;
+    }
     public static async Task SetClickedColor(object? sender)
     {
         var button = sender as Button;

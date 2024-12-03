@@ -1,4 +1,7 @@
-﻿namespace ZoharBible;
+﻿using System.ComponentModel;
+using System.Globalization;
+
+namespace ZoharBible;
 
 /// <summary>
 /// The StartPage class is a part of the ZoharBible namespace and
@@ -15,12 +18,38 @@ public partial class StartPage : ContentPage
     public StartPage()
     {
         InitializeComponent();
+        
+        try
+        {
+            if (this.BindingContext is ViewModelLanguageChanged viewModel)
+            {
+                viewModel.PropertyChanged += OnViewModelPropertyChanged;
+            }
+        }
+        catch (Exception e)
+        {
+            DisplayAlert("Error", e.Message, "OK");
+            throw;
+        }
+        
+        
         GlobalVars.AiSelected = "ChatGPT";
         UpdateCheckBoxes(GlobalVars.AiSelected);
         SpeechSpeedSlider.Value = 90;
         
         // Stel de initiële waarde van de Label in
         SpeechSpeedValueLabel.Text = GlobalVars.SpeechSpeed.ToString() + "%";
+    }
+    private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ViewModelLanguageChanged.SelectedLanguage))
+        {
+            // Your logic when text changes
+            var viewModel = (ViewModelLanguageChanged)sender;
+            var newText = viewModel.SelectedLanguage;
+            // Handle the text change here
+            GlobalVars.LanguageChoosenByFullName = this.LanguageByName.Text;
+        }
     }
 
     #region Lifecycle Methods
@@ -118,6 +147,12 @@ public partial class StartPage : ContentPage
         {
             GlobalVars.lLanguage_ = picker.SelectedItem as string;
         }
+        if (sender is Picker ppicker && ppicker.SelectedIndex != -1)
+        {
+            string selectedLanguage = ppicker.Items[ppicker.SelectedIndex];
+            var viewModel = (ViewModelLanguageChanged)BindingContext;
+            viewModel.SelectedLanguage = selectedLanguage;
+        }
     }
 
     /// <summary>
@@ -201,4 +236,63 @@ public partial class StartPage : ContentPage
     }
 
     #endregion
+}
+public class LanguageToMicrosoftVoiceConverter : IValueConverter
+{
+    private static readonly Dictionary<string, string> LanguageVoiceMapping = new()
+    {
+        {"af", "af-ZA-AdriNeural"},
+        {"ar", "ar-SA-HamedNeural"},
+        {"bn", "bn-BD-NabanitaNeural"},
+        {"bg", "bg-BG-BorislavNeural"},
+        {"zh-Hans", "zh-CN-XiaochenNeural"},
+        {"zh-Hant", "zh-HK-HiuGaaiNeural"},
+        {"hr", "hr-HR-SreckoNeural"},
+        {"cs", "cs-CZ-AntoninNeural"},
+        {"da", "da-DK-ChristofferNeural"},
+        {"nl", "nl-NL-ColetteNeural"},
+        {"en", "en-US-JennyNeural"},
+        {"fi", "fi-FI-NiinaNeural"},
+        {"fr", "fr-FR-DeniseNeural"},
+        {"de", "de-DE-AmalaNeural"},
+        {"el", "el-GR-NestorasNeural"},
+        {"he", "he-IL-AvriNeural"},
+        {"hi", "hi-IN-SwaraNeural"},
+        {"hu", "hu-HU-TamasNeural"},
+        {"id", "id-ID-ArifNeural"},
+        {"it", "it-IT-AntonellaNeural"},
+        {"ja", "ja-JP-NanamiNeural"},
+        {"ko", "ko-KR-SunHiNeural"},
+        {"ms", "ms-MY-OsmanNeural"},
+        {"fa", "fa-IR-DilaraNeural"},
+        {"pl", "pl-PL-EwaNeural"},
+        {"pt", "pt-PT-AntonioNeural"},
+        {"pa", "pa-IN-IqraNeural"},
+        {"ro", "ro-RO-CarmenNeural"},
+        {"ru", "ru-RU-DmitryNeural"},
+        {"sr", "sr-RS-NikolaNeural"},
+        {"sk", "sk-SK-LukasNeural"},
+        {"es", "es-ES-AbrilNeural"},
+        {"sv", "sv-SE-MattiasNeural"},
+        {"ta", "ta-IN-ValluvarNeural"},
+        {"th", "th-TH-PhairojNeural"},
+        {"tr", "tr-TR-AhmetNeural"},
+        {"uk", "uk-UA-PolinaNeural"},
+        {"ur", "ur-PK-AsadNeural"},
+        {"vi", "vi-VN-NamNeural"}
+    };
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is string languageCode && LanguageVoiceMapping.TryGetValue(languageCode, out var voice))
+        {
+            return voice;
+        }
+        return "Onbekende stem";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }

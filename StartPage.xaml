@@ -3,7 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ZoharBible"
              x:Class="ZoharBible.StartPage"
-             BackgroundColor="{x:Static local:Themes.PageBackgroundC}">
+             xmlns:viewModels="clr-namespace:ZoharBible"
+             BackgroundColor="{x:Static local:Themes.PageBackgroundC}"
+             >
+    <ContentPage.BindingContext>
+        <viewModels:ViewModelLanguageChanged />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:LanguageToMicrosoftVoiceConverter x:Key="LanguageToVoiceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid>
         <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <!-- Knop voor navigatie naar de MainPage -->
@@ -45,7 +56,12 @@
             </StackLayout>
             <!-- Toevoegen van lege ruimte -->
             <BoxView HeightRequest="80" Color="{x:Static local:Themes.PageBackgroundC}" />
-            
+            <StackLayout Padding="20">
+               <Label Text="{Binding SelectedLanguage, Converter={StaticResource LanguageToVoiceConverter}}"
+                      FontSize="Medium"
+                      TextColor="{x:Static local:Themes.ButtonTextC}"
+                      HorizontalOptions="Center"
+                      x:Name="LanguageByName" />
             <!-- Picker voor taalkeuze -->
             <Picker x:Name="LanguagePicker"
                     Title="Select Language"
@@ -100,6 +116,7 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
+            </StackLayout>
             <!-- Toevoegen van lege ruimte -->
             <BoxView HeightRequest="20" Color="{x:Static local:Themes.PageBackgroundC}" />
             <!-- Slider voor spraaksnelheid -->

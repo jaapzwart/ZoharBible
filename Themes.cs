@@ -2,8 +2,12 @@ using Color = Microsoft.Maui.Graphics.Color;
 
 namespace ZoharBible
 {
+    /// <summary>
+    /// Manages theme colors for the application's UI elements.
+    /// </summary>
     public class Themes
     {
+        // Default color values in hex format
         private static string _pageBackground = "#1E3A5F";
         private static string _buttonBackground = "#61A0D7";
         private static string _buttonBorder = "#FFFFFF";
@@ -13,6 +17,7 @@ namespace ZoharBible
         private static string _messageLabelBackground = "#00008B";
         private static string _messageLabelText = "#00FF00";
 
+        // Public properties for accessing colors, initialized with default values
         public static Color PageBackgroundC { get; set; } = Color.FromHex(_pageBackground);
         public static Color ButtonBackgroundC { get; set; } = Color.FromHex(_buttonBackground);
         public static Color ButtonBorderC { get; set; } = Color.FromHex(_buttonBorder);
@@ -22,6 +27,10 @@ namespace ZoharBible
         public static Color MessageLabelBackgroundC { get; set; } = Color.FromHex(_messageLabelBackground);
         public static Color MessageLabelTextC { get; set; } = Color.FromHex(_messageLabelText);
 
+        /// <summary>
+        /// Adjusts theme colors based on a mood value to dynamically change the UI appearance.
+        /// </summary>
+        /// <param name="_mood">A value between 10 and 100 representing mood, where 100 is the most vibrant.</param>
         public static void SetMoodColors(int _mood)
         {
             // Clamp mood between 10 (low) and 100 (high)
@@ -95,6 +104,13 @@ namespace ZoharBible
             MessageLabelTextC = Color.FromHex(messageLabelTextHex);
         }
 
+        /// <summary>
+        /// Converts RGB color values to a hexadecimal color string.
+        /// </summary>
+        /// <param name="red">Red component, from 0 to 1.</param>
+        /// <param name="green">Green component, from 0 to 1.</param>
+        /// <param name="blue">Blue component, from 0 to 1.</param>
+        /// <returns>A string representing the color in hex format #RRGGBB.</returns>
         static string ConvertToHex(float red, float green, float blue)
         {
             int r = (int)(red * 255);
@@ -105,6 +121,9 @@ namespace ZoharBible
             return $"#{r:X2}{g:X2}{b:X2}";
         }
 
+        /// <summary>
+        /// Sets the theme back to predefined standard colors.
+        /// </summary>
         public static void SetStandardTheme()
         {
             _pageBackground = "#1E3A5F";
